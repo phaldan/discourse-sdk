@@ -11,7 +11,9 @@
     ],
     "minimum-stability": "stable",
     "require": {},
-    "require-dev": {},
+    "require-dev": {
+        "brainmaestro/composer-git-hooks": "~1.1"
+    },
     "autoload": {
         "psr-4": {
             "PhALDan\\Discourse\\": "src/"
@@ -21,5 +23,10 @@
         "psr-4": {
             "PhALDan\\Discourse\\": "tests/"
         }
-    }
+    },
+    "scripts": {
+        "post-install-cmd": "vendor/bin/cghooks update",
+        "post-update-cmd": "vendor/bin/cghooks update"
+    },
+    "hooks": {}
 }
