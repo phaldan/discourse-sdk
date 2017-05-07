@@ -1,0 +1,25 @@
+{
+    "name": "phaldan/discourse",
+    "description": "Discourse SDK",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Philipp Daniels",
+            "email": "philipp.daniels@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "PhALDan\\Discourse\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhALDan\\Discourse\\": "tests/"
+        }
+    }
+}
