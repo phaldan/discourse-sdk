@@ -12,7 +12,8 @@
     "minimum-stability": "stable",
     "require": {},
     "require-dev": {
-        "brainmaestro/composer-git-hooks": "~1.1"
+        "brainmaestro/composer-git-hooks": "~1.1",
+        "phpunit/phpunit": "~6.1"
     },
     "autoload": {
         "psr-4": {
@@ -28,5 +29,9 @@
         "post-install-cmd": "vendor/bin/cghooks update",
         "post-update-cmd": "vendor/bin/cghooks update"
     },
-    "hooks": {}
+    "hooks": {
+        "pre-commit": [
+            "vendor/bin/phpunit;"
+        ]
+    }
 }
