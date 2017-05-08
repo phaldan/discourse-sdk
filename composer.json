@@ -27,11 +27,10 @@
     },
     "scripts": {
         "post-install-cmd": "vendor/bin/cghooks update",
-        "post-update-cmd": "vendor/bin/cghooks update"
-    },
-    "hooks": {
+        "post-update-cmd": "vendor/bin/cghooks update",
         "pre-commit": [
-            "vendor/bin/phpunit;"
+            "composer validate && ",
+            "vendor/bin/phpunit"
         ]
     }
 }
