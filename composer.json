@@ -14,7 +14,8 @@
     "require-dev": {
         "brainmaestro/composer-git-hooks": "~1.1",
         "phpunit/phpunit": "~6.1",
-        "sebastian/phpcpd": "^3.0"
+        "sebastian/phpcpd": "^3.0",
+        "jakub-onderka/php-parallel-lint": "^0.9.2"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +34,8 @@
             "php --version && ",
             "composer --version && ",
             "composer validate && ",
-            "vendor/bin/phpcpd -n src/ tests/ &&",
+            "vendor/bin/parallel-lint tests src && ",
+            "vendor/bin/phpcpd -n src/ tests/ && ",
             "vendor/bin/phpunit"
         ]
     }
