@@ -29,6 +29,8 @@
         "post-install-cmd": "vendor/bin/cghooks update",
         "post-update-cmd": "vendor/bin/cghooks update",
         "pre-commit": [
+            "php --version && ",
+            "composer --version && ",
             "composer validate && ",
             "vendor/bin/phpunit"
         ]
