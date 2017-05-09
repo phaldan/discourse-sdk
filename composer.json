@@ -13,7 +13,8 @@
     "require": {},
     "require-dev": {
         "brainmaestro/composer-git-hooks": "~1.1",
-        "phpunit/phpunit": "~6.1"
+        "phpunit/phpunit": "~6.1",
+        "sebastian/phpcpd": "^3.0"
     },
     "autoload": {
         "psr-4": {
@@ -32,6 +33,7 @@
             "php --version && ",
             "composer --version && ",
             "composer validate && ",
+            "vendor/bin/phpcpd -n src/ tests/ &&",
             "vendor/bin/phpunit"
         ]
     }
