@@ -1,0 +1,217 @@
+phpsa:
+  blame:                false
+
+  # Will be used to automatically disable the analyzers that require a greater version of PHP.
+  language_level:       '7.0' # Example: 5.3
+  parser:               'only-7' # One of "prefer-7"; "prefer-5"; "only-7"; "only-5"
+  analyzers:
+
+    # Contains all compiler notices. Those are raised when PHP with strict error reporting would create at least a Notice message. (mostly experimental)
+    language_error:
+      enabled:              true
+
+    # Discourages the use of the `@` operator to silence errors.
+    error_suppression:
+      enabled:              true
+
+    # Checks for use of multiple unary operators that cancel each other out. For example `!!boolean` or `- -int`. (there is a space between the two minus)
+    multiple_unary_operators:
+      enabled:              true
+
+    # Checks for use of UnaryPlus `+$a` and suggests to use an int or float cast instead.
+    stupid_unary_operators:
+      enabled:              true
+
+    # Discourages the use of variable variables.
+    variable_variable_usage:
+      enabled:              true
+
+    # Checks for casts that try to cast a type to itself.
+    casts:
+      enabled:              true
+
+    # Discourages the use of `eval()`.
+    eval_usage:
+      enabled:              true
+
+    # Checks for use of `static::` inside a final class.
+    final_static_usage:
+      enabled:              true
+
+    # Checks for `{type array} > 1` and similar and suggests use of `count()`.
+    compare_with_array:
+      enabled:              true
+
+    # Checks for division from 0. For example: `0/$x`, `false%$x`
+    division_from_zero:
+      enabled:              true
+
+    # Checks for division by 1. For example: `$x/1`, `$x%true`
+    division_by_one:
+      enabled:              true
+
+    # Discourages the use of backtick operator for shell execution.
+    backtick_usage:
+      enabled:              true
+
+    # Checks for Logic inversion like `if (!($a == $b))` and suggests the correct operator.
+    logic_inversion:
+      enabled:              true
+
+    # Discourages the use of `exit()` and `die()`.
+    exit_usage:
+      enabled:              true
+
+    # Discourages the use of nested ternaries.
+    nested_ternary:
+      enabled:              true
+
+    # Recommends the use of [] short syntax for arrays.
+    array_short_definition:
+      enabled:              true
+
+    # This inspection reports any duplicated keys on array creation expression.
+    # If multiple elements in the array declaration use the same key, only the last
+    # one will be used as all others are overwritten.
+    array_duplicate_keys:
+      enabled:              true
+
+    # Checks for illegal array key types (for example objects).
+    array_illegal_offset_type:
+      enabled:              true
+
+    # Checks for use of alias functions and suggests the use of the originals.
+    alias_check:
+      enabled:              true
+
+    # Checks for use of debug code and suggests to remove it.
+    debug_code:
+      enabled:              true
+
+    # Checks for use of old rand, srand, getrandmax functions and suggests alternatives.
+    random_api_migration:
+      enabled:              true
+
+    # Checks for use of different sleep functions which can lead to a DoS vulnerability.
+    sleep_usage:
+      enabled:              true
+
+    # Checks for use of functions like boolval, strval and others and suggests the use of casts.
+    use_cast:
+      enabled:              true
+
+    # Checks for use of deprecated php.ini options and gives alternatives if available.
+    deprecated_ini_options:
+      enabled:              true
+
+    # Checks that regular expressions are syntactically correct.
+    regular_expressions:
+      enabled:              true
+
+    # Checks for use of `func_get_args()` and suggests the use of argument unpacking. (... operator)
+    argument_unpacking:
+      enabled:              true
+
+    # Checks for use of `unserialize()` without a 2nd parameter defining the allowed classes. Requires PHP 7.0+
+    unsafe_unserialize:
+      enabled:              true
+
+    # Checks for use of deprecated functions and gives alternatives if available.
+    deprecated_functions:
+      enabled:              true
+
+    # Checks that magic methods have the right amount of parameters.
+    magic_method_parameters:
+      enabled:              true
+
+    # Discourages the use of goto and goto labels.
+    goto_usage:
+      enabled:              true
+
+    # Discourages the use of `global $var;`.
+    global_usage:
+      enabled:              true
+
+    # Checks for multiple property definitions in one line. For example public $a, $b; and discourages it.
+    has_more_than_one_property:
+      enabled:              true
+
+    # Checks for a missing break or return statement in switch cases. Can ignore empty cases and the last case.
+    missing_break_statement:
+      enabled:              true
+
+    # Checks for missing visibility modifiers for properties and methods.
+    missing_visibility:
+      enabled:              true
+
+    # Checks for return statements in `__construct` and `__destruct` since they can't return anything.
+    method_cannot_return:
+      enabled:              true
+
+    # Checks for behavior that would result in overwriting $this variable.
+    unexpected_use_of_this:
+      enabled:              true
+
+    # Checks for use of `@test` when methods name begins with test, since it is unnecessary.
+    test_annotation:
+      enabled:              true
+
+    # Checks for a missing docblock for: class, property, class constant, trait, interface, class method, function.
+    missing_docblock:
+      enabled:              true
+      class:                true
+      class_method:         false
+      class_const:          false
+      class_property:       false
+      function:             true
+      interface:            true
+      trait:                true
+
+    # Checks for use of PHP 4 constructors and discourages it.
+    old_constructor:
+      enabled:              true
+
+    # Checks that constants are all uppercase.
+    constant_naming:
+      enabled:              true
+
+    # Checks that statements that define a block of statements are not empty.
+    missing_body:
+      enabled:              true
+
+    # Discourages the use of inline html.
+    inline_html_usage:
+      enabled:              true
+
+    # Checks for assignments in conditions. (= instead of ==)
+    assignment_in_condition:
+      enabled:              true
+
+    # Discourages the use of static variables (not properties).
+    static_usage:
+      enabled:              true
+
+    # Checks if any optional parameters are before a required one. For example: `function ($a = 1, $b)`
+    optional_param_before_required:
+      enabled:              true
+
+    # Checks for Yoda conditions, where a constant is placed before the variable. For example: `if (3 == $a)`
+    yoda_condition:
+      enabled:              true
+
+    # Discourages the use of `for` with multiple conditions.
+    for_condition:
+      enabled:              true
+
+    # Checks if any Property Definition is done with a default null value (not needed). For example: `$a = null`
+    property_definition_default_value:
+      enabled:              true
+
+    # Checks for using return and yield statements in a one method and discourages it.
+    return_and_yield_in_one_method:
+      enabled:              true
+
+    # Using octal, hexadecimal or binary integers is discouraged.
+    check_l_number_kind:
+      enabled:              true
+
