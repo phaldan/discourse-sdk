@@ -1,0 +1,1025 @@
+<?xml version="1.0"?>
+
+<ruleset name="Clean Code Rules"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+    <description>PHPMD ruleset</description>
+
+    <rule name="BooleanArgumentFlag"
+          since="1.4.0"
+          message="The method {0} has a boolean flag argument {1}, which is a certain sign of a Single Responsibility Principle violation."
+          class="PHPMD\Rule\CleanCode\BooleanArgumentFlag"
+          externalInfoUrl="http://phpmd.org/rules/cleancode.html#booleanargumentflag">
+        <description>
+            <![CDATA[
+A boolean flag argument is a reliable indicator for a violation of
+the Single Responsibility Principle (SRP). You can fix this problem
+by extracting the logic in the boolean flag into its own class
+or method.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties />
+        <example>
+            <![CDATA[
+class Foo {
+    public function bar($flag = true) {
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="ElseExpression"
+          since="1.4.0"
+          message="The method {0} uses an else expression. Else is never necessary and you can simplify the code to work without else."
+          class="PHPMD\Rule\CleanCode\ElseExpression"
+          externalInfoUrl="http://phpmd.org/rules/cleancode.html#elseexpression">
+        <description>
+            <![CDATA[
+An if expression with an else branch is never necessary. You can rewrite the
+conditions in a way that the else is not necessary and the code becomes simpler
+to read.  To achieve this use early return statements. To achieve this you may
+need to split the code it several smaller methods. For very simple assignments
+you could also use the ternary operations.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties></properties>
+        <example>
+            <![CDATA[
+class Foo
+{
+    public function bar($flag)
+    {
+        if ($flag) {
+            // one branch
+        } else {
+            // another branch
+        }
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="StaticAccess"
+          since="1.4.0"
+          message="Avoid using static access to class '{0}' in method '{1}'."
+          class="PHPMD\Rule\CleanCode\StaticAccess"
+          externalInfoUrl="http://phpmd.org/rules/cleancode.html#staticaccess">
+        <description>
+            <![CDATA[
+Static access causes unexchangeable dependencies to other classes and leads to hard to test code. Avoid
+using static access at all costs and instead inject dependencies through the constructor. The only
+case when static access is acceptable is when used for factory methods.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties>
+            <property name="exceptions" description="Comma-separated class name list of exceptions" value=""/>
+        </properties>
+        <example>
+            <![CDATA[
+class Foo
+{
+    public function bar()
+    {
+        Bar::baz();
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="CyclomaticComplexity"
+          since="0.1"
+          message = "The {0} {1}() has a Cyclomatic Complexity of {2}. The configured cyclomatic complexity threshold is {3}."
+          class="PHPMD\Rule\CyclomaticComplexity"
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
+        <description>
+            <![CDATA[
+Complexity is determined by the number of decision points in a method plus one for the
+method entry. The decision points are 'if', 'while', 'for', and 'case labels'. Generally,
+1-4 is low complexity, 5-7 indicates moderate complexity, 8-10 is high complexity,
+ and 11+ is very high complexity.
+            ]]>
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="reportLevel" description="The Cyclomatic Complexity reporting threshold"  value="10"/>
+            <property name="showClassesComplexity"
+                      description="Indicate if class average violation should be added to the report"
+                      value="true"/>
+            <property name="showMethodsComplexity"
+                      description="Indicate if class average violation should be added to the report"
+                      value="true"/>
+        </properties>
+        <example>
+            <![CDATA[
+// Cyclomatic Complexity = 11
+class Foo {
+1   public function example() {
+2       if ($a == $b) {
+3           if ($a1 == $b1) {
+                fiddle();
+4           } elseif ($a2 == $b2) {
+                fiddle();
+            } else {
+                fiddle();
+            }
+5       } elseif ($c == $d) {
+6           while ($c == $d) {
+                fiddle();
+            }
+7        } elseif ($e == $f) {
+8           for ($n = 0; $n < $h; $n++) {
+                fiddle();
+            }
+        } else {
+            switch ($z) {
+9               case 1:
+                    fiddle();
+                    break;
+10              case 2:
+                    fiddle();
+                    break;
+11              case 3:
+                    fiddle();
+                    break;
+                default:
+                    fiddle();
+                    break;
+            }
+        }
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+
+    <rule name="NPathComplexity"
+          since="0.1"
+          message="The {0} {1}() has an NPath complexity of {2}. The configured NPath complexity threshold is {3}."
+          class="PHPMD\Rule\Design\NpathComplexity"
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity">
+        <description>
+The NPath complexity of a method is the number of acyclic execution paths through that method.
+A threshold of 200 is generally considered the point where measures should be taken to reduce complexity.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" description="The npath reporting threshold" value="200"/>
+        </properties>
+        <example>
+            <![CDATA[
+class Foo {
+    function bar() {
+        // lots of complicated code
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+
+    <rule name="ExcessiveMethodLength"
+          since="0.1"
+          message="The {0} {1}() has {2} lines of code. Current threshold is set to {3}. Avoid really long methods."
+          class="PHPMD\Rule\Design\LongMethod"
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength">
+        <description>
+Violations of this rule usually indicate that the method is doing
+too much. Try to reduce the method size by creating helper methods and removing any copy/pasted code.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" description="The method size reporting threshold" value="100"/>
+            <property name="ignore-whitespace" description="Count whitespace in reporting threshold" value="false"/>
+        </properties>
+        <example>
+            <![CDATA[
+class Foo {
+    public function doSomething() {
+        print("Hello world!" . PHP_EOL);
+        print("Hello world!" . PHP_EOL);
+        // 98 copies omitted for brevity.
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="ExcessiveClassLength"
+ 	  since="0.1"
+          message="The class {0} has {1} lines of code. Current threshold is {2}. Avoid really long classes."
+          class="PHPMD\Rule\Design\LongClass"
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasslength">
+        <description>
+Long Class files are indications that the class may be trying to
+do too much. Try to break it down, and reduce the size to something
+manageable.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" description="The class size reporting threshold"  value="1000"/>
+            <property name="ignore-whitespace" description="Count whitespace in reporting threshold" value="false"/>
+        </properties>
+        <example>
+            <![CDATA[
+class Foo {
+  public function bar() {
+    // 1000 lines of code
+  }
+}
+            ]]>
+        </example>
+    </rule>
+
+
+    <rule name="ExcessiveParameterList"
+          since="0.1"
+          message="The {0} {1} has {2} parameters. Consider reducing the number of parameters to less than {3}."
+          class="PHPMD\Rule\Design\LongParameterList"
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveparameterlist">
+        <description>
+Long parameter lists can indicate that a new object should be created to
+wrap the numerous parameters.  Basically, try to group the parameters together.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" description="The parameter count reporting threshold" value="10"/>
+        </properties>
+        <example>
+            <![CDATA[
+class Foo {
+    public function addData(
+        $p0, $p1, $p2, $p3, $p4, $p5,
+        $p5, $p6, $p7, $p8, $p9, $p10) {
+    }
+}
+            ]]>
+        </example>
+
+    </rule>
+
+    <rule name="ExcessivePublicCount"
+          since="0.1"
+          message="The {0} {1} has {2} public methods and attributes. Consider reducing the number of public items to less than {3}."
+          class="PHPMD\Rule\ExcessivePublicCount"
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivepubliccount">
+        <description>
+A large number of public methods and attributes declared in a class can indicate
+the class may need to be broken up as increased effort will be required to
+thoroughly test it.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" description="The public item reporting threshold" value="45"/>
+        </properties>
+        <example>
+            <![CDATA[
+public class Foo {
+    public $value;
+    public $something;
+    public $var;
+    // [... more more public attributes ...]
+
+    public function doWork() {}
+    public function doMoreWork() {}
+    public function doWorkAgain() {}
+    // [... more more public methods ...]
+}
+    ]]>
+        </example>
+    </rule>
+
+    <rule name="TooManyFields"
+          since="0.1"
+          message="The {0} {1} has {2} fields. Consider redesigning {1} to keep the number of fields under {3}."
+          class="PHPMD\Rule\Design\TooManyFields"
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanyfields">
+        <description>
+Classes that have too many fields could be redesigned to have fewer fields,
+possibly through some nested object grouping of some of the information. For
+example, a class with city/state/zip fields could instead have one Address
+field.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="maxfields" description="The field count reporting threshold " value="15"/>
+        </properties>
+        <example>
+            <![CDATA[
+class Person {
+   protected $one;
+   private $two;
+   private $three;
+   [... many more fields ...]
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="TooManyMethods"
+          since="0.1"
+          class="PHPMD\Rule\Design\TooManyMethods"
+          message="The {0} {1} has {2} non-getter- and setter-methods. Consider refactoring {1} to keep number of methods under {3}."
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods">
+        <description>
+            <![CDATA[
+A class with too many methods is probably a good suspect for refactoring, in
+order to reduce its complexity and find a way to have more fine grained objects.
+
+By default it ignores methods starting with 'get' or 'set'.
+
+The default was changed from 10 to 25 in PHPMD 2.3.
+            ]]>
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="maxmethods" description="The method count reporting threshold" value="25"/>
+            <property name="ignorepattern" description="Ignore methods matching this regex" value="(^(set|get))i"/>
+        </properties>
+    </rule>
+
+    <rule name="TooManyPublicMethods"
+          since="0.1"
+          class="PHPMD\Rule\Design\TooManyPublicMethods"
+          message="The {0} {1} has {2} public methods. Consider refactoring {1} to keep number of public methods under {3}."
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanypublicmethods">
+        <description>
+            <![CDATA[
+A class with too many public methods is probably a good suspect for refactoring, in
+order to reduce its complexity and find a way to have more fine grained objects.
+
+By default it ignores methods starting with 'get' or 'set'.
+            ]]>
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="maxmethods" description="The method count reporting threshold" value="10"/>
+            <property name="ignorepattern" description="Ignore methods matching this regex" value="(^(set|get))i"/>
+        </properties>
+    </rule>
+
+    <rule name="ExcessiveClassComplexity"
+          since="0.2.5"
+          class="PHPMD\Rule\Design\WeightedMethodCount"
+          message="The class {0} has an overall complexity of {1} which is very high. The configured complexity threshold is {2}."
+          externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity">
+        <description>
+            <![CDATA[
+The Weighted Method Count (WMC) of a class is a good indicator of how much time
+and effort is required to modify and maintain this class. The WMC metric is defined
+as the sum of complexities of all methods declared in a class. A large number of
+methods also means that this class has a greater potential impact on derived classes.
+            ]]>
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="maximum" description="The maximum WMC tolerable for a class." value="50"/>
+        </properties>
+        <example>
+            <![CDATA[
+class Foo {
+    public function bar() {
+        if ($a == $b)  {
+            if ($a1 == $b1) {
+                fiddle();
+            } elseif ($a2 == $b2) {
+                fiddle();
+            } else {
+            }
+        }
+    }
+    public function baz() {
+        if ($a == $b) {
+            if ($a1 == $b1) {
+                fiddle();
+            } elseif ($a2 == $b2) {
+                fiddle();
+            } else {
+            }
+        }
+    }
+    // Several other complex methods
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="Superglobals"
+          since="0.2"
+          message = "{0} accesses the super-global variable {1}."
+          class="PHPMD\Rule\Controversial\Superglobals"
+          externalInfoUrl="#">
+        <description>
+            <![CDATA[
+Accessing a super-global variable directly is considered a bad practice.
+These variables should be encapsulated in objects that are provided by a framework, for instance.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties />
+        <example>
+            <![CDATA[
+class Foo {
+    public function bar() {
+        $name = $_POST['foo'];
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="CamelCaseClassName"
+          since="0.2"
+          message = "The class {0} is not named in CamelCase."
+          class="PHPMD\Rule\Controversial\CamelCaseClassName"
+          externalInfoUrl="#">
+        <description>
+            <![CDATA[
+It is considered best practice to use the CamelCase notation to name classes.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties />
+        <example>
+            <![CDATA[
+class class_name {
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="CamelCasePropertyName"
+          since="0.2"
+          message = "The property {0} is not named in camelCase."
+          class="PHPMD\Rule\Controversial\CamelCasePropertyName"
+          externalInfoUrl="#">
+        <description>
+            <![CDATA[
+It is considered best practice to use the camelCase notation to name attributes.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties>
+            <property name="allow-underscore"
+                      description="Allow an optional, single underscore at the beginning."
+                      value="false" />
+            <property name="allow-underscore-test"
+                      description="Is it allowed to have underscores in test method names."
+                      value="false" />
+        </properties>
+        <example>
+            <![CDATA[
+class ClassName {
+    protected $property_name;
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="CamelCaseMethodName"
+          since="0.2"
+          message = "The method {0} is not named in camelCase."
+          class="PHPMD\Rule\Controversial\CamelCaseMethodName"
+          externalInfoUrl="#">
+        <description>
+            <![CDATA[
+It is considered best practice to use the camelCase notation to name methods.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties>
+            <property name="allow-underscore"
+                      description="Allow an optional, single underscore at the beginning."
+                      value="false" />
+            <property name="allow-underscore-test"
+                      description="Is it allowed to have underscores in test method names."
+                      value="false" />
+        </properties>
+        <example>
+            <![CDATA[
+class ClassName {
+    public function get_name() {
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="CamelCaseParameterName"
+          since="0.2"
+          message = "The parameter {0} is not named in camelCase."
+          class="PHPMD\Rule\Controversial\CamelCaseParameterName"
+          externalInfoUrl="#">
+        <description>
+            <![CDATA[
+It is considered best practice to use the camelCase notation to name parameters.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties />
+        <example>
+            <![CDATA[
+class ClassName {
+    public function doSomething($user_name) {
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="CamelCaseVariableName"
+          since="0.2"
+          message = "The variable {0} is not named in camelCase."
+          class="PHPMD\Rule\Controversial\CamelCaseVariableName"
+          externalInfoUrl="#">
+        <description>
+            <![CDATA[
+It is considered best practice to use the camelCase notation to name variables.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties />
+        <example>
+            <![CDATA[
+class ClassName {
+    public function doSomething() {
+        $data_module = new DataModule();
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="ExitExpression"
+          since="0.2"
+          message = "The {0} {1}() contains an exit expression."
+          class="PHPMD\Rule\Design\ExitExpression"
+          externalInfoUrl="http://phpmd.org/rules/design.html#exitexpression">
+        <description>
+            <![CDATA[
+An exit-expression within regular code is untestable and therefore it should
+be avoided. Consider to move the exit-expression into some kind of startup
+script where an error/exception code is returned to the calling environment.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties />
+        <example>
+            <![CDATA[
+class Foo {
+    public function bar($param)  {
+        if ($param === 42) {
+            exit(23);
+        }
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="EvalExpression"
+          since="0.2"
+          message = "The {0} {1}() contains an eval expression."
+          class="PHPMD\Rule\Design\EvalExpression"
+          externalInfoUrl="http://phpmd.org/rules/design.html#evalexpression">
+        <description>
+            <![CDATA[
+An eval-expression is untestable, a security risk and bad practice. Therefore
+it should be avoided. Consider to replace the eval-expression with regular
+code.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties />
+        <example>
+            <![CDATA[
+class Foo {
+    public function bar($param)  {
+        if ($param === 42) {
+            eval('$param = 23;');
+        }
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="GotoStatement"
+          since="1.1.0"
+          message="The {0} {1}() utilizes a goto statement."
+          class="PHPMD\Rule\Design\GotoStatement"
+          externalInfoUrl="http://phpmd.org/rules/design.html#gotostatement">
+        <description>
+            <![CDATA[
+Goto makes code harder to read and it is nearly impossible to understand the
+control flow of an application that uses this language construct. Therefore it
+should be avoided. Consider to replace Goto with regular control structures and
+separate methods/function, which are easier to read.
+            ]]>
+        </description>
+        <priority>1</priority>
+        <properties />
+        <example>
+            <![CDATA[
+class Foo {
+    public function bar($param)  {
+        A:
+        if ($param === 42) {
+            goto X;
+        }
+        Y:
+        if (time() % 42 === 23) {
+            goto Z;
+        }
+        X:
+        if (time() % 23 === 42) {
+            goto Y;
+        }
+        Z:
+        return 42;
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="NumberOfChildren"
+          since="0.2"
+          message = "The {0} {1} has {2} children. Consider to rebalance this class hierarchy to keep number of children under {3}."
+          class="PHPMD\Rule\Design\NumberOfChildren"
+          externalInfoUrl="http://phpmd.org/rules/design.html#numberofchildren">
+        <description>
+            <![CDATA[
+A class with an excessive number of children is an indicator for an unbalanced
+class hierarchy. You should consider to refactor this class hierarchy.
+            ]]>
+        </description>
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="15" description="Maximum number of acceptable child classes." />
+        </properties>
+        <example />
+    </rule>
+
+    <rule name="DepthOfInheritance"
+          since="0.2"
+          message = "The {0} {1} has {2} parents. Consider to reduce the depth of this class hierarchy to under {3}."
+          class="PHPMD\Rule\Design\DepthOfInheritance"
+          externalInfoUrl="http://phpmd.org/rules/design.html#depthofinheritance">
+        <description>
+            <![CDATA[
+A class with many parents is an indicator for an unbalanced and wrong class
+hierarchy. You should consider to refactor this class hierarchy.
+            ]]>
+        </description>
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="6" description="Maximum number of acceptable parent classes." />
+        </properties>
+        <example />
+    </rule>
+
+    <rule name="CouplingBetweenObjects"
+          since="1.1.0"
+          message="The class {0} has a coupling between objects value of {1}. Consider to reduce the number of dependencies under {2}."
+          class="PHPMD\Rule\Design\CouplingBetweenObjects"
+          externalInfoUrl="http://phpmd.org/rules/design.html#couplingbetweenobjects">
+        <description>
+            <![CDATA[
+A class with too many dependencies has negative impacts on several quality
+aspects of a class. This includes quality criteria like stability,
+maintainability and understandability
+            ]]>
+        </description>
+        <priority>2</priority>
+        <properties>
+            <property name="minimum" value="13" description="Maximum number of acceptable dependencies." />
+        </properties>
+        <example>
+            <![CDATA[
+class Foo {
+    /**
+     * @var \foo\bar\X
+     */
+    private $x = null;
+
+    /**
+     * @var \foo\bar\Y
+     */
+    private $y = null;
+
+    /**
+     * @var \foo\bar\Z
+     */
+    private $z = null;
+
+    public function setFoo(\Foo $foo) {}
+    public function setBar(\Bar $bar) {}
+    public function setBaz(\Baz $baz) {}
+
+    /**
+     * @return \SplObjectStorage
+     * @throws \OutOfRangeException
+     * @throws \InvalidArgumentException
+     * @throws \ErrorException
+     */
+    public function process(\Iterator $it) {}
+
+    // ...
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="DevelopmentCodeFragment"
+          since="2.3.0"
+          message="The {0} {1}() calls the typical debug function {2}() which is mostly only used during development."
+          class="PHPMD\Rule\Design\DevelopmentCodeFragment"
+          externalInfoUrl="http://phpmd.org/rules/design.html#developmentcodefragment">
+        <description>
+            <![CDATA[
+Functions like var_dump(), print_r() etc. are normally only used during development
+and therefore such calls in production code are a good indicator that they were
+just forgotten.
+            ]]>
+        </description>
+        <priority>2</priority>
+        <properties>
+            <property name="unwanted-functions" value="var_dump,print_r,debug_zval_dump,debug_print_backtrace" description="Comma separated list of suspect function images." />
+        </properties>
+        <example>
+            <![CDATA[
+class SuspectCode {
+
+    public function doSomething(array $items)
+    {
+        foreach ($items as $i => $item) {
+            // …
+
+            if ('qafoo' == $item) var_dump($i);
+
+            // …
+        }
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="ShortVariable"
+          since="0.2"
+          message="Avoid variables with short names like {0}. Configured minimum length is {1}."
+          class="PHPMD\Rule\Naming\ShortVariable"
+          externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable">
+        <description>
+Detects when a field, local, or parameter has a very short name.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" description="Minimum length for a variable, property or parameter name" value="3"/>
+            <property name="exceptions" description="Comma-separated list of exceptions" value=""/>
+        </properties>
+        <example>
+            <![CDATA[
+class Something {
+    private $q = 15; // VIOLATION - Field
+    public static function main( array $as ) { // VIOLATION - Formal
+        $r = 20 + $this->q; // VIOLATION - Local
+        for (int $i = 0; $i < 10; $i++) { // Not a Violation (inside FOR)
+            $r += $this->q;
+        }
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="LongVariable"
+          since="0.2"
+          message="Avoid excessively long variable names like {0}. Keep variable name length under {1}."
+          class="PHPMD\Rule\Naming\LongVariable"
+          externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable">
+        <description>
+Detects when a field, formal or local variable is declared with a long name.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="maximum" description="The variable length reporting threshold" value="20"/>
+        </properties>
+        <example>
+            <![CDATA[
+class Something {
+    protected $reallyLongIntName = -3; // VIOLATION - Field
+    public static function main( array $argumentsList[] ) { // VIOLATION - Formal
+        $otherReallyLongName = -5; // VIOLATION - Local
+        for ($interestingIntIndex = 0; // VIOLATION - For
+             $interestingIntIndex < 10;
+             $interestingIntIndex++ ) {
+        }
+    }
+}
+]]>
+        </example>
+    </rule>
+
+    <rule name="ShortMethodName"
+          since="0.2"
+          message="Avoid using short method names like {0}::{1}(). The configured minimum method name length is {2}."
+          class="PHPMD\Rule\Naming\ShortMethodName"
+          externalInfoUrl="http://phpmd.org/rules/naming.html#shortmethodname">
+        <description>
+Detects when very short method names are used.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" description="Minimum length for a method or function name" value="3"/>
+            <property name="exceptions" description="Comma-separated list of exceptions" value=""/>
+        </properties>
+        <example>
+            <![CDATA[
+class ShortMethod {
+    public function a( $index ) { // Violation
+    }
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="ConstructorWithNameAsEnclosingClass"
+          since="0.2"
+          message="Classes should not have a constructor method with the same name as the class"
+          class="PHPMD\Rule\Naming\ConstructorWithNameAsEnclosingClass"
+          externalInfoUrl="http://phpmd.org/rules/naming.html#constructorwithnameasenclosingclass">
+        <description>
+A constructor method should not have the same name as the enclosing class, consider
+to use the PHP 5 __construct method.
+        </description>
+        <priority>3</priority>
+        <example>
+            <![CDATA[
+class MyClass {
+     // this is bad because it is PHP 4 style
+    public function MyClass() {}
+    // this is good because it is a PHP 5 constructor
+    public function __construct() {}
+}
+    ]]>
+        </example>
+    </rule>
+
+    <rule name="ConstantNamingConventions"
+          since="0.2"
+          message="Constant {0} should be defined in uppercase"
+          class="PHPMD\Rule\Naming\ConstantNamingConventions"
+          externalInfoUrl="http://phpmd.org/rules/naming.html#constantnamingconventions">
+        <description>
+Class/Interface constant names should always be defined in uppercase.
+        </description>
+        <priority>4</priority>
+        <properties />
+        <example>
+            <![CDATA[
+class Foo {
+    const MY_NUM = 0; // ok
+    const myTest = ""; // fail
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="BooleanGetMethodName"
+          since="0.2"
+          message="The '{0}()' method which returns a boolean should be named 'is...()' or 'has...()'"
+          class="PHPMD\Rule\Naming\BooleanGetMethodName"
+          externalInfoUrl="http://phpmd.org/rules/naming.html#booleangetmethodname">
+        <description>
+Looks for methods named 'getX()' with 'boolean' as the return type. The convention
+is to name these methods 'isX()' or 'hasX()'.
+        </description>
+        <priority>4</priority>
+        <properties>
+            <property name="checkParameterizedMethods" value="false" description="Applies only to methods without parameter when set to true" />
+        </properties>
+        <example>
+            <![CDATA[
+class Foo {
+    /**
+     * @return boolean
+     */
+    public function getFoo() {} // bad
+    /**
+     * @return bool
+     */
+    public function isFoo(); // ok
+    /**
+     * @return boolean
+     */
+    public function getFoo($bar); // ok, unless checkParameterizedMethods=true
+}
+            ]]>
+        </example>
+    </rule>
+
+    <rule name="UnusedPrivateField"
+          since="0.2"
+          message="Avoid unused private fields such as '{0}'."
+          class="PHPMD\Rule\UnusedPrivateField"
+          externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedprivatefield">
+        <description>
+Detects when a private field is declared and/or assigned a value, but not used.
+        </description>
+        <priority>3</priority>
+        <example>
+<![CDATA[
+class Something
+{
+    private static $FOO = 2; // Unused
+    private $i = 5; // Unused
+    private $j = 6;
+    public function addOne()
+    {
+        return $this->j++;
+    }
+}
+]]>
+        </example>
+    </rule>
+
+    <rule name="UnusedLocalVariable"
+          since="0.2"
+          message="Avoid unused local variables such as '{0}'."
+          class="PHPMD\Rule\UnusedLocalVariable"
+          externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+        <description>
+Detects when a local variable is declared and/or assigned, but not used.
+        </description>
+        <priority>3</priority>
+        <properties>
+            <property
+                    name="allow-unused-foreach-variables"
+                    description="Allow unused variables in foreach language constructs."
+                    value="false" />
+        </properties>
+        <example>
+<![CDATA[
+class Foo {
+    public function doSomething()
+    {
+        $i = 5; // Unused
+    }
+}
+]]>
+        </example>
+    </rule>
+
+    <rule name="UnusedPrivateMethod"
+          since="0.2"
+          message="Avoid unused private methods such as '{0}'."
+          class="PHPMD\Rule\UnusedPrivateMethod"
+          externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedprivatemethod">
+        <description>
+Unused Private Method detects when a private method is declared but is unused.
+        </description>
+        <priority>3</priority>
+        <example>
+<![CDATA[
+class Something
+{
+    private function foo() {} // unused
+}
+]]>
+        </example>
+    </rule>
+
+    <rule name="UnusedFormalParameter"
+          since="0.2"
+          message="Avoid unused parameters such as '{0}'."
+          class="PHPMD\Rule\UnusedFormalParameter"
+          externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+        <description>
+Avoid passing parameters to methods or constructors and then not using those parameters.
+        </description>
+        <priority>3</priority>
+        <example>
+<![CDATA[
+class Foo
+{
+    private function bar($howdy)
+    {
+        // $howdy is not used
+    }
+}
+]]>
+        </example>
+    </rule>
+</ruleset>
+
