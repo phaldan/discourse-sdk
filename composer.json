@@ -17,7 +17,8 @@
         "sebastian/phpcpd": "^3.0",
         "jakub-onderka/php-parallel-lint": "^0.9.2",
         "phpmd/phpmd": "^2.6",
-        "vimeo/psalm": "^0.3.41"
+        "vimeo/psalm": "^0.3.41",
+        "friendsofphp/php-cs-fixer": "^2.3"
     },
     "autoload": {
         "psr-4": {
@@ -40,7 +41,8 @@
             "vendor/bin/phpcpd -n src/ tests/ && ",
             "vendor/bin/psalm --find-dead-code && ",
             "vendor/bin/phpmd src,tests text .phpmd.xml && ",
-            "vendor/bin/phpunit --coverage-text"
+            "vendor/bin/phpunit --coverage-text && ",
+            "vendor/bin/php-cs-fixer fix"
         ]
     }
 }
