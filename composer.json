@@ -41,7 +41,7 @@
             "vendor/bin/phpsa check src && ",
             "vendor/bin/phpsa check tests && ",
             "vendor/bin/phpmd src,tests text .phpmd.xml && ",
-            "vendor/bin/phpunit"
+            "vendor/bin/phpunit --coverage-text"
         ]
     }
 }
