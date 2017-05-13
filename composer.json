@@ -16,8 +16,8 @@
         "phpunit/phpunit": "~6.1",
         "sebastian/phpcpd": "^3.0",
         "jakub-onderka/php-parallel-lint": "^0.9.2",
-        "ovr/phpsa": "^0.6.2",
-        "phpmd/phpmd": "^2.6"
+        "phpmd/phpmd": "^2.6",
+        "vimeo/psalm": "^0.3.41"
     },
     "autoload": {
         "psr-4": {
@@ -38,8 +38,7 @@
             "composer validate && ",
             "vendor/bin/parallel-lint tests src && ",
             "vendor/bin/phpcpd -n src/ tests/ && ",
-            "vendor/bin/phpsa check src && ",
-            "vendor/bin/phpsa check tests && ",
+            "vendor/bin/psalm --find-dead-code && ",
             "vendor/bin/phpmd src,tests text .phpmd.xml && ",
             "vendor/bin/phpunit --coverage-text"
         ]

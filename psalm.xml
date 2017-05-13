@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<psalm
+    stopOnFirstError="false"
+    useDocblockTypes="true"
+    totallyTyped="false"
+>
+    <projectFiles>
+        <directory name="src" />
+        <directory name="tests" />
+    </projectFiles>
+
+    <issueHandlers>
+        <AbstractInstantiation errorLevel="error" />
+        <ContinueOutsideLoop errorLevel="error" />
+        <ConflictingReferenceConstraint errorLevel="error" />
+        <DeprecatedMethod errorLevel="error" />
+        <DuplicateParam errorLevel="error" />
+        <DuplicateClass errorLevel="error" />
+        <FailedTypeResolution errorLevel="error" />
+        <ForbiddenCode errorLevel="error" />
+        <ImplicitToStringCast errorLevel="error" />
+        <InaccessibleClassConstant errorLevel="error" />
+        <InaccessibleMethod errorLevel="error" />
+        <InaccessibleProperty errorLevel="error" />
+        <InvalidArgument errorLevel="error" />
+        <InvalidArrayAccess errorLevel="error" />
+        <InvalidArrayAssignment errorLevel="error" />
+        <InvalidClass errorLevel="error" />
+        <InvalidClone errorLevel="error" />
+        <InvalidDocblock errorLevel="error" />
+        <InvalidParamDefault errorLevel="error" />
+        <InvalidFunctionCall errorLevel="error" />
+        <InvalidGlobal errorLevel="error" />
+        <InvalidIterator errorLevel="error" />
+        <InvalidMethodCall errorLevel="error" />
+        <InvalidOperand errorLevel="error" />
+        <InvalidPropertyAssignment errorLevel="error" />
+        <InvalidPropertyFetch errorLevel="error" />
+        <InvalidReturnType errorLevel="error" />
+        <InvalidScalarArgument errorLevel="error" />
+        <InvalidScope errorLevel="error" />
+        <InvalidStaticInvocation errorLevel="error" />
+        <InvalidStaticVariable errorLevel="error" />
+        <InvalidToString errorLevel="error" />
+        <LessSpecificReturnType errorLevel="error" />
+        <MethodSignatureMismatch errorLevel="error" />
+        <MissingClosureReturnType errorLevel="error" />
+        <MissingConstructor errorLevel="error" />
+        <MissingPropertyDeclaration errorLevel="error" />
+        <MissingPropertyType errorLevel="error" />
+        <MissingReturnType errorLevel="error" />
+        <MisplacedRequiredParam errorLevel="error" />
+        <MixedArgument errorLevel="error" />
+        <MixedArrayAccess errorLevel="error" />
+        <MixedArrayOffset errorLevel="error" />
+        <MixedAssignment errorLevel="error" />
+        <MixedInferredReturnType errorLevel="error" />
+        <MixedMethodCall errorLevel="error" />
+        <MixedOperand errorLevel="error" />
+        <MixedPropertyAssignment errorLevel="error" />
+        <MixedPropertyFetch errorLevel="error" />
+        <MixedStringOffsetAssignment errorLevel="error" />
+        <MoreSpecificReturnType errorLevel="error" />
+        <NoInterfaceProperties errorLevel="error" />
+        <NonStaticSelfCall errorLevel="error" />
+        <NullFunctionCall errorLevel="error" />
+        <OverriddenMethodAccess errorLevel="error" />
+        <ParadoxicalCondition errorLevel="error" />
+        <ParentNotFound errorLevel="error" />
+        <PossiblyInvalidArgument errorLevel="error" />
+        <PossiblyNullArgument errorLevel="error" />
+        <PossiblyNullArrayAccess errorLevel="error" />
+        <PossiblyNullFunctionCall errorLevel="error" />
+        <PossiblyNullOperand errorLevel="error" />
+        <PossiblyNullPropertyAssignment errorLevel="error" />
+        <PossiblyNullPropertyFetch errorLevel="error" />
+        <PossiblyNullReference errorLevel="error" />
+        <PossiblyUndefinedVariable errorLevel="error" />
+        <PossiblyUnusedMethod errorLevel="error" />
+        <PossiblyUnusedVariable errorLevel="error" />
+        <PropertyNotSetInConstructor errorLevel="error" />
+        <ReferenceConstraintViolation errorLevel="error" />
+        <TooFewArguments errorLevel="error" />
+        <TooManyArguments errorLevel="error" />
+        <TypeCoercion errorLevel="error" />
+        <TypeDoesNotContainType errorLevel="error" />
+        <UndefinedClass errorLevel="error" />
+        <UndefinedConstant errorLevel="error" />
+        <UndefinedFunction errorLevel="error" />
+        <UndefinedMethod errorLevel="error" />
+        <UndefinedPropertyAssignment errorLevel="error" />
+        <UndefinedPropertyFetch errorLevel="error" />
+        <UndefinedThisPropertyAssignment errorLevel="error" />
+        <UndefinedThisPropertyFetch errorLevel="error" />
+        <UndefinedTrait errorLevel="error" />
+        <UnimplementedInterfaceMethod errorLevel="error" />
+        <UnrecognizedExpression errorLevel="error" />
+        <UnrecognizedStatement errorLevel="error" />
+        <UnevaluatedCode errorLevel="error" />
+        <UnusedVariable errorLevel="error" />
+        <UnusedClass errorLevel="error" />
+        <UnusedMethod errorLevel="error" />
+    </issueHandlers>
+</psalm>
+
