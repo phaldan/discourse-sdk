@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "~1.1",
         "phpunit/phpunit": "~6.1",
@@ -40,7 +42,7 @@
             "vendor/bin/parallel-lint tests src && ",
             "vendor/bin/phpcpd -n src/ tests/ && ",
             "vendor/bin/psalm --find-dead-code && ",
-            "vendor/bin/phpmd src,tests text .phpmd.xml && ",
+            "vendor/bin/phpmd src text .phpmd.xml && ",
             "vendor/bin/phpunit --coverage-text && ",
             "vendor/bin/php-cs-fixer fix"
         ]

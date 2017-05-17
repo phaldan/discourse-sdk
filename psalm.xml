@@ -6,7 +6,6 @@
 >
     <projectFiles>
         <directory name="src" />
-        <directory name="tests" />
     </projectFiles>
 
     <issueHandlers>
@@ -76,8 +75,8 @@
         <PossiblyNullPropertyFetch errorLevel="error" />
         <PossiblyNullReference errorLevel="error" />
         <PossiblyUndefinedVariable errorLevel="error" />
-        <PossiblyUnusedMethod errorLevel="error" />
-        <PossiblyUnusedVariable errorLevel="error" />
+        <PossiblyUnusedMethod errorLevel="suppress" />
+        <PossiblyUnusedVariable errorLevel="suppress" />
         <PropertyNotSetInConstructor errorLevel="error" />
         <ReferenceConstraintViolation errorLevel="error" />
         <TooFewArguments errorLevel="error" />
@@ -98,7 +97,7 @@
         <UnrecognizedStatement errorLevel="error" />
         <UnevaluatedCode errorLevel="error" />
         <UnusedVariable errorLevel="error" />
-        <UnusedClass errorLevel="error" />
+        <UnusedClass errorLevel="suppress" />
         <UnusedMethod errorLevel="error" />
     </issueHandlers>
 </psalm>
