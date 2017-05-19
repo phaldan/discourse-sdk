@@ -46,12 +46,18 @@ class GuzzleHttp implements Http
         return $this;
     }
 
-    public function delete(string $path): PromiseInterface
+    public function delete(string $path, array $json = []): PromiseInterface
     {
-        $headers = [
-          self::HEADER_ACCEPT => self::MIME_TYPE_JSON,
-        ];
-        $request = new Request(self::METHOD_DELETE, $this->url.$path, $headers);
+        $headers = [];
+        $headers[self::HEADER_ACCEPT] = self::MIME_TYPE_JSON;
+        $body = null;
+
+        if (!empty($json)) {
+            $headers[self::HEADER_CONTENT_TYPE] = self::MIME_TYPE_JSON;
+            $body = json_encode($json);
+        }
+
+        $request = new Request(self::METHOD_DELETE, $this->url.$path, $headers, $body);
 
         return $this->client->sendAsync($request);
     }

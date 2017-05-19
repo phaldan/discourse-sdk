@@ -16,7 +16,7 @@ class HttpDummy implements Http
         return $this;
     }
 
-    public function delete(string $path): PromiseInterface
+    public function delete(string $path, array $json = []): PromiseInterface
     {
         return $this->createPromise();
     }

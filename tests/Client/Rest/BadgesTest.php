@@ -42,7 +42,7 @@ class BadgesTest extends TestCase
         $client = new class() extends HttpDummy {
             public $path;
 
-            public function delete(string $path): PromiseInterface
+            public function delete(string $path, array $json = []): PromiseInterface
             {
                 $this->path = $path;
 

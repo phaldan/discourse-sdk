@@ -69,6 +69,20 @@ class GuzzleHttpTest extends TestCase
     /**
      * @test
      */
+    public function successCreateDeleteRequestWithBody(): void
+    {
+        $this->target->setInstance('domain');
+        $this->assertNull($this->target->delete('/rest.json', ['json' => 'delete'])->wait());
+        $headers = [
+          GuzzleHttp::HEADER_ACCEPT => [GuzzleHttp::MIME_TYPE_JSON],
+          GuzzleHttp::HEADER_CONTENT_TYPE => [GuzzleHttp::MIME_TYPE_JSON],
+        ];
+        $this->assertRequest(Http::METHOD_DELETE, 'domain/rest.json', $headers, '{"json":"delete"}');
+    }
+
+    /**
+     * @test
+     */
     public function successCreateGetRequest(): void
     {
         $this->target->setInstance('domain');
@@ -90,7 +104,7 @@ class GuzzleHttpTest extends TestCase
             GuzzleHttp::HEADER_ACCEPT => [GuzzleHttp::MIME_TYPE_JSON],
             GuzzleHttp::HEADER_CONTENT_TYPE => [GuzzleHttp::MIME_TYPE_JSON],
         ];
-        $this->assertRequest(Http::METHOD_POST, 'domain/rest.json', $headers, json_encode(['json' => 'post']));
+        $this->assertRequest(Http::METHOD_POST, 'domain/rest.json', $headers, '{"json":"post"}');
     }
 
     /**
@@ -104,7 +118,7 @@ class GuzzleHttpTest extends TestCase
           GuzzleHttp::HEADER_ACCEPT => [GuzzleHttp::MIME_TYPE_JSON],
           GuzzleHttp::HEADER_CONTENT_TYPE => [GuzzleHttp::MIME_TYPE_JSON],
         ];
-        $this->assertRequest(Http::METHOD_PUT, 'domain/rest.json', $headers, json_encode(['json' => 'put']));
+        $this->assertRequest(Http::METHOD_PUT, 'domain/rest.json', $headers, '{"json":"put"}');
     }
 
     protected function assertRequest(string $method, string $uri, array $headers = [], string $body = '')

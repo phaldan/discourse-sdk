@@ -32,10 +32,11 @@ interface Http
      * Execute http/https request via DELETE method and only accept json as response.
      *
      * @param string $path
+     * @param array  $json
      *
      * @return PromiseInterface
      */
-    public function delete(string $path): PromiseInterface;
+    public function delete(string $path, array $json = []): PromiseInterface;
 
     /**
      * Execute http/https request via GET method and only accept json as response.
