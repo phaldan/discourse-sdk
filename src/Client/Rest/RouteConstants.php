@@ -22,4 +22,11 @@ abstract class RouteConstants
     const EMAILS_LIST = '/admin/email/%s.json';
 
     const FLAGS_LIST = '/admin/flags/%s.json';
+
+    const GROUPS_ADD_MEMBER = '/groups/%d/members.json';
+    const GROUPS_CREATE = '/admin/groups';
+    const GROUPS_DELETE = '/admin/groups/%d.json';
+    const GROUPS_DELETE_MEMBER = '/groups/%d/members.json';
+    const GROUPS_LIST = '/admin/groups.json';
+    const GROUPS_SINGLE = '/groups/%s/members.json';
 }
