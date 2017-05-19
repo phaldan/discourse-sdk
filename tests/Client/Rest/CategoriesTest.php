@@ -2,7 +2,6 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use GuzzleHttp\Promise\PromiseInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -83,18 +82,7 @@ class CategoriesTest extends TestCase
      */
     public function successUpdate(): void
     {
-        $client = new class() extends HttpDummy {
-            public $path;
-            public $json;
-
-            public function put(string $path, array $json): PromiseInterface
-            {
-                $this->path = $path;
-                $this->json = $json;
-
-                return parent::get($path);
-            }
-        };
+        $client = new HttpPutSpy();
         $target = new Categories($client);
         $category = $this->createCategory('Welcome', 'FF00FF', '00FF00');
         $this->assertNull($target->update(1337, $category)->wait());

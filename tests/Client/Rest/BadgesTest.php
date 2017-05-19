@@ -2,7 +2,6 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use GuzzleHttp\Promise\PromiseInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -39,16 +38,7 @@ class BadgesTest extends TestCase
      */
     public function successDelete(): void
     {
-        $client = new class() extends HttpDummy {
-            public $path;
-
-            public function delete(string $path, array $json = []): PromiseInterface
-            {
-                $this->path = $path;
-
-                return parent::delete($path);
-            }
-        };
+        $client = new HttpDeleteSpy();
         $target = new Badges($client);
         $this->assertNull($target->delete(1337)->wait());
         $this->assertSame(sprintf(RouteConstants::BADGES_DELETE, 1337), $client->path);
