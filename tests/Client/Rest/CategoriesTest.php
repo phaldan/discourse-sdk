@@ -3,7 +3,6 @@
 namespace PhALDan\Discourse\Client\Rest;
 
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\HttpDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,10 +16,10 @@ class CategoriesTest extends TestCase
      */
     public function successGetList(): void
     {
-        $client = $this->createGetClient();
+        $client = $this->createHttpGetSpy();
         $target = new Categories($client);
         $this->assertNull($target->list()->wait());
-        $this->assertSame(Categories::URL_GET_LIST, $client->path);
+        $this->assertSame(RouteConstants::CATEGORIES_LIST, $client->path);
     }
 
     /**
@@ -28,10 +27,10 @@ class CategoriesTest extends TestCase
      */
     public function successGetListLimitToSecondLevel(): void
     {
-        $client = $this->createGetClient();
+        $client = $this->createHttpGetSpy();
         $target = new Categories($client);
         $this->assertNull($target->list([Categories::OPTION_PARENT_CATEGORY => 1337])->wait());
-        $path = Categories::URL_GET_LIST.'?'.Categories::OPTION_PARENT_CATEGORY.'=1337';
+        $path = RouteConstants::CATEGORIES_LIST.'?'.Categories::OPTION_PARENT_CATEGORY.'=1337';
         $this->assertSame($path, $client->path);
     }
 
@@ -40,10 +39,10 @@ class CategoriesTest extends TestCase
      */
     public function successGetSingle(): void
     {
-        $client = $this->createGetClient();
+        $client = $this->createHttpGetSpy();
         $target = new Categories($client);
         $this->assertNull($target->single(1337)->wait());
-        $this->assertSame(sprintf(Categories::URL_GET_SINGLE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::CATEGORIES_SINGLE, 1337), $client->path);
     }
 
     /**
@@ -51,10 +50,10 @@ class CategoriesTest extends TestCase
      */
     public function successGetSingleBySlug(): void
     {
-        $client = $this->createGetClient();
+        $client = $this->createHttpGetSpy();
         $target = new Categories($client);
         $this->assertNull($target->singleBySlug('welcome')->wait());
-        $this->assertSame(sprintf(Categories::URL_GET_SINGLE, 'welcome'), $client->path);
+        $this->assertSame(sprintf(RouteConstants::CATEGORIES_SINGLE, 'welcome'), $client->path);
     }
 
     /**
@@ -62,22 +61,11 @@ class CategoriesTest extends TestCase
      */
     public function successCreate(): void
     {
-        $client = new class() extends HttpDummy {
-            public $path;
-            public $json;
-
-            public function post(string $path, array $json): PromiseInterface
-            {
-                $this->path = $path;
-                $this->json = $json;
-
-                return parent::get($path);
-            }
-        };
+        $client = new HttpPostSpy();
         $target = new Categories($client);
         $category = $this->createCategory('Welcome', 'FF00FF', '00FF00');
         $this->assertNull($target->create($category)->wait());
-        $this->assertSame(Categories::URL_CREATE, $client->path);
+        $this->assertSame(RouteConstants::CATEGORIES_CREATE, $client->path);
         $this->assertSame($category, $client->json);
     }
 
@@ -110,21 +98,12 @@ class CategoriesTest extends TestCase
         $target = new Categories($client);
         $category = $this->createCategory('Welcome', 'FF00FF', '00FF00');
         $this->assertNull($target->update(1337, $category)->wait());
-        $this->assertSame(sprintf(Categories::URL_UPDATE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::CATEGORIES_UPDATE, 1337), $client->path);
         $this->assertSame($category, $client->json);
     }
 
-    private function createGetClient()
+    private function createHttpGetSpy()
     {
-        return new class() extends HttpDummy {
-            public $path;
-
-            public function get(string $path): PromiseInterface
-            {
-                $this->path = $path;
-
-                return parent::get($path);
-            }
-        };
+        return new HttpGetSpy();
     }
 }

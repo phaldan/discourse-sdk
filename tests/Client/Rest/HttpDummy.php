@@ -1,9 +1,10 @@
 <?php
 
-namespace PhALDan\Discourse\Client;
+namespace PhALDan\Discourse\Client\Rest;
 
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
+use PhALDan\Discourse\Client\Http;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>

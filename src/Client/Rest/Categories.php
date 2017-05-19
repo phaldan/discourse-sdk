@@ -3,36 +3,17 @@
 namespace PhALDan\Discourse\Client\Rest;
 
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\Http;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Categories
+class Categories extends HttpClient
 {
-    const URL_GET_LIST = '/categories.json';
-    const URL_GET_SINGLE = '/c/%s.json';
-    const URL_CREATE = '/categories.json';
-    const URL_UPDATE = '/categories/%s';
-
     const ATTR_COLOR = 'color';
     const ATTR_NAME = 'name';
     const ATTR_TEXT_COLOR = 'text_color';
 
     const OPTION_PARENT_CATEGORY = 'parent_category_id';
-
-    /**
-     * @var Http
-     */
-    private $client;
-
-    /**
-     * @param Http $client client for handling http requests
-     */
-    public function __construct(Http $client)
-    {
-        $this->client = $client;
-    }
 
     /**
      * Request categories of all hierarchy levels (Default). Optional options via query-strings:
@@ -47,7 +28,7 @@ class Categories
     {
         $queryString = http_build_query($queryParams);
 
-        return $this->client->get(self::URL_GET_LIST.(empty($queryString) ? '' : '?'.$queryString));
+        return $this->client()->get(RouteConstants::CATEGORIES_LIST.(empty($queryString) ? '' : '?'.$queryString));
     }
 
     /**
@@ -60,7 +41,9 @@ class Categories
      */
     public function single(int $id): PromiseInterface
     {
-        return $this->client->get(sprintf(self::URL_GET_SINGLE, (string) $id));
+        $url = sprintf(RouteConstants::CATEGORIES_SINGLE, (string) $id);
+
+        return $this->client()->get($url);
     }
 
     /**
@@ -72,7 +55,9 @@ class Categories
      */
     public function singleBySlug(string $slug): PromiseInterface
     {
-        return $this->client->get(sprintf(self::URL_GET_SINGLE, $slug));
+        $url = sprintf(RouteConstants::CATEGORIES_SINGLE, $slug);
+
+        return $this->client()->get($url);
     }
 
     /**
@@ -85,7 +70,7 @@ class Categories
      */
     public function create(array $attributes): PromiseInterface
     {
-        return $this->client->post(self::URL_CREATE, $attributes);
+        return $this->client()->post(RouteConstants::CATEGORIES_CREATE, $attributes);
     }
 
     /**
@@ -99,6 +84,8 @@ class Categories
      */
     public function update(int $id, array $attributes): PromiseInterface
     {
-        return $this->client->put(sprintf(self::URL_UPDATE, $id), $attributes);
+        $url = sprintf(RouteConstants::CATEGORIES_UPDATE, $id);
+
+        return $this->client()->put($url, $attributes);
     }
 }
