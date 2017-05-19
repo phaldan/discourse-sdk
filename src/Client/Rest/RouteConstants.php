@@ -18,4 +18,6 @@ abstract class RouteConstants
     const CATEGORIES_LIST = '/categories.json';
     const CATEGORIES_SINGLE = '/c/%s.json';
     const CATEGORIES_UPDATE = '/categories/%s';
+
+    const EMAILS_LIST = '/admin/email/%s.json';
 }
