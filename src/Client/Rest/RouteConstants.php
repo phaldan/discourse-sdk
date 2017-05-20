@@ -39,4 +39,11 @@ abstract class RouteConstants
 
     const TAGS_LIST = '/tags';
     const TAGS_SINGLE = '/tags/%s';
+
+    const USERS_CREATE = '/users';
+    const USERS_DIRECTORY_ITEMS = '/directory_items.json';
+    const USERS_LIST = '/admin/users/list/%s.json';
+    const USERS_SINGLE = '/users/%s.json';
+    const USERS_UPDATE_AVATAR = '/users/%s/preferences/avatar/pick';
+    const USERS_UPDATE_EMAIL = '/users/%s/preferences/email';
 }
