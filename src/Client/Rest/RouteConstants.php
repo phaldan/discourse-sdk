@@ -30,6 +30,11 @@ abstract class RouteConstants
     const GROUPS_LIST = '/admin/groups.json';
     const GROUPS_SINGLE = '/groups/%s/members.json';
 
+    const TAG_GROUP_CREATE = '/tag_groups.json';
+    const TAG_GROUPS_LIST = '/tag_groups.json';
+    const TAG_GROUPS_SINGLE = '/tag_groups/%d.json';
+    const TAG_GROUPS_UPDATE = '/tag_groups/%d.json';
+
     const TAGS_LIST = '/tags';
     const TAGS_SINGLE = '/tags/%s';
 }

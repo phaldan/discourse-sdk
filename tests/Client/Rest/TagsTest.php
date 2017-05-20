@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @coversNothing
+ * @covers \PhALDan\Discourse\Client\Rest\Tags
  */
 class TagsTest extends TestCase
 {
