@@ -29,4 +29,7 @@ abstract class RouteConstants
     const GROUPS_DELETE_MEMBER = '/groups/%d/members.json';
     const GROUPS_LIST = '/admin/groups.json';
     const GROUPS_SINGLE = '/groups/%s/members.json';
+
+    const TAGS_LIST = '/tags';
+    const TAGS_SINGLE = '/tags/%s';
 }
