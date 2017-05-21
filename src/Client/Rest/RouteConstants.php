@@ -30,6 +30,12 @@ abstract class RouteConstants
     const GROUPS_LIST = '/admin/groups.json';
     const GROUPS_SINGLE = '/groups/%s/members.json';
 
+    const PRIVATE_MESSAGES_INBOX = '/topics/private-messages/%s.json';
+    const PRIVATE_MESSAGES_SENT = '/topics/private-messages-sent/%s.json';
+    const PRIVATE_MESSAGES_ARCHIVE = '/topics/private-messages-archive/%s.json';
+    const PRIVATE_MESSAGES_GROUP = '/topics/private-messages-group/%s/%s.json';
+    const PRIVATE_MESSAGES_GROUP_ARCHIVE = '/topics/private-messages-group/%s/%s/archive.json';
+
     const SITE_SETTINGS_SET = '/admin/site_settings/%s';
 
     const TAG_GROUP_CREATE = '/tag_groups.json';
