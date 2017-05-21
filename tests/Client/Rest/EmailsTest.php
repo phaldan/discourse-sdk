@@ -28,8 +28,9 @@ class EmailsTest extends TestCase
     {
         $client = new HttpGetSpy();
         $target = new Emails($client);
-        $this->assertNull($target->list(Emails::ACTION_SENT, [Emails::OPTION_OFFSET => 1337])->wait());
-        $url = sprintf(RouteConstants::EMAILS_LIST, Emails::ACTION_SENT).'?'.Emails::OPTION_OFFSET.'=1337';
-        $this->assertSame($url, $client->path);
+        $parameters = [Emails::OPTION_OFFSET => 1337];
+        $this->assertNull($target->list(Emails::ACTION_SENT, $parameters)->wait());
+        $this->assertSame(sprintf(RouteConstants::EMAILS_LIST, Emails::ACTION_SENT), $client->path);
+        $this->assertSame($parameters, $client->parameters);
     }
 }

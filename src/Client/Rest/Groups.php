@@ -55,9 +55,7 @@ class Groups extends HttpClient
      */
     public function list(array $parameters = []): PromiseInterface
     {
-        $queryString = http_build_query($parameters);
-
-        return $this->client()->get(RouteConstants::GROUPS_LIST.(empty($queryString) ? '' : '?'.$queryString));
+        return $this->client()->get(RouteConstants::GROUPS_LIST, $parameters);
     }
 
     /**

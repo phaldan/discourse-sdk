@@ -28,8 +28,10 @@ class GroupsTest extends TestCase
     {
         $client = new HttpGetSpy();
         $target = new Groups($client);
-        $this->assertNull($target->list([Groups::OPTION_OFFSET => 1337])->wait());
-        $this->assertSame(RouteConstants::GROUPS_LIST.'?'.Groups::OPTION_OFFSET.'=1337', $client->path);
+        $parameters = [Groups::OPTION_OFFSET => 1337];
+        $this->assertNull($target->list($parameters)->wait());
+        $this->assertSame(RouteConstants::GROUPS_LIST, $client->path);
+        $this->assertSame($parameters, $client->parameters);
     }
 
     /**

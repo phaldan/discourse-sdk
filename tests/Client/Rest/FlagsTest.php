@@ -19,6 +19,7 @@ class FlagsTest extends TestCase
         $target = new Flags($client);
         $this->assertNull($target->list(Flags::TYPE_ACTIVE)->wait());
         $this->assertSame(sprintf(RouteConstants::FLAGS_LIST, Flags::TYPE_ACTIVE), $client->path);
+        $this->assertSame([], $client->parameters);
     }
 
     /**
@@ -28,8 +29,9 @@ class FlagsTest extends TestCase
     {
         $client = new HttpGetSpy();
         $target = new Flags($client);
-        $this->assertNull($target->list(Flags::TYPE_ACTIVE, [Flags::OPTION_OFFSET => 1337])->wait());
-        $url = sprintf(RouteConstants::FLAGS_LIST, Flags::TYPE_ACTIVE).'?'.Flags::OPTION_OFFSET.'=1337';
-        $this->assertSame($url, $client->path);
+        $parameters = [Flags::OPTION_OFFSET => 1337];
+        $this->assertNull($target->list(Flags::TYPE_ACTIVE, $parameters)->wait());
+        $this->assertSame(sprintf(RouteConstants::FLAGS_LIST, Flags::TYPE_ACTIVE), $client->path);
+        $this->assertSame($parameters, $client->parameters);
     }
 }

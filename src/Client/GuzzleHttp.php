@@ -62,12 +62,14 @@ class GuzzleHttp implements Http
         return $this->client->sendAsync($request);
     }
 
-    public function get(string $path): PromiseInterface
+    public function get(string $path, array $parameters = []): PromiseInterface
     {
+        $queryString = http_build_query($parameters);
+        $uri = $this->url.$path.(empty($queryString) ? '' : '?'.$queryString);
         $headers = [
           self::HEADER_ACCEPT => self::MIME_TYPE_JSON,
         ];
-        $request = new Request(self::METHOD_GET, $this->url.$path, $headers);
+        $request = new Request(self::METHOD_GET, $uri, $headers);
 
         return $this->client->sendAsync($request);
     }

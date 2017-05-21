@@ -96,6 +96,19 @@ class GuzzleHttpTest extends TestCase
     /**
      * @test
      */
+    public function successCreateGetRequestWithQueryString(): void
+    {
+        $this->target->setInstance('domain');
+        $this->assertNull($this->target->get('/rest.json', ['flag' => 'value'])->wait());
+        $headers = [
+          GuzzleHttp::HEADER_ACCEPT => [GuzzleHttp::MIME_TYPE_JSON],
+        ];
+        $this->assertRequest(Http::METHOD_GET, 'domain/rest.json?flag=value', $headers);
+    }
+
+    /**
+     * @test
+     */
     public function successCreatePostRequest(): void
     {
         $this->target->setInstance('domain');

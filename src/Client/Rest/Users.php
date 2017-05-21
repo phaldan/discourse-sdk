@@ -76,9 +76,7 @@ class Users extends HttpClient
      */
     public function directoryItems(array $parameters): PromiseInterface
     {
-        $queryString = http_build_query($parameters);
-
-        return $this->client()->get(RouteConstants::USERS_DIRECTORY_ITEMS.(empty($queryString) ? '' : '?'.$queryString));
+        return $this->client()->get(RouteConstants::USERS_DIRECTORY_ITEMS, $parameters);
     }
 
     /**
@@ -93,9 +91,8 @@ class Users extends HttpClient
     public function list(string $flag, array $parameters): PromiseInterface
     {
         $url = sprintf(RouteConstants::USERS_LIST, $flag);
-        $queryString = http_build_query($parameters);
 
-        return $this->client()->get($url.(empty($queryString) ? '' : '?'.$queryString));
+        return $this->client()->get($url, $parameters);
     }
 
     /**

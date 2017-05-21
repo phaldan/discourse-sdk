@@ -30,9 +30,10 @@ class UsersTest extends TestCase
     {
         $client = new HttpGetSpy();
         $target = new Users($client);
-        $this->assertNull($target->directoryItems([Users::OPTION_PERIOD => Users::PERIOD_WEEKLY])->wait());
-        $url = RouteConstants::USERS_DIRECTORY_ITEMS.'?'.Users::OPTION_PERIOD.'='.Users::PERIOD_WEEKLY;
-        $this->assertSame($url, $client->path);
+        $parameters = [Users::OPTION_PERIOD => Users::PERIOD_WEEKLY];
+        $this->assertNull($target->directoryItems($parameters)->wait());
+        $this->assertSame(RouteConstants::USERS_DIRECTORY_ITEMS, $client->path);
+        $this->assertSame($parameters, $client->parameters);
     }
 
     /**
@@ -42,9 +43,10 @@ class UsersTest extends TestCase
     {
         $client = new HttpGetSpy();
         $target = new Users($client);
-        $this->assertNull($target->list(Users::FLAG_ACTIVE, [Users::OPTION_ORDER => Users::ORDER_EMAIL])->wait());
-        $url = sprintf(RouteConstants::USERS_LIST, Users::FLAG_ACTIVE).'?'.Users::OPTION_ORDER.'='.Users::ORDER_EMAIL;
-        $this->assertSame($url, $client->path);
+        $parameters = [Users::OPTION_ORDER => Users::ORDER_EMAIL];
+        $this->assertNull($target->list(Users::FLAG_ACTIVE, $parameters)->wait());
+        $this->assertSame(sprintf(RouteConstants::USERS_LIST, Users::FLAG_ACTIVE), $client->path);
+        $this->assertSame($parameters, $client->parameters);
     }
 
     /**

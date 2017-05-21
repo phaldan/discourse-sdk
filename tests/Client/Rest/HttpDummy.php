@@ -21,7 +21,7 @@ class HttpDummy implements Http
         return $this->createPromise();
     }
 
-    public function get(string $path): PromiseInterface
+    public function get(string $path, array $parameters = []): PromiseInterface
     {
         return $this->createPromise();
     }

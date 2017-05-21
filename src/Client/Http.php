@@ -42,10 +42,11 @@ interface Http
      * Execute http/https request via GET method and only accept json as response.
      *
      * @param string $path
+     * @param array  $parameters
      *
      * @return PromiseInterface
      */
-    public function get(string $path): PromiseInterface;
+    public function get(string $path, array $parameters = []): PromiseInterface;
 
     /**
      * Execute http/https request with json encoded data via POST method and only accept json as response.

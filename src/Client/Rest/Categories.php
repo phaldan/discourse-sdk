@@ -20,15 +20,13 @@ class Categories extends HttpClient
      *  - parent_category_id: Use slug or numeric identifier to limit result to 2nd-level categories
      * More information on http://docs.discourse.org/#tag/Categories%2Fpaths%2F~1categories.json%2Fget.
      *
-     * @param array $queryParams
+     * @param array $parameters
      *
      * @return PromiseInterface
      */
-    public function list(array $queryParams = []): PromiseInterface
+    public function list(array $parameters = []): PromiseInterface
     {
-        $queryString = http_build_query($queryParams);
-
-        return $this->client()->get(RouteConstants::CATEGORIES_LIST.(empty($queryString) ? '' : '?'.$queryString));
+        return $this->client()->get(RouteConstants::CATEGORIES_LIST, $parameters);
     }
 
     /**

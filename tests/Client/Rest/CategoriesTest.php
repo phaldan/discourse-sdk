@@ -19,6 +19,7 @@ class CategoriesTest extends TestCase
         $target = new Categories($client);
         $this->assertNull($target->list()->wait());
         $this->assertSame(RouteConstants::CATEGORIES_LIST, $client->path);
+        $this->assertSame([], $client->parameters);
     }
 
     /**
@@ -28,9 +29,10 @@ class CategoriesTest extends TestCase
     {
         $client = $this->createHttpGetSpy();
         $target = new Categories($client);
-        $this->assertNull($target->list([Categories::OPTION_PARENT_CATEGORY => 1337])->wait());
-        $path = RouteConstants::CATEGORIES_LIST.'?'.Categories::OPTION_PARENT_CATEGORY.'=1337';
-        $this->assertSame($path, $client->path);
+        $parameters = [Categories::OPTION_PARENT_CATEGORY => 1337];
+        $this->assertNull($target->list($parameters)->wait());
+        $this->assertSame(RouteConstants::CATEGORIES_LIST, $client->path);
+        $this->assertSame($parameters, $client->parameters);
     }
 
     /**

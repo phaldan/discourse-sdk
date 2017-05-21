@@ -10,10 +10,12 @@ use GuzzleHttp\Promise\PromiseInterface;
 class HttpGetSpy extends HttpDummy
 {
     public $path;
+    public $parameters;
 
-    public function get(string $path): PromiseInterface
+    public function get(string $path, array $parameters = []): PromiseInterface
     {
         $this->path = $path;
+        $this->parameters = $parameters;
 
         return parent::get($path);
     }
