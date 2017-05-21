@@ -32,6 +32,8 @@ abstract class RouteConstants
 
     const NOTIFICATIONS_LIST = '/notifications.json';
 
+    const PLUGINS_LIST = '/admin/plugins';
+
     const PRIVATE_MESSAGES_INBOX = '/topics/private-messages/%s.json';
     const PRIVATE_MESSAGES_SENT = '/topics/private-messages-sent/%s.json';
     const PRIVATE_MESSAGES_ARCHIVE = '/topics/private-messages-archive/%s.json';
