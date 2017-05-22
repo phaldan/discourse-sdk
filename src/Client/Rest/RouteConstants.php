@@ -38,6 +38,12 @@ abstract class RouteConstants
 
     const PLUGINS_LIST = '/admin/plugins';
 
+    const POSTS_CREATE = '/posts';
+    const POSTS_LIKE = '/post_actions';
+    const POSTS_SINGLE = '/posts/%d';
+    const POSTS_UNLIKE = '/post_actions/%d';
+    const POSTS_UPDATE = '/posts/%d';
+
     const PRIVATE_MESSAGES_INBOX = '/topics/private-messages/%s.json';
     const PRIVATE_MESSAGES_SENT = '/topics/private-messages-sent/%s.json';
     const PRIVATE_MESSAGES_ARCHIVE = '/topics/private-messages-archive/%s.json';
