@@ -20,7 +20,7 @@ class PrivateMessagesTest extends TestCase
      */
     private $client;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->client = new HttpGetSpy();
         $this->target = new PrivateMessages($this->client);

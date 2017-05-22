@@ -30,6 +30,10 @@ abstract class RouteConstants
     const GROUPS_LIST = '/admin/groups.json';
     const GROUPS_SINGLE = '/groups/%s/members.json';
 
+    const INVITES_EMAIL = '/invites';
+    const INVITES_CREATE_LINK = '/invites/link';
+    const INVITES_CREATE_TOKEN = '/invites/disposable';
+
     const NOTIFICATIONS_LIST = '/notifications.json';
 
     const PLUGINS_LIST = '/admin/plugins';
