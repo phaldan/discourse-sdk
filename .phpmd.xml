@@ -362,7 +362,7 @@ By default it ignores methods starting with 'get' or 'set'.
         </description>
         <priority>3</priority>
         <properties>
-            <property name="maxmethods" description="The method count reporting threshold" value="10"/>
+            <property name="maxmethods" description="The method count reporting threshold" value="20"/>
             <property name="ignorepattern" description="Ignore methods matching this regex" value="(^(set|get))i"/>
         </properties>
     </rule>

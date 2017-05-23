@@ -60,6 +60,18 @@ abstract class RouteConstants
     const TAGS_LIST = '/tags';
     const TAGS_SINGLE = '/tags/%s';
 
+    const TOPICS_CREATE_SCHEDULED = '/t/%d/status_update';
+    const TOPICS_DELETE = '/t/%d.json';
+    const TOPICS_INVITE = '/t/%d/invite';
+    const TOPICS_LATEST = '/latest.json';
+    const TOPICS_NOTIFICATIONS = '/t/%d/notifications';
+    const TOPICS_SINGLE = '/t/%d.json';
+    const TOPICS_TOP = '/top.json';
+    const TOPICS_TOP_FILTERED = '/top/%s.json';
+    const TOPICS_UPDATE = '/t/%s/%d.json';
+    const TOPICS_UPDATE_SCHEDULED = '/t/%d/change-timestamp';
+    const TOPICS_UPDATE_STATUS = '/t/%d/status';
+
     const USERS_CREATE = '/users';
     const USERS_DIRECTORY_ITEMS = '/directory_items.json';
     const USERS_LIST = '/admin/users/list/%s.json';
