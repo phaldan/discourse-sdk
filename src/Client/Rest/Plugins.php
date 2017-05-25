@@ -17,6 +17,6 @@ class Plugins extends HttpClient
      */
     public function list(): PromiseInterface
     {
-        return $this->client()->get(RouteConstants::PLUGINS_LIST);
+        return $this->client()->get(RouteConstants::PLUGIN_LIST);
     }
 }

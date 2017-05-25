@@ -19,7 +19,7 @@ class Backups extends HttpClient
      */
     public function list(): PromiseInterface
     {
-        return $this->client()->get(RouteConstants::BACKUPS_LIST);
+        return $this->client()->get(RouteConstants::BACKUP_LIST);
     }
 
     /**
@@ -32,6 +32,6 @@ class Backups extends HttpClient
      */
     public function create(array $options): PromiseInterface
     {
-        return $this->client()->post(RouteConstants::BACKUPS_CREATE, $options);
+        return $this->client()->post(RouteConstants::BACKUP_CREATE, $options);
     }
 }

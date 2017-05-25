@@ -18,7 +18,7 @@ class TagsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Tags($client);
         $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::TAGS_LIST, $client->path);
+        $this->assertSame(RouteConstants::TAG_LIST, $client->path);
     }
 
     /**
@@ -29,6 +29,6 @@ class TagsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Tags($client);
         $this->assertNull($target->single('faq')->wait());
-        $this->assertSame(sprintf(RouteConstants::TAGS_SINGLE, 'faq'), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TAG_SINGLE, 'faq'), $client->path);
     }
 }

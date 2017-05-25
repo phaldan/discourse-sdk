@@ -26,7 +26,7 @@ class Categories extends HttpClient
      */
     public function list(array $parameters = []): PromiseInterface
     {
-        return $this->client()->get(RouteConstants::CATEGORIES_LIST, $parameters);
+        return $this->client()->get(RouteConstants::CATEGORY_LIST, $parameters);
     }
 
     /**
@@ -39,7 +39,7 @@ class Categories extends HttpClient
      */
     public function single(int $id): PromiseInterface
     {
-        $url = sprintf(RouteConstants::CATEGORIES_SINGLE, (string) $id);
+        $url = sprintf(RouteConstants::CATEGORY_SINGLE, (string) $id);
 
         return $this->client()->get($url);
     }
@@ -53,7 +53,7 @@ class Categories extends HttpClient
      */
     public function singleBySlug(string $slug): PromiseInterface
     {
-        $url = sprintf(RouteConstants::CATEGORIES_SINGLE, $slug);
+        $url = sprintf(RouteConstants::CATEGORY_SINGLE, $slug);
 
         return $this->client()->get($url);
     }
@@ -68,7 +68,7 @@ class Categories extends HttpClient
      */
     public function create(array $attributes): PromiseInterface
     {
-        return $this->client()->post(RouteConstants::CATEGORIES_CREATE, $attributes);
+        return $this->client()->post(RouteConstants::CATEGORY_CREATE, $attributes);
     }
 
     /**
@@ -82,7 +82,7 @@ class Categories extends HttpClient
      */
     public function update(int $id, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::CATEGORIES_UPDATE, $id);
+        $url = sprintf(RouteConstants::CATEGORY_UPDATE, $id);
 
         return $this->client()->put($url, $attributes);
     }

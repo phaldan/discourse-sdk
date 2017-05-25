@@ -27,7 +27,7 @@ class Emails extends HttpClient
      */
     public function list(string $action, array $parameters = []): PromiseInterface
     {
-        $url = sprintf(RouteConstants::EMAILS_LIST, $action);
+        $url = sprintf(RouteConstants::EMAIL_LIST, $action);
 
         return $this->client()->get($url, $parameters);
     }

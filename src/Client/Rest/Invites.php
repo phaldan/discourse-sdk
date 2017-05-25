@@ -25,7 +25,7 @@ class Invites extends HttpClient
      */
     public function email(array $attributes): PromiseInterface
     {
-        return $this->client()->post(RouteConstants::INVITES_EMAIL, $attributes);
+        return $this->client()->post(RouteConstants::INVITE_EMAIL, $attributes);
     }
 
     /**
@@ -38,7 +38,7 @@ class Invites extends HttpClient
      */
     public function createLink(array $attributes): PromiseInterface
     {
-        return $this->client()->post(RouteConstants::INVITES_CREATE_LINK, $attributes);
+        return $this->client()->post(RouteConstants::INVITE_CREATE_LINK, $attributes);
     }
 
     /**
@@ -51,6 +51,6 @@ class Invites extends HttpClient
      */
     public function createToken(array $attributes): PromiseInterface
     {
-        return $this->client()->post(RouteConstants::INVITES_CREATE_TOKEN, $attributes);
+        return $this->client()->post(RouteConstants::INVITE_CREATE_TOKEN, $attributes);
     }
 }

@@ -18,7 +18,7 @@ class GroupsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Groups($client);
         $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::GROUPS_LIST, $client->path);
+        $this->assertSame(RouteConstants::GROUP_LIST, $client->path);
     }
 
     /**
@@ -30,7 +30,7 @@ class GroupsTest extends TestCase
         $target = new Groups($client);
         $parameters = [Groups::OPTION_OFFSET => 1337];
         $this->assertNull($target->list($parameters)->wait());
-        $this->assertSame(RouteConstants::GROUPS_LIST, $client->path);
+        $this->assertSame(RouteConstants::GROUP_LIST, $client->path);
         $this->assertSame($parameters, $client->parameters);
     }
 
@@ -43,7 +43,7 @@ class GroupsTest extends TestCase
         $target = new Groups($client);
         $group = [Groups::ATTRIBUTE_GROUP_NAME => 'admins'];
         $this->assertNull($target->create($group)->wait());
-        $this->assertSame(RouteConstants::GROUPS_CREATE, $client->path);
+        $this->assertSame(RouteConstants::GROUP_CREATE, $client->path);
         $this->assertSame($group, $client->json);
     }
 
@@ -55,7 +55,7 @@ class GroupsTest extends TestCase
         $client = new HttpDeleteSpy();
         $target = new Groups($client);
         $this->assertNull($target->delete(1337)->wait());
-        $this->assertSame(sprintf(RouteConstants::GROUPS_DELETE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::GROUP_DELETE, 1337), $client->path);
     }
 
     /**
@@ -66,7 +66,7 @@ class GroupsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Groups($client);
         $this->assertNull($target->single('admins')->wait());
-        $this->assertSame(sprintf(RouteConstants::GROUPS_SINGLE, 'admins'), $client->path);
+        $this->assertSame(sprintf(RouteConstants::GROUP_SINGLE, 'admins'), $client->path);
     }
 
     /**
@@ -77,7 +77,7 @@ class GroupsTest extends TestCase
         $client = new HttpPutSpy();
         $target = new Groups($client);
         $this->assertNull($target->addMember(1337, ['username'])->wait());
-        $this->assertSame(sprintf(RouteConstants::GROUPS_ADD_MEMBER, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::GROUP_ADD_MEMBER, 1337), $client->path);
         $this->assertSame([Groups::ATTRIBUTE_MEMBER_USERNAMES => 'username'], $client->json);
     }
 
@@ -89,7 +89,7 @@ class GroupsTest extends TestCase
         $client = new HttpPutSpy();
         $target = new Groups($client);
         $this->assertNull($target->addMember(1337, ['user1', 'user2'])->wait());
-        $this->assertSame(sprintf(RouteConstants::GROUPS_ADD_MEMBER, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::GROUP_ADD_MEMBER, 1337), $client->path);
         $this->assertSame([Groups::ATTRIBUTE_MEMBER_USERNAMES => 'user1,user2'], $client->json);
     }
 
@@ -102,7 +102,7 @@ class GroupsTest extends TestCase
         $target = new Groups($client);
         $attributes = [Groups::ATTRIBUTE_USER_ID => 42];
         $this->assertNull($target->deleteMember(1337, $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::GROUPS_DELETE_MEMBER, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::GROUP_DELETE_MEMBER, 1337), $client->path);
         $this->assertSame($attributes, $client->json);
     }
 }

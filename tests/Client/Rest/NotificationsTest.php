@@ -18,6 +18,6 @@ class NotificationsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Notifications($client);
         $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::NOTIFICATIONS_LIST, $client->path);
+        $this->assertSame(RouteConstants::NOTIFICATION_LIST, $client->path);
     }
 }

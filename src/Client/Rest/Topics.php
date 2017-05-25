@@ -55,7 +55,7 @@ class Topics extends HttpClient
      */
     public function createScheduled(int $id, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TOPICS_CREATE_SCHEDULED, $id);
+        $url = sprintf(RouteConstants::TOPIC_CREATE_SCHEDULED, $id);
 
         return $this->client()->post($url, $attributes);
     }
@@ -70,7 +70,7 @@ class Topics extends HttpClient
      */
     public function delete(int $id): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TOPICS_DELETE, $id);
+        $url = sprintf(RouteConstants::TOPIC_DELETE, $id);
 
         return $this->client()->delete($url);
     }
@@ -86,7 +86,7 @@ class Topics extends HttpClient
      */
     public function invite(int $id, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TOPICS_INVITE, $id);
+        $url = sprintf(RouteConstants::TOPIC_INVITE, $id);
 
         return $this->client()->post($url, $attributes);
     }
@@ -101,7 +101,7 @@ class Topics extends HttpClient
      */
     public function latest(array $parameter = []): PromiseInterface
     {
-        return $this->client()->get(RouteConstants::TOPICS_LATEST, $parameter);
+        return $this->client()->get(RouteConstants::TOPIC_LATEST, $parameter);
     }
 
     /**
@@ -115,7 +115,7 @@ class Topics extends HttpClient
      */
     public function notification(int $id, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TOPICS_NOTIFICATIONS, $id);
+        $url = sprintf(RouteConstants::TOPIC_NOTIFICATIONS, $id);
 
         return $this->client()->post($url, $attributes);
     }
@@ -130,7 +130,7 @@ class Topics extends HttpClient
      */
     public function single(int $id): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TOPICS_SINGLE, $id);
+        $url = sprintf(RouteConstants::TOPIC_SINGLE, $id);
 
         return $this->client()->get($url);
     }
@@ -143,7 +143,7 @@ class Topics extends HttpClient
      */
     public function top(): PromiseInterface
     {
-        return $this->client()->get(RouteConstants::TOPICS_TOP);
+        return $this->client()->get(RouteConstants::TOPIC_TOP);
     }
 
     /**
@@ -156,7 +156,7 @@ class Topics extends HttpClient
      */
     public function topFiltered(string $flag): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TOPICS_TOP_FILTERED, $flag);
+        $url = sprintf(RouteConstants::TOPIC_TOP_FILTERED, $flag);
 
         return $this->client()->get($url);
     }
@@ -173,7 +173,7 @@ class Topics extends HttpClient
      */
     public function update(string $slug, int $id, array $attribute): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TOPICS_UPDATE, $slug, $id);
+        $url = sprintf(RouteConstants::TOPIC_UPDATE, $slug, $id);
 
         return $this->client()->put($url, $attribute);
     }
@@ -189,7 +189,7 @@ class Topics extends HttpClient
      */
     public function updateScheduled(int $id, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TOPICS_UPDATE_SCHEDULED, $id);
+        $url = sprintf(RouteConstants::TOPIC_UPDATE_SCHEDULED, $id);
 
         return $this->client()->put($url, $attributes);
     }
@@ -205,7 +205,7 @@ class Topics extends HttpClient
      */
     public function updateStatus(int $id, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TOPICS_UPDATE_STATUS, $id);
+        $url = sprintf(RouteConstants::TOPIC_UPDATE_STATUS, $id);
 
         return $this->client()->put($url, $attributes);
     }

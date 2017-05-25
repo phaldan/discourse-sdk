@@ -19,7 +19,7 @@ class PrivateMessages extends HttpClient
      */
     public function inbox(string $username): PromiseInterface
     {
-        $url = sprintf(RouteConstants::PRIVATE_MESSAGES_INBOX, $username);
+        $url = sprintf(RouteConstants::PRIVATE_MESSAGE_INBOX, $username);
 
         return $this->client()->get($url);
     }
@@ -34,7 +34,7 @@ class PrivateMessages extends HttpClient
      */
     public function sent(string $username): PromiseInterface
     {
-        $url = sprintf(RouteConstants::PRIVATE_MESSAGES_SENT, $username);
+        $url = sprintf(RouteConstants::PRIVATE_MESSAGE_SENT, $username);
 
         return $this->client()->get($url);
     }
@@ -48,7 +48,7 @@ class PrivateMessages extends HttpClient
      */
     public function archive(string $username): PromiseInterface
     {
-        $url = sprintf(RouteConstants::PRIVATE_MESSAGES_ARCHIVE, $username);
+        $url = sprintf(RouteConstants::PRIVATE_MESSAGE_ARCHIVE, $username);
 
         return $this->client()->get($url);
     }
@@ -63,7 +63,7 @@ class PrivateMessages extends HttpClient
      */
     public function group(string $username, string $group): PromiseInterface
     {
-        $url = sprintf(RouteConstants::PRIVATE_MESSAGES_GROUP, $username, $group);
+        $url = sprintf(RouteConstants::PRIVATE_MESSAGE_GROUP, $username, $group);
 
         return $this->client()->get($url);
     }
@@ -78,7 +78,7 @@ class PrivateMessages extends HttpClient
      */
     public function groupArchive(string $username, string $group): PromiseInterface
     {
-        $url = sprintf(RouteConstants::PRIVATE_MESSAGES_GROUP_ARCHIVE, $username, $group);
+        $url = sprintf(RouteConstants::PRIVATE_MESSAGE_GROUP_ARCHIVE, $username, $group);
 
         return $this->client()->get($url);
     }

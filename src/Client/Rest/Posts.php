@@ -31,7 +31,7 @@ class Posts extends HttpClient
      */
     public function create(array $attributes): PromiseInterface
     {
-        return $this->client()->post(RouteConstants::POSTS_CREATE, $attributes);
+        return $this->client()->post(RouteConstants::POST_CREATE, $attributes);
     }
 
     /**
@@ -44,7 +44,7 @@ class Posts extends HttpClient
      */
     public function like(array $attributes): PromiseInterface
     {
-        return $this->client()->post(RouteConstants::POSTS_LIKE, $attributes);
+        return $this->client()->post(RouteConstants::POST_LIKE, $attributes);
     }
 
     /**
@@ -57,7 +57,7 @@ class Posts extends HttpClient
      */
     public function single(int $id): PromiseInterface
     {
-        $url = sprintf(RouteConstants::POSTS_SINGLE, $id);
+        $url = sprintf(RouteConstants::POST_SINGLE, $id);
 
         return $this->client()->get($url);
     }
@@ -73,7 +73,7 @@ class Posts extends HttpClient
      */
     public function unlike(int $id, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::POSTS_UNLIKE, $id);
+        $url = sprintf(RouteConstants::POST_UNLIKE, $id);
 
         return $this->client()->delete($url, $attributes);
     }
@@ -89,7 +89,7 @@ class Posts extends HttpClient
      */
     public function update(int $id, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::POSTS_UPDATE, $id);
+        $url = sprintf(RouteConstants::POST_UPDATE, $id);
 
         return $this->client()->put($url, $attributes);
     }

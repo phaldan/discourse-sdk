@@ -33,7 +33,7 @@ class InvitesTest extends TestCase
     {
         $attributes = [Invites::ATTR_EMAIL => 'admin@example.com'];
         $this->assertNull($this->target->email($attributes)->wait());
-        $this->assertSame(RouteConstants::INVITES_EMAIL, $this->client->path);
+        $this->assertSame(RouteConstants::INVITE_EMAIL, $this->client->path);
         $this->assertSame($attributes, $this->client->json);
     }
 
@@ -44,7 +44,7 @@ class InvitesTest extends TestCase
     {
         $attributes = [Invites::ATTR_EMAIL => 'admin@example.com'];
         $this->assertNull($this->target->createLink($attributes)->wait());
-        $this->assertSame(RouteConstants::INVITES_CREATE_LINK, $this->client->path);
+        $this->assertSame(RouteConstants::INVITE_CREATE_LINK, $this->client->path);
         $this->assertSame($attributes, $this->client->json);
     }
 
@@ -55,7 +55,7 @@ class InvitesTest extends TestCase
     {
         $attributes = [Invites::ATTR_EMAIL => 'admin@example.com'];
         $this->assertNull($this->target->createToken($attributes)->wait());
-        $this->assertSame(RouteConstants::INVITES_CREATE_TOKEN, $this->client->path);
+        $this->assertSame(RouteConstants::INVITE_CREATE_TOKEN, $this->client->path);
         $this->assertSame($attributes, $this->client->json);
     }
 }

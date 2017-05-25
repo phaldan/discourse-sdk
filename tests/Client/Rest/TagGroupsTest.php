@@ -18,7 +18,7 @@ class TagGroupsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new TagGroups($client);
         $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::TAG_GROUPS_LIST, $client->path);
+        $this->assertSame(RouteConstants::TAG_GROUP_LIST, $client->path);
     }
 
     /**
@@ -29,7 +29,7 @@ class TagGroupsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new TagGroups($client);
         $this->assertNull($target->single(1337)->wait());
-        $this->assertSame(sprintf(RouteConstants::TAG_GROUPS_SINGLE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TAG_GROUP_SINGLE, 1337), $client->path);
     }
 
     /**
@@ -54,7 +54,7 @@ class TagGroupsTest extends TestCase
         $target = new TagGroups($client);
         $attributes = [TagGroups::ATTR_NAME => 'group'];
         $this->assertNull($target->update(1337, $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::TAG_GROUPS_UPDATE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TAG_GROUP_UPDATE, 1337), $client->path);
         $this->assertSame($attributes, $client->json);
     }
 }

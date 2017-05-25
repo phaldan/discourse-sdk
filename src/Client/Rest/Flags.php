@@ -24,7 +24,7 @@ class Flags extends HttpClient
      */
     public function list(string $type, array $parameters = []): PromiseInterface
     {
-        $url = sprintf(RouteConstants::FLAGS_LIST, $type);
+        $url = sprintf(RouteConstants::FLAG_LIST, $type);
 
         return $this->client()->get($url, $parameters);
     }

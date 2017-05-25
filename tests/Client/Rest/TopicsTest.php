@@ -19,7 +19,7 @@ class TopicsTest extends TestCase
         $target = new Topics($client);
         $attributes = [Topics::ATTR_TIME => 'some-time'];
         $this->assertNull($target->createScheduled(1337, $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_CREATE_SCHEDULED, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_CREATE_SCHEDULED, 1337), $client->path);
         $this->assertSame($attributes, $client->json);
     }
 
@@ -31,7 +31,7 @@ class TopicsTest extends TestCase
         $client = new HttpDeleteSpy();
         $target = new Topics($client);
         $this->assertNull($target->delete(1337)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_DELETE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_DELETE, 1337), $client->path);
     }
 
     /**
@@ -43,7 +43,7 @@ class TopicsTest extends TestCase
         $target = new Topics($client);
         $attributes = [Topics::ATTR_USERNAME => 'username'];
         $this->assertNull($target->invite(1337, $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_INVITE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_INVITE, 1337), $client->path);
         $this->assertSame($attributes, $client->json);
     }
 
@@ -55,7 +55,7 @@ class TopicsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Topics($client);
         $this->assertNull($target->latest()->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_LATEST), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_LATEST), $client->path);
         $this->assertSame([], $client->parameters);
     }
 
@@ -68,7 +68,7 @@ class TopicsTest extends TestCase
         $target = new Topics($client);
         $parameters = [Topics::OPTION_ORDER => Topics::ORDER_DEFAULT];
         $this->assertNull($target->latest($parameters)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_LATEST), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_LATEST), $client->path);
         $this->assertSame($parameters, $client->parameters);
     }
 
@@ -81,7 +81,7 @@ class TopicsTest extends TestCase
         $target = new Topics($client);
         $attributes = [Topics::ATTR_NOTIFICATION_LEVEL => 1];
         $this->assertNull($target->notification(1337, $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_NOTIFICATIONS, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_NOTIFICATIONS, 1337), $client->path);
         $this->assertSame($attributes, $client->json);
     }
 
@@ -93,7 +93,7 @@ class TopicsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Topics($client);
         $this->assertNull($target->single(1337)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_SINGLE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_SINGLE, 1337), $client->path);
     }
 
     /**
@@ -104,7 +104,7 @@ class TopicsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Topics($client);
         $this->assertNull($target->top()->wait());
-        $this->assertSame(RouteConstants::TOPICS_TOP, $client->path);
+        $this->assertSame(RouteConstants::TOPIC_TOP, $client->path);
     }
 
     /**
@@ -115,7 +115,7 @@ class TopicsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Topics($client);
         $this->assertNull($target->topFiltered(Topics::FLAG_ALL)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_TOP_FILTERED, Topics::FLAG_ALL), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_TOP_FILTERED, Topics::FLAG_ALL), $client->path);
     }
 
     /**
@@ -127,7 +127,7 @@ class TopicsTest extends TestCase
         $target = new Topics($client);
         $attribute = [Topics::ATTR_TITLE => 'newer news'];
         $this->assertNull($target->update('news', 1337, $attribute)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_UPDATE, 'news', 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_UPDATE, 'news', 1337), $client->path);
         $this->assertSame($attribute, $client->json);
     }
 
@@ -140,7 +140,7 @@ class TopicsTest extends TestCase
         $target = new Topics($client);
         $attributes = [Topics::ATTR_TIMESTAMP => 42];
         $this->assertNull($target->updateScheduled(1337, $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_UPDATE_SCHEDULED, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_UPDATE_SCHEDULED, 1337), $client->path);
         $this->assertSame($attributes, $client->json);
     }
 
@@ -153,7 +153,7 @@ class TopicsTest extends TestCase
         $target = new Topics($client);
         $attributes = [Topics::ATTR_STATUS => Topics::STATUS_VISIBLE];
         $this->assertNull($target->updateStatus(1337, $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::TOPICS_UPDATE_STATUS, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::TOPIC_UPDATE_STATUS, 1337), $client->path);
         $this->assertSame($attributes, $client->json);
     }
 }

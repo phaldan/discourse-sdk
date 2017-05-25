@@ -18,6 +18,6 @@ class PluginsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Plugins($client);
         $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::PLUGINS_LIST, $client->path);
+        $this->assertSame(RouteConstants::PLUGIN_LIST, $client->path);
     }
 }

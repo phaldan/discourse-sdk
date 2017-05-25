@@ -18,7 +18,7 @@ class BadgesTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Badges($client);
         $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::BADGES_LIST, $client->path);
+        $this->assertSame(RouteConstants::BADGE_LIST, $client->path);
     }
 
     /**
@@ -29,7 +29,7 @@ class BadgesTest extends TestCase
         $client = new HttpPostSpy();
         $target = new Badges($client);
         $this->assertNull($target->create([])->wait());
-        $this->assertSame(RouteConstants::BADGES_CREATE, $client->path);
+        $this->assertSame(RouteConstants::BADGE_CREATE, $client->path);
         $this->assertSame([], $client->json);
     }
 
@@ -41,6 +41,6 @@ class BadgesTest extends TestCase
         $client = new HttpDeleteSpy();
         $target = new Badges($client);
         $this->assertNull($target->delete(1337)->wait());
-        $this->assertSame(sprintf(RouteConstants::BADGES_DELETE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::BADGE_DELETE, 1337), $client->path);
     }
 }

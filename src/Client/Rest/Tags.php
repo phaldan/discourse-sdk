@@ -17,7 +17,7 @@ class Tags extends HttpClient
      */
     public function list(): PromiseInterface
     {
-        return $this->client()->get(RouteConstants::TAGS_LIST);
+        return $this->client()->get(RouteConstants::TAG_LIST);
     }
 
     /**
@@ -30,7 +30,7 @@ class Tags extends HttpClient
      */
     public function single(string $name): PromiseInterface
     {
-        $url = sprintf(RouteConstants::TAGS_SINGLE, $name);
+        $url = sprintf(RouteConstants::TAG_SINGLE, $name);
 
         return $this->client()->get($url);
     }

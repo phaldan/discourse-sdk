@@ -19,7 +19,7 @@ class SiteSettingsTest extends TestCase
         $target = new SiteSettings($client);
         $attribute = ['title' => 'My fancy board'];
         $this->assertNull($target->update('title', $attribute)->wait());
-        $this->assertSame(sprintf(RouteConstants::SITE_SETTINGS_SET, 'title'), $client->path);
+        $this->assertSame(sprintf(RouteConstants::SITE_SETTING_SET, 'title'), $client->path);
         $this->assertSame($attribute, $client->json);
     }
 }

@@ -19,7 +19,7 @@ class UsersTest extends TestCase
         $target = new Users($client);
         $attributes = [Users::ATTR_NAME => 'admin'];
         $this->assertNull($target->create($attributes)->wait());
-        $this->assertSame(RouteConstants::USERS_CREATE, $client->path);
+        $this->assertSame(RouteConstants::USER_CREATE, $client->path);
         $this->assertSame($attributes, $client->json);
     }
 
@@ -32,7 +32,7 @@ class UsersTest extends TestCase
         $target = new Users($client);
         $parameters = [Users::OPTION_PERIOD => Users::PERIOD_WEEKLY];
         $this->assertNull($target->directoryItems($parameters)->wait());
-        $this->assertSame(RouteConstants::USERS_DIRECTORY_ITEMS, $client->path);
+        $this->assertSame(RouteConstants::USER_DIRECTORY_ITEMS, $client->path);
         $this->assertSame($parameters, $client->parameters);
     }
 
@@ -45,7 +45,7 @@ class UsersTest extends TestCase
         $target = new Users($client);
         $parameters = [Users::OPTION_ORDER => Users::ORDER_EMAIL];
         $this->assertNull($target->list(Users::FLAG_ACTIVE, $parameters)->wait());
-        $this->assertSame(sprintf(RouteConstants::USERS_LIST, Users::FLAG_ACTIVE), $client->path);
+        $this->assertSame(sprintf(RouteConstants::USER_LIST, Users::FLAG_ACTIVE), $client->path);
         $this->assertSame($parameters, $client->parameters);
     }
 
@@ -57,7 +57,7 @@ class UsersTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Users($client);
         $this->assertNull($target->single('admin')->wait());
-        $this->assertSame(sprintf(RouteConstants::USERS_SINGLE, 'admin'), $client->path);
+        $this->assertSame(sprintf(RouteConstants::USER_SINGLE, 'admin'), $client->path);
     }
 
     /**
@@ -69,7 +69,7 @@ class UsersTest extends TestCase
         $target = new Users($client);
         $attributes = [Users::ATTR_UPLOAD => 42];
         $this->assertNull($target->updateAvatar('admin', $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::USERS_UPDATE_AVATAR, 'admin'), $client->path);
+        $this->assertSame(sprintf(RouteConstants::USER_UPDATE_AVATAR, 'admin'), $client->path);
         $this->assertSame($attributes, $client->json);
     }
 
@@ -82,7 +82,7 @@ class UsersTest extends TestCase
         $target = new Users($client);
         $attributes = [Users::ATTR_EMAIL => 'admin@example.com'];
         $this->assertNull($target->updateEmail('admin', $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::USERS_UPDATE_EMAIL, 'admin'), $client->path);
+        $this->assertSame(sprintf(RouteConstants::USER_UPDATE_EMAIL, 'admin'), $client->path);
         $this->assertSame($attributes, $client->json);
     }
 }

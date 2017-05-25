@@ -18,7 +18,7 @@ class CategoriesTest extends TestCase
         $client = $this->createHttpGetSpy();
         $target = new Categories($client);
         $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::CATEGORIES_LIST, $client->path);
+        $this->assertSame(RouteConstants::CATEGORY_LIST, $client->path);
         $this->assertSame([], $client->parameters);
     }
 
@@ -31,7 +31,7 @@ class CategoriesTest extends TestCase
         $target = new Categories($client);
         $parameters = [Categories::OPTION_PARENT_CATEGORY => 1337];
         $this->assertNull($target->list($parameters)->wait());
-        $this->assertSame(RouteConstants::CATEGORIES_LIST, $client->path);
+        $this->assertSame(RouteConstants::CATEGORY_LIST, $client->path);
         $this->assertSame($parameters, $client->parameters);
     }
 
@@ -43,7 +43,7 @@ class CategoriesTest extends TestCase
         $client = $this->createHttpGetSpy();
         $target = new Categories($client);
         $this->assertNull($target->single(1337)->wait());
-        $this->assertSame(sprintf(RouteConstants::CATEGORIES_SINGLE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::CATEGORY_SINGLE, 1337), $client->path);
     }
 
     /**
@@ -54,7 +54,7 @@ class CategoriesTest extends TestCase
         $client = $this->createHttpGetSpy();
         $target = new Categories($client);
         $this->assertNull($target->singleBySlug('welcome')->wait());
-        $this->assertSame(sprintf(RouteConstants::CATEGORIES_SINGLE, 'welcome'), $client->path);
+        $this->assertSame(sprintf(RouteConstants::CATEGORY_SINGLE, 'welcome'), $client->path);
     }
 
     /**
@@ -66,7 +66,7 @@ class CategoriesTest extends TestCase
         $target = new Categories($client);
         $category = $this->createCategory('Welcome', 'FF00FF', '00FF00');
         $this->assertNull($target->create($category)->wait());
-        $this->assertSame(RouteConstants::CATEGORIES_CREATE, $client->path);
+        $this->assertSame(RouteConstants::CATEGORY_CREATE, $client->path);
         $this->assertSame($category, $client->json);
     }
 
@@ -88,7 +88,7 @@ class CategoriesTest extends TestCase
         $target = new Categories($client);
         $category = $this->createCategory('Welcome', 'FF00FF', '00FF00');
         $this->assertNull($target->update(1337, $category)->wait());
-        $this->assertSame(sprintf(RouteConstants::CATEGORIES_UPDATE, 1337), $client->path);
+        $this->assertSame(sprintf(RouteConstants::CATEGORY_UPDATE, 1337), $client->path);
         $this->assertSame($category, $client->json);
     }
 

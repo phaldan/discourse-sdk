@@ -18,7 +18,7 @@ class BackupsTest extends TestCase
         $client = new HttpGetSpy();
         $target = new Backups($client);
         $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::BACKUPS_LIST, $client->path);
+        $this->assertSame(RouteConstants::BACKUP_LIST, $client->path);
     }
 
     /**
@@ -29,7 +29,7 @@ class BackupsTest extends TestCase
         $client = new HttpPostSpy();
         $target = new Backups($client);
         $this->assertNull($target->create([Backups::ATTR_WITH_UPLOADS => true])->wait());
-        $this->assertSame(RouteConstants::BACKUPS_CREATE, $client->path);
+        $this->assertSame(RouteConstants::BACKUP_CREATE, $client->path);
         $this->assertSame([Backups::ATTR_WITH_UPLOADS => true], $client->json);
     }
 }

@@ -63,7 +63,7 @@ class Users extends HttpClient
      */
     public function create(array $attributes): PromiseInterface
     {
-        return $this->client()->post(RouteConstants::USERS_CREATE, $attributes);
+        return $this->client()->post(RouteConstants::USER_CREATE, $attributes);
     }
 
     /**
@@ -76,7 +76,7 @@ class Users extends HttpClient
      */
     public function directoryItems(array $parameters): PromiseInterface
     {
-        return $this->client()->get(RouteConstants::USERS_DIRECTORY_ITEMS, $parameters);
+        return $this->client()->get(RouteConstants::USER_DIRECTORY_ITEMS, $parameters);
     }
 
     /**
@@ -90,7 +90,7 @@ class Users extends HttpClient
      */
     public function list(string $flag, array $parameters): PromiseInterface
     {
-        $url = sprintf(RouteConstants::USERS_LIST, $flag);
+        $url = sprintf(RouteConstants::USER_LIST, $flag);
 
         return $this->client()->get($url, $parameters);
     }
@@ -105,7 +105,7 @@ class Users extends HttpClient
      */
     public function single(string $username): PromiseInterface
     {
-        $url = sprintf(RouteConstants::USERS_SINGLE, $username);
+        $url = sprintf(RouteConstants::USER_SINGLE, $username);
 
         return $this->client()->get($url);
     }
@@ -121,7 +121,7 @@ class Users extends HttpClient
      */
     public function updateAvatar(string $username, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::USERS_UPDATE_AVATAR, $username);
+        $url = sprintf(RouteConstants::USER_UPDATE_AVATAR, $username);
 
         return $this->client()->put($url, $attributes);
     }
@@ -137,7 +137,7 @@ class Users extends HttpClient
      */
     public function updateEmail(string $username, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::USERS_UPDATE_EMAIL, $username);
+        $url = sprintf(RouteConstants::USER_UPDATE_EMAIL, $username);
 
         return $this->client()->put($url, $attributes);
     }

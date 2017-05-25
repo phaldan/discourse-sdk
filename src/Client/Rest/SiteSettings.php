@@ -41,7 +41,7 @@ class SiteSettings extends HttpClient
      */
     public function update(string $setting, array $attributes): PromiseInterface
     {
-        $url = sprintf(RouteConstants::SITE_SETTINGS_SET, $setting);
+        $url = sprintf(RouteConstants::SITE_SETTING_SET, $setting);
 
         return $this->client()->put($url, $attributes);
     }
