@@ -76,21 +76,10 @@ class GroupsTest extends TestCase
     {
         $client = new HttpPutSpy();
         $target = new Groups($client);
-        $this->assertNull($target->addMember(1337, ['username'])->wait());
+        $attributes = [Groups::ATTRIBUTE_USERNAMES => 'user1,user2'];
+        $this->assertNull($target->addMember(1337, $attributes)->wait());
         $this->assertSame(sprintf(RouteConstants::GROUP_ADD_MEMBER, 1337), $client->path);
-        $this->assertSame([Groups::ATTRIBUTE_MEMBER_USERNAMES => 'username'], $client->json);
-    }
-
-    /**
-     * @test
-     */
-    public function successAddMemberWithMultipleUsernames(): void
-    {
-        $client = new HttpPutSpy();
-        $target = new Groups($client);
-        $this->assertNull($target->addMember(1337, ['user1', 'user2'])->wait());
-        $this->assertSame(sprintf(RouteConstants::GROUP_ADD_MEMBER, 1337), $client->path);
-        $this->assertSame([Groups::ATTRIBUTE_MEMBER_USERNAMES => 'user1,user2'], $client->json);
+        $this->assertSame($attributes, $client->json);
     }
 
     /**

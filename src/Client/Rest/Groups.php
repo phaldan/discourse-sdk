@@ -13,9 +13,8 @@ class Groups extends HttpClient
     const OPTION_LIMIT = 'limit';
 
     const ATTRIBUTE_GROUP_NAME = 'group[name]';
-    const ATTRIBUTE_MEMBER_USERNAMES = 'usernames';
+    const ATTRIBUTE_USERNAMES = 'usernames';
     const ATTRIBUTE_USER_ID = 'user_id';
-    const USERNAME_SEPARATOR = ',';
 
     /**
      * Create a new group. Required attribute: group[name]
@@ -74,18 +73,17 @@ class Groups extends HttpClient
     }
 
     /**
-     * Add a new member to a group identified by it'S username.
+     * Add a new member to a group identified by it'S username. Required attribute: usernames
      * More information on http://docs.discourse.org/#tag/Groups%2Fpaths%2F~1groups~1%7Bgroup_id%7D~1members.json%2Fput.
      *
      * @param int   $id
-     * @param array $usernames
+     * @param array $attributes
      *
      * @return PromiseInterface
      */
-    public function addMember(int $id, array $usernames): PromiseInterface
+    public function addMember(int $id, array $attributes): PromiseInterface
     {
         $url = sprintf(RouteConstants::GROUP_ADD_MEMBER, $id);
-        $attributes = [self::ATTRIBUTE_MEMBER_USERNAMES => implode(self::USERNAME_SEPARATOR, $usernames)];
 
         return $this->client()->put($url, $attributes);
     }
