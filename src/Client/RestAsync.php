@@ -8,7 +8,7 @@ use PhALDan\Discourse\Client\Rest\CategoryAsync;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class RestAsync
+class RestAsync implements RestAsyncInterface
 {
     use RestAdminAsync;
     use RestPostAsync;
@@ -24,11 +24,6 @@ class RestAsync
         $this->http = $http;
     }
 
-    /**
-     * Access REST API endpoints for categories.
-     *
-     * @return CategoryAsync
-     */
     public function category(): CategoryAsync
     {
         return new Categories($this->http);

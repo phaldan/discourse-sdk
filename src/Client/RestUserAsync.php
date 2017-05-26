@@ -23,51 +23,26 @@ trait RestUserAsync
      */
     private $http;
 
-    /**
-     * Access REST API endpoints for badges.
-     *
-     * @return BadgeAsync
-     */
     public function badge(): BadgeAsync
     {
         return new Badges($this->http);
     }
 
-    /**
-     * Access REST API endpoints for groups.
-     *
-     * @return GroupAsync
-     */
     public function group(): GroupAsync
     {
         return new Groups($this->http);
     }
 
-    /**
-     * Access REST API endpoints for invites.
-     *
-     * @return InviteAsync
-     */
     public function invite(): InviteAsync
     {
         return new Invites($this->http);
     }
 
-    /**
-     * Access REST API endpoints for notifications.
-     *
-     * @return NotificationAsync
-     */
     public function notification(): NotificationAsync
     {
         return new Notifications($this->http);
     }
 
-    /**
-     * Access REST API endpoints for users.
-     *
-     * @return UserAsync
-     */
     public function user(): UserAsync
     {
         return new Users($this->http);

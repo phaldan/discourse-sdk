@@ -21,41 +21,21 @@ trait RestAdminAsync
      */
     private $http;
 
-    /**
-     * Access REST API endpoints for backups.
-     *
-     * @return BackupAsync
-     */
     public function backup(): BackupAsync
     {
         return new Backups($this->http);
     }
 
-    /**
-     * Access REST API endpoints for emails.
-     *
-     * @return EmailAsync
-     */
     public function email(): EmailAsync
     {
         return new Emails($this->http);
     }
 
-    /**
-     * Access REST API endpoints for plugins.
-     *
-     * @return PluginAsync
-     */
     public function plugin(): PluginAsync
     {
         return new Plugins($this->http);
     }
 
-    /**
-     * Access REST API endpoints for site settings.
-     *
-     * @return SiteSettingAsync
-     */
     public function siteSetting(): SiteSettingAsync
     {
         return new SiteSettings($this->http);
