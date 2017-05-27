@@ -2,21 +2,23 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\Http;
 use Psr\Http\Message\RequestInterface;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class HttpDummy implements Http
+class HttpSpy extends HttpDummy
 {
+    /**
+     * @var RequestInterface
+     */
+    public $request;
+
     public function send(RequestInterface $request): PromiseInterface
     {
-        $promise = new Promise();
-        $promise->resolve(null);
+        $this->request = $request;
 
-        return $promise;
+        return parent::send($request);
     }
 }

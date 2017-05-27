@@ -3,6 +3,7 @@
 namespace PhALDan\Discourse\Client\Rest;
 
 use PhALDan\Discourse\Client\Http;
+use PhALDan\Discourse\Client\HttpMethods;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
@@ -10,7 +11,7 @@ use PhALDan\Discourse\Client\Http;
 abstract class HttpClient
 {
     /**
-     * @var Http
+     * @var HttpMethods
      */
     private $client;
 
@@ -19,13 +20,13 @@ abstract class HttpClient
      */
     public function __construct(Http $client)
     {
-        $this->client = $client;
+        $this->client = new HttpMethods($client);
     }
 
     /**
-     * @return Http
+     * @return HttpMethods
      */
-    protected function client(): Http
+    protected function client(): HttpMethods
     {
         return $this->client;
     }

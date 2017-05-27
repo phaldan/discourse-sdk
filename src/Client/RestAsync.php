@@ -19,6 +19,11 @@ class RestAsync implements RestAsyncInterface
      */
     private $http;
 
+    /**
+     * RestAsync constructor.
+     *
+     * @param Http $http
+     */
     public function __construct(Http $http)
     {
         $this->http = $http;

@@ -2,24 +2,30 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\Rest\Categories
  */
-class CategoriesTest extends TestCase
+class CategoriesTest extends HttpTestCase
 {
+    /**
+     * @var Categories
+     */
+    private $target;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->target = new Categories($this->http);
+    }
+
     /**
      * @test
      */
     public function successGetList(): void
     {
-        $client = $this->createHttpGetSpy();
-        $target = new Categories($client);
-        $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::CATEGORY_LIST, $client->path);
-        $this->assertSame([], $client->parameters);
+        $this->assertNull($this->target->list()->wait());
+        $this->assertHttpGet(RouteConstants::CATEGORY_LIST);
     }
 
     /**
@@ -27,12 +33,9 @@ class CategoriesTest extends TestCase
      */
     public function successGetListLimitToSecondLevel(): void
     {
-        $client = $this->createHttpGetSpy();
-        $target = new Categories($client);
         $parameters = [Categories::OPTION_PARENT_CATEGORY => 1337];
-        $this->assertNull($target->list($parameters)->wait());
-        $this->assertSame(RouteConstants::CATEGORY_LIST, $client->path);
-        $this->assertSame($parameters, $client->parameters);
+        $this->assertNull($this->target->list($parameters)->wait());
+        $this->assertHttpGet(RouteConstants::CATEGORY_LIST.'?'.Categories::OPTION_PARENT_CATEGORY.'=1337');
     }
 
     /**
@@ -40,10 +43,8 @@ class CategoriesTest extends TestCase
      */
     public function successGetSingle(): void
     {
-        $client = $this->createHttpGetSpy();
-        $target = new Categories($client);
-        $this->assertNull($target->single(1337)->wait());
-        $this->assertSame(sprintf(RouteConstants::CATEGORY_SINGLE, 1337), $client->path);
+        $this->assertNull($this->target->single(1337)->wait());
+        $this->assertHttpGet(sprintf(RouteConstants::CATEGORY_SINGLE, 1337));
     }
 
     /**
@@ -51,10 +52,8 @@ class CategoriesTest extends TestCase
      */
     public function successGetSingleBySlug(): void
     {
-        $client = $this->createHttpGetSpy();
-        $target = new Categories($client);
-        $this->assertNull($target->singleBySlug('welcome')->wait());
-        $this->assertSame(sprintf(RouteConstants::CATEGORY_SINGLE, 'welcome'), $client->path);
+        $this->assertNull($this->target->singleBySlug('welcome')->wait());
+        $this->assertHttpGet(sprintf(RouteConstants::CATEGORY_SINGLE, 'welcome'));
     }
 
     /**
@@ -62,12 +61,9 @@ class CategoriesTest extends TestCase
      */
     public function successCreate(): void
     {
-        $client = new HttpPostSpy();
-        $target = new Categories($client);
         $category = $this->createCategory('Welcome', 'FF00FF', '00FF00');
-        $this->assertNull($target->create($category)->wait());
-        $this->assertSame(RouteConstants::CATEGORY_CREATE, $client->path);
-        $this->assertSame($category, $client->json);
+        $this->assertNull($this->target->create($category)->wait());
+        $this->assertHttpPost(RouteConstants::CATEGORY_CREATE, $category);
     }
 
     public function createCategory(string $name, string $color, string $textColor): array
@@ -84,16 +80,8 @@ class CategoriesTest extends TestCase
      */
     public function successUpdate(): void
     {
-        $client = new HttpPutSpy();
-        $target = new Categories($client);
         $category = $this->createCategory('Welcome', 'FF00FF', '00FF00');
-        $this->assertNull($target->update(1337, $category)->wait());
-        $this->assertSame(sprintf(RouteConstants::CATEGORY_UPDATE, 1337), $client->path);
-        $this->assertSame($category, $client->json);
-    }
-
-    private function createHttpGetSpy()
-    {
-        return new HttpGetSpy();
+        $this->assertNull($this->target->update(1337, $category)->wait());
+        $this->assertHttpPut(sprintf(RouteConstants::CATEGORY_UPDATE, 1337), $category);
     }
 }

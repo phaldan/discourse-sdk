@@ -19,7 +19,7 @@ class ResponseDummy implements ResponseInterface
 
     public function withStatus($code, $reasonPhrase = ''): ResponseInterface
     {
-        return $this;
+        return new self();
     }
 
     public function getReasonPhrase(): string
@@ -34,7 +34,7 @@ class ResponseDummy implements ResponseInterface
 
     public function withProtocolVersion($version): ResponseInterface
     {
-        return $this;
+        return new self();
     }
 
     public function getHeaders(): array
@@ -59,97 +59,26 @@ class ResponseDummy implements ResponseInterface
 
     public function withHeader($name, $value): ResponseInterface
     {
-        return $this;
+        return new self();
     }
 
     public function withAddedHeader($name, $value): ResponseInterface
     {
-        return $this;
+        return new self();
     }
 
     public function withoutHeader($name): ResponseInterface
     {
-        return $this;
+        return new self();
     }
 
     public function getBody(): StreamInterface
     {
-        return new class() implements StreamInterface {
-            public function __toString(): string
-            {
-                return '';
-            }
-
-            public function close(): void
-            {
-            }
-
-            public function detach()
-            {
-            }
-
-            public function getSize(): ?int
-            {
-                return null;
-            }
-
-            public function tell(): int
-            {
-                return 1337;
-            }
-
-            public function eof(): bool
-            {
-                return true;
-            }
-
-            public function isSeekable(): bool
-            {
-                return true;
-            }
-
-            public function seek($offset, $whence = SEEK_SET): void
-            {
-            }
-
-            public function rewind(): void
-            {
-            }
-
-            public function isWritable(): bool
-            {
-                return true;
-            }
-
-            public function write($string): int
-            {
-                return 42;
-            }
-
-            public function isReadable(): bool
-            {
-                return true;
-            }
-
-            public function read($length): string
-            {
-                return '';
-            }
-
-            public function getContents(): string
-            {
-                return '';
-            }
-
-            public function getMetadata($key = null): ?array
-            {
-                return null;
-            }
-        };
+        return new StreamDummy();
     }
 
     public function withBody(StreamInterface $body): ResponseInterface
     {
-        return $this;
+        return new self();
     }
 }

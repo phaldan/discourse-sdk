@@ -2,28 +2,21 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\Rest\PrivateMessages
  */
-class PrivateMessagesTest extends TestCase
+class PrivateMessagesTest extends HttpTestCase
 {
     /**
      * @var PrivateMessages
      */
     private $target;
 
-    /**
-     * @var HttpGetSpy
-     */
-    private $client;
-
     protected function setUp(): void
     {
-        $this->client = new HttpGetSpy();
-        $this->target = new PrivateMessages($this->client);
+        parent::setUp();
+        $this->target = new PrivateMessages($this->http);
     }
 
     /**
@@ -32,7 +25,7 @@ class PrivateMessagesTest extends TestCase
     public function successInbox(): void
     {
         $this->assertNull($this->target->inbox('admin')->wait());
-        $this->assertSame(sprintf(RouteConstants::PRIVATE_MESSAGE_INBOX, 'admin'), $this->client->path);
+        $this->assertHttpGet(sprintf(RouteConstants::PRIVATE_MESSAGE_INBOX, 'admin'));
     }
 
     /**
@@ -41,7 +34,7 @@ class PrivateMessagesTest extends TestCase
     public function successSent(): void
     {
         $this->assertNull($this->target->sent('admin')->wait());
-        $this->assertSame(sprintf(RouteConstants::PRIVATE_MESSAGE_SENT, 'admin'), $this->client->path);
+        $this->assertHttpGet(sprintf(RouteConstants::PRIVATE_MESSAGE_SENT, 'admin'));
     }
 
     /**
@@ -50,7 +43,7 @@ class PrivateMessagesTest extends TestCase
     public function successArchive(): void
     {
         $this->assertNull($this->target->archive('admin')->wait());
-        $this->assertSame(sprintf(RouteConstants::PRIVATE_MESSAGE_ARCHIVE, 'admin'), $this->client->path);
+        $this->assertHttpGet(sprintf(RouteConstants::PRIVATE_MESSAGE_ARCHIVE, 'admin'));
     }
 
     /**
@@ -59,7 +52,7 @@ class PrivateMessagesTest extends TestCase
     public function successGroup(): void
     {
         $this->assertNull($this->target->group('admin', 'group')->wait());
-        $this->assertSame(sprintf(RouteConstants::PRIVATE_MESSAGE_GROUP, 'admin', 'group'), $this->client->path);
+        $this->assertHttpGet(sprintf(RouteConstants::PRIVATE_MESSAGE_GROUP, 'admin', 'group'));
     }
 
     /**
@@ -68,6 +61,6 @@ class PrivateMessagesTest extends TestCase
     public function successGroupArchive(): void
     {
         $this->assertNull($this->target->groupArchive('admin', 'group')->wait());
-        $this->assertSame(sprintf(RouteConstants::PRIVATE_MESSAGE_GROUP_ARCHIVE, 'admin', 'group'), $this->client->path);
+        $this->assertHttpGet(sprintf(RouteConstants::PRIVATE_MESSAGE_GROUP_ARCHIVE, 'admin', 'group'));
     }
 }

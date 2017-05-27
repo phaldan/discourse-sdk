@@ -2,23 +2,30 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\Rest\Emails
  */
-class EmailsTest extends TestCase
+class EmailsTest extends HttpTestCase
 {
+    /**
+     * @var Emails
+     */
+    private $target;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->target = new Emails($this->http);
+    }
+
     /**
      * @test
      */
     public function successList(): void
     {
-        $client = new HttpGetSpy();
-        $target = new Emails($client);
-        $this->assertNull($target->list(Emails::ACTION_SENT)->wait());
-        $this->assertSame(sprintf(RouteConstants::EMAIL_LIST, Emails::ACTION_SENT), $client->path);
+        $this->assertNull($this->target->list(Emails::ACTION_SENT)->wait());
+        $this->assertHttpGet(sprintf(RouteConstants::EMAIL_LIST, Emails::ACTION_SENT));
     }
 
     /**
@@ -26,11 +33,8 @@ class EmailsTest extends TestCase
      */
     public function successListWithOffset(): void
     {
-        $client = new HttpGetSpy();
-        $target = new Emails($client);
         $parameters = [Emails::OPTION_OFFSET => 1337];
-        $this->assertNull($target->list(Emails::ACTION_SENT, $parameters)->wait());
-        $this->assertSame(sprintf(RouteConstants::EMAIL_LIST, Emails::ACTION_SENT), $client->path);
-        $this->assertSame($parameters, $client->parameters);
+        $this->assertNull($this->target->list(Emails::ACTION_SENT, $parameters)->wait());
+        $this->assertHttpGet(sprintf(RouteConstants::EMAIL_LIST, Emails::ACTION_SENT).'?'.Emails::OPTION_OFFSET.'=1337');
     }
 }

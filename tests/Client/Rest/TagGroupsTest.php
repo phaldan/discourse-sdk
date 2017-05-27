@@ -2,23 +2,30 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\Rest\TagGroups
  */
-class TagGroupsTest extends TestCase
+class TagGroupsTest extends HttpTestCase
 {
+    /**
+     * @var TagGroups
+     */
+    private $target;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->target = new TagGroups($this->http);
+    }
+
     /**
      * @test
      */
     public function successList(): void
     {
-        $client = new HttpGetSpy();
-        $target = new TagGroups($client);
-        $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::TAG_GROUP_LIST, $client->path);
+        $this->assertNull($this->target->list()->wait());
+        $this->assertHttpGet(RouteConstants::TAG_GROUP_LIST);
     }
 
     /**
@@ -26,10 +33,8 @@ class TagGroupsTest extends TestCase
      */
     public function successSingle(): void
     {
-        $client = new HttpGetSpy();
-        $target = new TagGroups($client);
-        $this->assertNull($target->single(1337)->wait());
-        $this->assertSame(sprintf(RouteConstants::TAG_GROUP_SINGLE, 1337), $client->path);
+        $this->assertNull($this->target->single(1337)->wait());
+        $this->assertHttpGet(sprintf(RouteConstants::TAG_GROUP_SINGLE, 1337));
     }
 
     /**
@@ -37,12 +42,9 @@ class TagGroupsTest extends TestCase
      */
     public function successCreate(): void
     {
-        $client = new HttpPostSpy();
-        $target = new TagGroups($client);
         $attributes = [TagGroups::ATTR_NAME => 'group'];
-        $this->assertNull($target->create($attributes)->wait());
-        $this->assertSame(RouteConstants::TAG_GROUP_CREATE, $client->path);
-        $this->assertSame($attributes, $client->json);
+        $this->assertNull($this->target->create($attributes)->wait());
+        $this->assertHttpPost(RouteConstants::TAG_GROUP_CREATE, $attributes);
     }
 
     /**
@@ -50,11 +52,8 @@ class TagGroupsTest extends TestCase
      */
     public function successUodate(): void
     {
-        $client = new HttpPutSpy();
-        $target = new TagGroups($client);
         $attributes = [TagGroups::ATTR_NAME => 'group'];
-        $this->assertNull($target->update(1337, $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::TAG_GROUP_UPDATE, 1337), $client->path);
-        $this->assertSame($attributes, $client->json);
+        $this->assertNull($this->target->update(1337, $attributes)->wait());
+        $this->assertHttpPut(sprintf(RouteConstants::TAG_GROUP_UPDATE, 1337), $attributes);
     }
 }

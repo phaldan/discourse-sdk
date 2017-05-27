@@ -2,7 +2,7 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PhALDan\Discourse\Client\Http;
+use PhALDan\Discourse\Client\HttpMethods;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,12 +18,12 @@ class HttpClientTest extends TestCase
     {
         $client = new HttpDummy();
         $target = new class($client) extends HttpClient {
-            public function getHttpClient(): Http
+            public function getHttpClient(): HttpMethods
             {
                 return parent::client();
             }
         };
 
-        $this->assertSame($client, $target->getHttpClient());
+        $this->assertSame($client, $target->getHttpClient()->client());
     }
 }

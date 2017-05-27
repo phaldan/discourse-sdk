@@ -2,24 +2,30 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\Rest\Flags
  */
-class FlagsTest extends TestCase
+class FlagsTest extends HttpTestCase
 {
+    /**
+     * @var Flags
+     */
+    private $target;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->target = new Flags($this->http);
+    }
+
     /**
      * @test
      */
     public function successList(): void
     {
-        $client = new HttpGetSpy();
-        $target = new Flags($client);
-        $this->assertNull($target->list(Flags::TYPE_ACTIVE)->wait());
-        $this->assertSame(sprintf(RouteConstants::FLAG_LIST, Flags::TYPE_ACTIVE), $client->path);
-        $this->assertSame([], $client->parameters);
+        $this->assertNull($this->target->list(Flags::TYPE_ACTIVE)->wait());
+        $this->assertHttpGet(sprintf(RouteConstants::FLAG_LIST, Flags::TYPE_ACTIVE));
     }
 
     /**
@@ -27,11 +33,8 @@ class FlagsTest extends TestCase
      */
     public function successListWithOffset()
     {
-        $client = new HttpGetSpy();
-        $target = new Flags($client);
         $parameters = [Flags::OPTION_OFFSET => 1337];
-        $this->assertNull($target->list(Flags::TYPE_ACTIVE, $parameters)->wait());
-        $this->assertSame(sprintf(RouteConstants::FLAG_LIST, Flags::TYPE_ACTIVE), $client->path);
-        $this->assertSame($parameters, $client->parameters);
+        $this->assertNull($this->target->list(Flags::TYPE_ACTIVE, $parameters)->wait());
+        $this->assertHttpGet(sprintf(RouteConstants::FLAG_LIST, Flags::TYPE_ACTIVE).'?'.Flags::OPTION_OFFSET.'=1337');
     }
 }

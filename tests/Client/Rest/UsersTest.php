@@ -2,25 +2,31 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\Rest\Users
  */
-class UsersTest extends TestCase
+class UsersTest extends HttpTestCase
 {
+    /**
+     * @var Users
+     */
+    private $target;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->target = new Users($this->http);
+    }
+
     /**
      * @test
      */
     public function successCreate(): void
     {
-        $client = new HttpPostSpy();
-        $target = new Users($client);
         $attributes = [Users::ATTR_NAME => 'admin'];
-        $this->assertNull($target->create($attributes)->wait());
-        $this->assertSame(RouteConstants::USER_CREATE, $client->path);
-        $this->assertSame($attributes, $client->json);
+        $this->assertNull($this->target->create($attributes)->wait());
+        $this->assertHttpPost(RouteConstants::USER_CREATE, $attributes);
     }
 
     /**
@@ -28,12 +34,9 @@ class UsersTest extends TestCase
      */
     public function successDirectoryItems(): void
     {
-        $client = new HttpGetSpy();
-        $target = new Users($client);
         $parameters = [Users::OPTION_PERIOD => Users::PERIOD_WEEKLY];
-        $this->assertNull($target->directoryItems($parameters)->wait());
-        $this->assertSame(RouteConstants::USER_DIRECTORY_ITEMS, $client->path);
-        $this->assertSame($parameters, $client->parameters);
+        $this->assertNull($this->target->directoryItems($parameters)->wait());
+        $this->assertHttpGet(RouteConstants::USER_DIRECTORY_ITEMS.'?'.Users::OPTION_PERIOD.'='.Users::PERIOD_WEEKLY);
     }
 
     /**
@@ -41,12 +44,10 @@ class UsersTest extends TestCase
      */
     public function successList(): void
     {
-        $client = new HttpGetSpy();
-        $target = new Users($client);
         $parameters = [Users::OPTION_ORDER => Users::ORDER_EMAIL];
-        $this->assertNull($target->list(Users::FLAG_ACTIVE, $parameters)->wait());
-        $this->assertSame(sprintf(RouteConstants::USER_LIST, Users::FLAG_ACTIVE), $client->path);
-        $this->assertSame($parameters, $client->parameters);
+        $this->assertNull($this->target->list(Users::FLAG_ACTIVE, $parameters)->wait());
+        $url = sprintf(RouteConstants::USER_LIST, Users::FLAG_ACTIVE).'?'.Users::OPTION_ORDER.'='.Users::ORDER_EMAIL;
+        $this->assertHttpGet($url);
     }
 
     /**
@@ -54,10 +55,8 @@ class UsersTest extends TestCase
      */
     public function successSingle(): void
     {
-        $client = new HttpGetSpy();
-        $target = new Users($client);
-        $this->assertNull($target->single('admin')->wait());
-        $this->assertSame(sprintf(RouteConstants::USER_SINGLE, 'admin'), $client->path);
+        $this->assertNull($this->target->single('admin')->wait());
+        $this->assertHttpGet(sprintf(RouteConstants::USER_SINGLE, 'admin'));
     }
 
     /**
@@ -65,12 +64,9 @@ class UsersTest extends TestCase
      */
     public function successUpdateAvatar(): void
     {
-        $client = new HttpPutSpy();
-        $target = new Users($client);
         $attributes = [Users::ATTR_UPLOAD => 42];
-        $this->assertNull($target->updateAvatar('admin', $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::USER_UPDATE_AVATAR, 'admin'), $client->path);
-        $this->assertSame($attributes, $client->json);
+        $this->assertNull($this->target->updateAvatar('admin', $attributes)->wait());
+        $this->assertHttpPut(sprintf(RouteConstants::USER_UPDATE_AVATAR, 'admin'), $attributes);
     }
 
     /**
@@ -78,11 +74,8 @@ class UsersTest extends TestCase
      */
     public function successUpdateEmail(): void
     {
-        $client = new HttpPutSpy();
-        $target = new Users($client);
         $attributes = [Users::ATTR_EMAIL => 'admin@example.com'];
-        $this->assertNull($target->updateEmail('admin', $attributes)->wait());
-        $this->assertSame(sprintf(RouteConstants::USER_UPDATE_EMAIL, 'admin'), $client->path);
-        $this->assertSame($attributes, $client->json);
+        $this->assertNull($this->target->updateEmail('admin', $attributes)->wait());
+        $this->assertHttpPut(sprintf(RouteConstants::USER_UPDATE_EMAIL, 'admin'), $attributes);
     }
 }

@@ -2,23 +2,30 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\Rest\Backups
  */
-class BackupsTest extends TestCase
+class BackupsTest extends HttpTestCase
 {
+    /**
+     * @var Backups
+     */
+    private $target;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->target = new Backups($this->http);
+    }
+
     /**
      * @test
      */
     public function successList(): void
     {
-        $client = new HttpGetSpy();
-        $target = new Backups($client);
-        $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::BACKUP_LIST, $client->path);
+        $this->assertNull($this->target->list()->wait());
+        $this->assertHttpGet(RouteConstants::BACKUP_LIST);
     }
 
     /**
@@ -26,10 +33,8 @@ class BackupsTest extends TestCase
      */
     public function successCreate(): void
     {
-        $client = new HttpPostSpy();
-        $target = new Backups($client);
-        $this->assertNull($target->create([Backups::ATTR_WITH_UPLOADS => true])->wait());
-        $this->assertSame(RouteConstants::BACKUP_CREATE, $client->path);
-        $this->assertSame([Backups::ATTR_WITH_UPLOADS => true], $client->json);
+        $attributes = [Backups::ATTR_WITH_UPLOADS => true];
+        $this->assertNull($this->target->create($attributes)->wait());
+        $this->assertHttpPost(RouteConstants::BACKUP_CREATE, $attributes);
     }
 }

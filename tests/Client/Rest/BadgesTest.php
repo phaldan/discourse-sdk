@@ -2,23 +2,30 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\Rest\Badges
  */
-class BadgesTest extends TestCase
+class BadgesTest extends HttpTestCase
 {
+    /**
+     * @var Badges
+     */
+    private $target;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->target = new Badges($this->http);
+    }
+
     /**
      * @test
      */
     public function successList(): void
     {
-        $client = new HttpGetSpy();
-        $target = new Badges($client);
-        $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::BADGE_LIST, $client->path);
+        $this->assertNull($this->target->list()->wait());
+        $this->assertHttpGet(RouteConstants::BADGE_LIST);
     }
 
     /**
@@ -26,11 +33,8 @@ class BadgesTest extends TestCase
      */
     public function successCreate(): void
     {
-        $client = new HttpPostSpy();
-        $target = new Badges($client);
-        $this->assertNull($target->create([])->wait());
-        $this->assertSame(RouteConstants::BADGE_CREATE, $client->path);
-        $this->assertSame([], $client->json);
+        $this->assertNull($this->target->create([])->wait());
+        $this->assertHttpPost(RouteConstants::BADGE_CREATE, []);
     }
 
     /**
@@ -38,9 +42,7 @@ class BadgesTest extends TestCase
      */
     public function successDelete(): void
     {
-        $client = new HttpDeleteSpy();
-        $target = new Badges($client);
-        $this->assertNull($target->delete(1337)->wait());
-        $this->assertSame(sprintf(RouteConstants::BADGE_DELETE, 1337), $client->path);
+        $this->assertNull($this->target->delete(1337)->wait());
+        $this->assertHttpDelete(sprintf(RouteConstants::BADGE_DELETE, 1337));
     }
 }

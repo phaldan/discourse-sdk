@@ -2,22 +2,29 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PHPUnit\Framework\TestCase;
-
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\Rest\Plugins
  */
-class PluginsTest extends TestCase
+class PluginsTest extends HttpTestCase
 {
+    /**
+     * @var Plugins
+     */
+    private $target;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->target = new Plugins($this->http);
+    }
+
     /**
      * @test
      */
     public function successList(): void
     {
-        $client = new HttpGetSpy();
-        $target = new Plugins($client);
-        $this->assertNull($target->list()->wait());
-        $this->assertSame(RouteConstants::PLUGIN_LIST, $client->path);
+        $this->assertNull($this->target->list()->wait());
+        $this->assertHttpGet(RouteConstants::PLUGIN_LIST);
     }
 }
