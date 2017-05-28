@@ -6,7 +6,7 @@ use PhALDan\Discourse\Client\Authentication;
 use PhALDan\Discourse\Client\GuzzleHttp;
 use PhALDan\Discourse\Client\Http;
 use PhALDan\Discourse\Client\RestAsync;
-use PhALDan\Discourse\Client\RestAsyncInterface;
+use PhALDan\Discourse\Client\RestAsyncFactory;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
@@ -14,23 +14,23 @@ use PhALDan\Discourse\Client\RestAsyncInterface;
 class Discourse implements DiscourseFactory
 {
     /**
-     * @var ?RestAsyncInterface
+     * @var ?RestAsyncFactory
      */
     private $rest = null;
 
     /**
-     * @param RestAsyncInterface $rest
+     * @param RestAsyncFactory $rest
      *
      * @return Discourse
      */
-    public function setRest(RestAsyncInterface $rest): Discourse
+    public function setRest(RestAsyncFactory $rest): Discourse
     {
         $this->rest = $rest;
 
         return $this;
     }
 
-    public function rest(string $url, Http $auth = null, Http $http = null): RestAsyncInterface
+    public function rest(string $url, Http $auth = null, Http $http = null): RestAsyncFactory
     {
         $httpAdapter = $http ?? new GuzzleHttp();
         $authDecorator = ($auth === null) ? $httpAdapter : $this->processAuth($auth, $httpAdapter);
@@ -43,7 +43,7 @@ class Discourse implements DiscourseFactory
         return ($auth instanceof Authentication) ? $auth->setHttp($http) : $auth;
     }
 
-    private function createRest(string $url, Http $auth): RestAsyncInterface
+    private function createRest(string $url, Http $auth): RestAsyncFactory
     {
         return $this->rest ?? new RestAsync($url, $auth);
     }

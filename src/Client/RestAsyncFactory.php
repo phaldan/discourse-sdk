@@ -22,7 +22,7 @@ use PhALDan\Discourse\Client\Rest\UserAsync;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-interface RestAsyncInterface
+interface RestAsyncFactory
 {
     /**
      * Access REST API endpoints for backups.

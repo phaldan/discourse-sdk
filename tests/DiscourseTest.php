@@ -8,7 +8,7 @@ use PhALDan\Discourse\Client\Rest\CategoryAsync;
 use PhALDan\Discourse\Client\Rest\HttpDummy;
 use PhALDan\Discourse\Client\Rest\HttpSpy;
 use PhALDan\Discourse\Client\RestAdminAsync;
-use PhALDan\Discourse\Client\RestAsyncInterface;
+use PhALDan\Discourse\Client\RestAsyncFactory;
 use PhALDan\Discourse\Client\RestPostAsync;
 use PhALDan\Discourse\Client\RestUserAsync;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +24,7 @@ class DiscourseTest extends TestCase
      */
     public function successRest(): void
     {
-        $rest = new class() implements RestAsyncInterface {
+        $rest = new class() implements RestAsyncFactory {
             /**
              * @var string
              */

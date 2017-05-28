@@ -8,7 +8,7 @@ use PhALDan\Discourse\Client\Rest\CategoryAsync;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class RestAsync implements RestAsyncInterface
+class RestAsync implements RestAsyncFactory
 {
     use RestAdminAsync;
     use RestPostAsync;
