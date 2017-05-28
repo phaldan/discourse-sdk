@@ -3,7 +3,7 @@
 namespace PhALDan\Discourse\Client;
 
 use GuzzleHttp\Psr7\Request;
-use PhALDan\Discourse\Client\Rest\HttpSpy;
+use PhALDan\Discourse\Client\Rest\HttpAdapterSpy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,7 +18,7 @@ class ApiKeyAuthTest extends TestCase
     public function successSend(): void
     {
         $target = new ApiKeyAuth('secret-token');
-        $http = new HttpSpy();
+        $http = new HttpAdapterSpy();
         $target->setHttp($http);
         $request = new Request('GET', 'http://localhost/example');
         $this->assertNull($target->send($request)->wait());
@@ -32,7 +32,7 @@ class ApiKeyAuthTest extends TestCase
     public function successSendWithQueries(): void
     {
         $target = new ApiKeyAuth('secret-token');
-        $http = new HttpSpy();
+        $http = new HttpAdapterSpy();
         $target->setHttp($http);
         $request = new Request('GET', 'http://localhost/example?order=date');
         $this->assertNull($target->send($request)->wait());

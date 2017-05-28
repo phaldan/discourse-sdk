@@ -17,7 +17,7 @@ use PhALDan\Discourse\Client\Rest\SiteSettings;
 trait RestAdminAsync
 {
     /**
-     * @var Http
+     * @var HttpAdapter
      */
     private $http;
 

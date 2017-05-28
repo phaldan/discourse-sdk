@@ -15,7 +15,7 @@ class RestAsync implements RestAsyncFactory
     use RestUserAsync;
 
     /**
-     * @var Http
+     * @var HttpAdapter
      */
     private $http;
 
@@ -28,9 +28,9 @@ class RestAsync implements RestAsyncFactory
      * RestAsync constructor.
      *
      * @param string $url
-     * @param Http   $http
+     * @param HttpAdapter   $http
      */
-    public function __construct(string $url, Http $http)
+    public function __construct(string $url, HttpAdapter $http)
     {
         $this->url = $url;
         $this->http = $http;

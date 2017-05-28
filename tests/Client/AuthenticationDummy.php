@@ -2,14 +2,14 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\HttpDummy;
+use PhALDan\Discourse\Client\Rest\HttpAdapterDummy;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class AuthenticationDummy extends HttpDummy implements Authentication
+class AuthenticationDummy extends HttpAdapterDummy implements Authentication
 {
-    public function setHttp(Http $http): Authentication
+    public function setHttp(HttpAdapter $http): Authentication
     {
         return $this;
     }

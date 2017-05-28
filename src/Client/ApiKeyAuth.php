@@ -18,7 +18,7 @@ class ApiKeyAuth implements Authentication
     private $apiKey;
 
     /**
-     * @var Http
+     * @var HttpAdapter
      */
     private $http;
 
@@ -32,7 +32,7 @@ class ApiKeyAuth implements Authentication
         $this->apiKey = $apiKey;
     }
 
-    public function setHttp(Http $http): Authentication
+    public function setHttp(HttpAdapter $http): Authentication
     {
         $this->http = $http;
 

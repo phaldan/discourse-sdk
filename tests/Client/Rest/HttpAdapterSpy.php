@@ -8,7 +8,7 @@ use Psr\Http\Message\RequestInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class HttpSpy extends HttpDummy
+class HttpAdapterSpy extends HttpAdapterDummy
 {
     /**
      * @var RequestInterface

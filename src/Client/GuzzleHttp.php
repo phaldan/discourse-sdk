@@ -12,7 +12,7 @@ use Psr\Http\Message\RequestInterface;
  *
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class GuzzleHttp implements Http
+class GuzzleHttp implements HttpAdapter
 {
     /**
      * @var ClientInterface

@@ -21,7 +21,7 @@ use PhALDan\Discourse\Client\Rest\Topics;
 trait RestPostAsync
 {
     /**
-     * @var Http
+     * @var HttpAdapter
      */
     private $http;
 

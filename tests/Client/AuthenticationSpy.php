@@ -13,7 +13,7 @@ class AuthenticationSpy extends AuthenticationDummy
     public $http;
     public $request;
 
-    public function setHttp(Http $http): Authentication
+    public function setHttp(HttpAdapter $http): Authentication
     {
         $this->http = $http;
 

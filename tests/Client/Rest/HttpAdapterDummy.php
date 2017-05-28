@@ -4,13 +4,13 @@ namespace PhALDan\Discourse\Client\Rest;
 
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\Http;
+use PhALDan\Discourse\Client\HttpAdapter;
 use Psr\Http\Message\RequestInterface;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class HttpDummy implements Http
+class HttpAdapterDummy implements HttpAdapter
 {
     public function send(RequestInterface $request): PromiseInterface
     {

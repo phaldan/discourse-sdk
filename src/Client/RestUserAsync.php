@@ -19,7 +19,7 @@ use PhALDan\Discourse\Client\Rest\Users;
 trait RestUserAsync
 {
     /**
-     * @var Http
+     * @var HttpAdapter
      */
     private $http;
 

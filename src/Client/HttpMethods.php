@@ -26,16 +26,16 @@ class HttpMethods
     private $url = '';
 
     /**
-     * @var Http
+     * @var HttpAdapter
      */
     private $http;
 
     /**
      * HttpHelper constructor.
      *
-     * @param Http $http
+     * @param HttpAdapter $http
      */
-    public function __construct(Http $http)
+    public function __construct(HttpAdapter $http)
     {
         $this->http = $http;
     }
@@ -43,9 +43,9 @@ class HttpMethods
     /**
      * Return current instance of Http.
      *
-     * @return Http
+     * @return HttpAdapter
      */
-    public function client(): Http
+    public function client(): HttpAdapter
     {
         return $this->http;
     }

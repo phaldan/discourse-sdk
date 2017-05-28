@@ -5,8 +5,8 @@ namespace PhALDan\Discourse;
 use PhALDan\Discourse\Client\AuthenticationSpy;
 use PhALDan\Discourse\Client\Rest\Categories;
 use PhALDan\Discourse\Client\Rest\CategoryAsync;
-use PhALDan\Discourse\Client\Rest\HttpDummy;
-use PhALDan\Discourse\Client\Rest\HttpSpy;
+use PhALDan\Discourse\Client\Rest\HttpAdapterDummy;
+use PhALDan\Discourse\Client\Rest\HttpAdapterSpy;
 use PhALDan\Discourse\Client\RestAdminAsync;
 use PhALDan\Discourse\Client\RestAsyncFactory;
 use PhALDan\Discourse\Client\RestPostAsync;
@@ -31,7 +31,7 @@ class DiscourseTest extends TestCase
             private $url = '';
 
             /**
-             * @var HttpDummy
+             * @var HttpAdapterDummy
              */
             private $http;
 
@@ -41,7 +41,7 @@ class DiscourseTest extends TestCase
 
             public function __construct()
             {
-                $this->http = new HttpDummy();
+                $this->http = new HttpAdapterDummy();
             }
 
             public function category(): CategoryAsync
@@ -71,7 +71,7 @@ class DiscourseTest extends TestCase
      */
     public function successRestWithHttp(): void
     {
-        $http = new HttpSpy();
+        $http = new HttpAdapterSpy();
         $target = new Discourse();
         $target->rest('https://localhost', $http)->category()->list()->wait();
         $this->assertNotNull($http->request);
@@ -83,7 +83,7 @@ class DiscourseTest extends TestCase
     public function successRestWithAuthAndHttp(): void
     {
         $auth = new AuthenticationSpy();
-        $http = new HttpSpy();
+        $http = new HttpAdapterSpy();
         $target = new Discourse();
         $target->rest('https://localhost', $auth, $http)->category()->list()->wait();
         $this->assertSame($http, $auth->http);

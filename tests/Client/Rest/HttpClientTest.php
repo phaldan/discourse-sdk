@@ -16,7 +16,7 @@ class HttpClientTest extends TestCase
      */
     public function successGetHttpClient(): void
     {
-        $client = new HttpDummy();
+        $client = new HttpAdapterDummy();
         $target = new class('http://localhost', $client) extends HttpClient {
             public function getHttpClient(): HttpMethods
             {

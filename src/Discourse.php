@@ -4,7 +4,7 @@ namespace PhALDan\Discourse;
 
 use PhALDan\Discourse\Client\Authentication;
 use PhALDan\Discourse\Client\GuzzleHttp;
-use PhALDan\Discourse\Client\Http;
+use PhALDan\Discourse\Client\HttpAdapter;
 use PhALDan\Discourse\Client\RestAsync;
 use PhALDan\Discourse\Client\RestAsyncFactory;
 
@@ -30,7 +30,7 @@ class Discourse implements DiscourseFactory
         return $this;
     }
 
-    public function rest(string $url, Http $auth = null, Http $http = null): RestAsyncFactory
+    public function rest(string $url, HttpAdapter $auth = null, HttpAdapter $http = null): RestAsyncFactory
     {
         $httpAdapter = $http ?? new GuzzleHttp();
         $authDecorator = ($auth === null) ? $httpAdapter : $this->processAuth($auth, $httpAdapter);
@@ -38,12 +38,12 @@ class Discourse implements DiscourseFactory
         return $this->createRest($url, $authDecorator);
     }
 
-    private function processAuth(Http $auth, Http $http): Http
+    private function processAuth(HttpAdapter $auth, HttpAdapter $http): HttpAdapter
     {
         return ($auth instanceof Authentication) ? $auth->setHttp($http) : $auth;
     }
 
-    private function createRest(string $url, Http $auth): RestAsyncFactory
+    private function createRest(string $url, HttpAdapter $auth): RestAsyncFactory
     {
         return $this->rest ?? new RestAsync($url, $auth);
     }

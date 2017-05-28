@@ -2,7 +2,7 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\HttpDummy;
+use PhALDan\Discourse\Client\Rest\HttpAdapterDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,7 +19,7 @@ class RestAsyncTest extends TestCase
      */
     public function success(): void
     {
-        $target = new RestAsync('http://localhost', new HttpDummy());
+        $target = new RestAsync('http://localhost', new HttpAdapterDummy());
         $this->assertNotNull($target->backup());
         $this->assertNotNull($target->badge());
         $this->assertNotNull($target->category());

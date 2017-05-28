@@ -14,7 +14,7 @@ class HttpTestCase extends TestCase
     const URL = 'http://localhost';
 
     /**
-     * @var HttpSpy
+     * @var HttpAdapterSpy
      */
     protected $http;
 
@@ -22,7 +22,7 @@ class HttpTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->http = new HttpSpy();
+        $this->http = new HttpAdapterSpy();
     }
 
     protected function assertHttpDelete(string $url, array $json = null): void

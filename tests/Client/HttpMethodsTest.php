@@ -2,7 +2,7 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\HttpSpy;
+use PhALDan\Discourse\Client\Rest\HttpAdapterSpy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -17,13 +17,13 @@ class HttpMethodsTest extends TestCase
     private $target;
 
     /**
-     * @var HttpSpy
+     * @var HttpAdapterSpy
      */
     private $http;
 
     protected function setUp()
     {
-        $this->http = new HttpSpy();
+        $this->http = new HttpAdapterSpy();
         $this->target = new HttpMethods($this->http);
     }
 

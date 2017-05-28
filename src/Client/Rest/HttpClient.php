@@ -2,7 +2,7 @@
 
 namespace PhALDan\Discourse\Client\Rest;
 
-use PhALDan\Discourse\Client\Http;
+use PhALDan\Discourse\Client\HttpAdapter;
 use PhALDan\Discourse\Client\HttpMethods;
 
 /**
@@ -17,9 +17,9 @@ abstract class HttpClient
 
     /**
      * @param string $url
-     * @param Http   $client client for handling http requests
+     * @param HttpAdapter   $client client for handling http requests
      */
-    public function __construct(string $url, Http $client)
+    public function __construct(string $url, HttpAdapter $client)
     {
         $this->client = (new HttpMethods($client))->setInstance($url);
     }

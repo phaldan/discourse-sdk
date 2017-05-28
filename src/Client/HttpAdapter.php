@@ -10,7 +10,7 @@ use Psr\Http\Message\RequestInterface;
  *
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-interface Http
+interface HttpAdapter
 {
     /**
      * @param RequestInterface $request
