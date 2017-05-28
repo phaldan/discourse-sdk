@@ -16,8 +16,8 @@ abstract class HttpClient
     private $client;
 
     /**
-     * @param string $url
-     * @param HttpAdapter   $client client for handling http requests
+     * @param string      $url
+     * @param HttpAdapter $client client for handling http requests
      */
     public function __construct(string $url, HttpAdapter $client)
     {

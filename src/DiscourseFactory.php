@@ -13,7 +13,7 @@ interface DiscourseFactory
     /**
      * Create REST API client.
      *
-     * @param string    $url
+     * @param string           $url
      * @param HttpAdapter|null $auth
      * @param HttpAdapter|null $http
      *

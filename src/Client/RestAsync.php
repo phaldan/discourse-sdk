@@ -27,8 +27,8 @@ class RestAsync implements RestAsyncFactory
     /**
      * RestAsync constructor.
      *
-     * @param string $url
-     * @param HttpAdapter   $http
+     * @param string      $url
+     * @param HttpAdapter $http
      */
     public function __construct(string $url, HttpAdapter $http)
     {
