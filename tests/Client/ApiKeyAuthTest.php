@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @coversNothing
+ * @covers \PhALDan\Discourse\Client\ApiKeyAuth
  */
 class ApiKeyAuthTest extends TestCase
 {
