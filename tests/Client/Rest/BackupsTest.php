@@ -16,7 +16,7 @@ class BackupsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Backups($this->http);
+        $this->target = new Backups(self::URL, $this->http);
     }
 
     /**

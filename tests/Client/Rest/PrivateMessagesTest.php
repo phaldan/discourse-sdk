@@ -16,7 +16,7 @@ class PrivateMessagesTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new PrivateMessages($this->http);
+        $this->target = new PrivateMessages(self::URL, $this->http);
     }
 
     /**

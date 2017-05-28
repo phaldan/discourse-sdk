@@ -16,7 +16,7 @@ class CategoriesTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Categories($this->http);
+        $this->target = new Categories(self::URL, $this->http);
     }
 
     /**

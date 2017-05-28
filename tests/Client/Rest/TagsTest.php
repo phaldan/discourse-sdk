@@ -16,7 +16,7 @@ class TagsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Tags($this->http);
+        $this->target = new Tags(self::URL, $this->http);
     }
 
     /**

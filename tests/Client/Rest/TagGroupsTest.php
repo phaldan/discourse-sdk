@@ -16,7 +16,7 @@ class TagGroupsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new TagGroups($this->http);
+        $this->target = new TagGroups(self::URL, $this->http);
     }
 
     /**

@@ -16,7 +16,7 @@ class PluginsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Plugins($this->http);
+        $this->target = new Plugins(self::URL, $this->http);
     }
 
     /**

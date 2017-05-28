@@ -16,7 +16,7 @@ class PostsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Posts($this->http);
+        $this->target = new Posts(self::URL, $this->http);
     }
 
     /**

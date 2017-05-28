@@ -16,7 +16,7 @@ class InvitesTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Invites($this->http);
+        $this->target = new Invites(self::URL, $this->http);
     }
 
     /**

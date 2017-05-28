@@ -16,7 +16,7 @@ class SiteSettingsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new SiteSettings($this->http);
+        $this->target = new SiteSettings(self::URL, $this->http);
     }
 
     /**

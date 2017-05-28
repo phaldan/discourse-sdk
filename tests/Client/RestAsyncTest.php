@@ -19,7 +19,7 @@ class RestAsyncTest extends TestCase
      */
     public function success(): void
     {
-        $target = new RestAsync(new HttpDummy());
+        $target = new RestAsync('http://localhost', new HttpDummy());
         $this->assertNotNull($target->backup());
         $this->assertNotNull($target->badge());
         $this->assertNotNull($target->category());

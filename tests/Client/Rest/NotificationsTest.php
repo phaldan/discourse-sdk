@@ -16,7 +16,7 @@ class NotificationsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Notifications($this->http);
+        $this->target = new Notifications(self::URL, $this->http);
     }
 
     /**

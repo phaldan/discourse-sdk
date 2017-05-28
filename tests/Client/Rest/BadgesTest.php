@@ -16,7 +16,7 @@ class BadgesTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Badges($this->http);
+        $this->target = new Badges(self::URL, $this->http);
     }
 
     /**

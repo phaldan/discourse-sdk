@@ -16,7 +16,7 @@ class GroupsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Groups($this->http);
+        $this->target = new Groups(self::URL, $this->http);
     }
 
     /**

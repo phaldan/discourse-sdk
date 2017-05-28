@@ -16,7 +16,7 @@ class TopicsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Topics($this->http);
+        $this->target = new Topics(self::URL, $this->http);
     }
 
     /**

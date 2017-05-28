@@ -25,33 +25,38 @@ trait RestPostAsync
      */
     private $http;
 
+    /**
+     * @var string
+     */
+    private $url;
+
     public function flag(): FlagAsync
     {
-        return new Flags($this->http);
+        return new Flags($this->url, $this->http);
     }
 
     public function post(): PostAsync
     {
-        return new Posts($this->http);
+        return new Posts($this->url, $this->http);
     }
 
     public function privateMessage(): PrivateMessageAsync
     {
-        return new PrivateMessages($this->http);
+        return new PrivateMessages($this->url, $this->http);
     }
 
     public function tag(): TagAsync
     {
-        return new Tags($this->http);
+        return new Tags($this->url, $this->http);
     }
 
     public function tagGroup(): TagGroupAsync
     {
-        return new TagGroups($this->http);
+        return new TagGroups($this->url, $this->http);
     }
 
     public function topic(): TopicAsync
     {
-        return new Topics($this->http);
+        return new Topics($this->url, $this->http);
     }
 }

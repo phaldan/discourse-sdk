@@ -23,28 +23,33 @@ trait RestUserAsync
      */
     private $http;
 
+    /**
+     * @var string
+     */
+    private $url;
+
     public function badge(): BadgeAsync
     {
-        return new Badges($this->http);
+        return new Badges($this->url, $this->http);
     }
 
     public function group(): GroupAsync
     {
-        return new Groups($this->http);
+        return new Groups($this->url, $this->http);
     }
 
     public function invite(): InviteAsync
     {
-        return new Invites($this->http);
+        return new Invites($this->url, $this->http);
     }
 
     public function notification(): NotificationAsync
     {
-        return new Notifications($this->http);
+        return new Notifications($this->url, $this->http);
     }
 
     public function user(): UserAsync
     {
-        return new Users($this->http);
+        return new Users($this->url, $this->http);
     }
 }

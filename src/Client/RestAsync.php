@@ -20,17 +20,24 @@ class RestAsync implements RestAsyncInterface
     private $http;
 
     /**
+     * @var string
+     */
+    private $url;
+
+    /**
      * RestAsync constructor.
      *
-     * @param Http $http
+     * @param string $url
+     * @param Http   $http
      */
-    public function __construct(Http $http)
+    public function __construct(string $url, Http $http)
     {
+        $this->url = $url;
         $this->http = $http;
     }
 
     public function category(): CategoryAsync
     {
-        return new Categories($this->http);
+        return new Categories($this->url, $this->http);
     }
 }

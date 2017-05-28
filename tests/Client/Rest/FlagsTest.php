@@ -16,7 +16,7 @@ class FlagsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Flags($this->http);
+        $this->target = new Flags(self::URL, $this->http);
     }
 
     /**

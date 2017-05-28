@@ -17,7 +17,7 @@ class HttpClientTest extends TestCase
     public function successGetHttpClient(): void
     {
         $client = new HttpDummy();
-        $target = new class($client) extends HttpClient {
+        $target = new class('http://localhost', $client) extends HttpClient {
             public function getHttpClient(): HttpMethods
             {
                 return parent::client();

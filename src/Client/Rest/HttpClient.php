@@ -16,11 +16,12 @@ abstract class HttpClient
     private $client;
 
     /**
-     * @param Http $client client for handling http requests
+     * @param string $url
+     * @param Http   $client client for handling http requests
      */
-    public function __construct(Http $client)
+    public function __construct(string $url, Http $client)
     {
-        $this->client = new HttpMethods($client);
+        $this->client = (new HttpMethods($client))->setInstance($url);
     }
 
     /**

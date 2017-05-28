@@ -16,7 +16,7 @@ class UsersTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Users($this->http);
+        $this->target = new Users(self::URL, $this->http);
     }
 
     /**

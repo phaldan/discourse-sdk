@@ -16,7 +16,7 @@ class EmailsTest extends HttpTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Emails($this->http);
+        $this->target = new Emails(self::URL, $this->http);
     }
 
     /**

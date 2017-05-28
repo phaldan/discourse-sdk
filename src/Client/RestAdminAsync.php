@@ -21,23 +21,28 @@ trait RestAdminAsync
      */
     private $http;
 
+    /**
+     * @var string
+     */
+    private $url;
+
     public function backup(): BackupAsync
     {
-        return new Backups($this->http);
+        return new Backups($this->url, $this->http);
     }
 
     public function email(): EmailAsync
     {
-        return new Emails($this->http);
+        return new Emails($this->url, $this->http);
     }
 
     public function plugin(): PluginAsync
     {
-        return new Plugins($this->http);
+        return new Plugins($this->url, $this->http);
     }
 
     public function siteSetting(): SiteSettingAsync
     {
-        return new SiteSettings($this->http);
+        return new SiteSettings($this->url, $this->http);
     }
 }
