@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\Categories
+ * @covers \PhALDan\Discourse\Client\RestAsync\Category
  */
-class CategoriesTest extends HttpTestCase
+class CategoryTest extends HttpTestCase
 {
     /**
-     * @var Categories
+     * @var Category
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Categories(self::URL, $this->http);
+        $this->target = new Category(self::URL, $this->http);
     }
 
     /**
@@ -33,9 +33,9 @@ class CategoriesTest extends HttpTestCase
      */
     public function successGetListLimitToSecondLevel(): void
     {
-        $parameters = [Categories::OPTION_PARENT_CATEGORY => 1337];
+        $parameters = [Category::OPTION_PARENT_CATEGORY => 1337];
         $this->assertNull($this->target->list($parameters)->wait());
-        $this->assertHttpGet(RouteConstants::CATEGORY_LIST.'?'.Categories::OPTION_PARENT_CATEGORY.'=1337');
+        $this->assertHttpGet(RouteConstants::CATEGORY_LIST.'?'.Category::OPTION_PARENT_CATEGORY.'=1337');
     }
 
     /**
@@ -69,9 +69,9 @@ class CategoriesTest extends HttpTestCase
     public function createCategory(string $name, string $color, string $textColor): array
     {
         return [
-            Categories::ATTR_NAME => $name,
-            Categories::ATTR_COLOR => $color,
-            Categories::ATTR_TEXT_COLOR => $textColor,
+            Category::ATTR_NAME => $name,
+            Category::ATTR_COLOR => $color,
+            Category::ATTR_TEXT_COLOR => $textColor,
         ];
     }
 

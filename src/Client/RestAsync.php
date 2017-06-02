@@ -2,7 +2,7 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\RestAsync\Categories;
+use PhALDan\Discourse\Client\RestAsync\Category;
 use PhALDan\Discourse\Client\RestAsync\CategoryAsync;
 
 /**
@@ -38,6 +38,6 @@ class RestAsync implements RestAsyncFactory
 
     public function category(): CategoryAsync
     {
-        return new Categories($this->url, $this->http);
+        return new Category($this->url, $this->http);
     }
 }

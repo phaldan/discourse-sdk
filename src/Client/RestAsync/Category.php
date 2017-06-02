@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Categories extends HttpClient implements CategoryAsync
+final class Category extends HttpClient implements CategoryAsync
 {
     public function list(array $parameters = []): PromiseInterface
     {
