@@ -10,7 +10,13 @@ use Psr\Http\Message\RequestInterface;
  */
 class ApiKeyAuth implements Authentication
 {
-    const QUERY_API_TOKEN = 'api_key';
+    const QUERY_API_USERNAME = 'api_username';
+    const QUERY_API_KEY = 'api_key';
+
+    /**
+     * @var string
+     */
+    private $apiUsername;
 
     /**
      * @var string
@@ -25,10 +31,12 @@ class ApiKeyAuth implements Authentication
     /**
      * ApiKeyAuth constructor.
      *
+     * @param string $apiUsername
      * @param string $apiKey
      */
-    public function __construct(string $apiKey)
+    public function __construct(string $apiUsername, string $apiKey)
     {
+        $this->apiUsername = $apiUsername;
         $this->apiKey = $apiKey;
     }
 
@@ -44,7 +52,8 @@ class ApiKeyAuth implements Authentication
         $uri = $request->getUri();
         $parameters = [];
         parse_str($uri->getQuery(), $parameters);
-        $parameters[self::QUERY_API_TOKEN] = $this->apiKey;
+        $parameters[self::QUERY_API_USERNAME] = $this->apiUsername;
+        $parameters[self::QUERY_API_KEY] = $this->apiKey;
         $query = http_build_query($parameters);
 
         return $this->http->send($request->withUri($uri->withQuery($query)));
