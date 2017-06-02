@@ -2,7 +2,7 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\HttpAdapterDummy;
+use PhALDan\Discourse\Client\RestAsync\HttpAdapterDummy;
 use PHPUnit\Framework\TestCase;
 
 /**

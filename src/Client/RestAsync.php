@@ -2,8 +2,8 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\Categories;
-use PhALDan\Discourse\Client\Rest\CategoryAsync;
+use PhALDan\Discourse\Client\RestAsync\Categories;
+use PhALDan\Discourse\Client\RestAsync\CategoryAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>

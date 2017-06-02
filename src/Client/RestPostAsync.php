@@ -2,18 +2,18 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\FlagAsync;
-use PhALDan\Discourse\Client\Rest\Flags;
-use PhALDan\Discourse\Client\Rest\PostAsync;
-use PhALDan\Discourse\Client\Rest\Posts;
-use PhALDan\Discourse\Client\Rest\PrivateMessageAsync;
-use PhALDan\Discourse\Client\Rest\PrivateMessages;
-use PhALDan\Discourse\Client\Rest\TagAsync;
-use PhALDan\Discourse\Client\Rest\TagGroupAsync;
-use PhALDan\Discourse\Client\Rest\TagGroups;
-use PhALDan\Discourse\Client\Rest\Tags;
-use PhALDan\Discourse\Client\Rest\TopicAsync;
-use PhALDan\Discourse\Client\Rest\Topics;
+use PhALDan\Discourse\Client\RestAsync\FlagAsync;
+use PhALDan\Discourse\Client\RestAsync\Flags;
+use PhALDan\Discourse\Client\RestAsync\PostAsync;
+use PhALDan\Discourse\Client\RestAsync\Posts;
+use PhALDan\Discourse\Client\RestAsync\PrivateMessageAsync;
+use PhALDan\Discourse\Client\RestAsync\PrivateMessages;
+use PhALDan\Discourse\Client\RestAsync\TagAsync;
+use PhALDan\Discourse\Client\RestAsync\TagGroupAsync;
+use PhALDan\Discourse\Client\RestAsync\TagGroups;
+use PhALDan\Discourse\Client\RestAsync\Tags;
+use PhALDan\Discourse\Client\RestAsync\TopicAsync;
+use PhALDan\Discourse\Client\RestAsync\Topics;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>

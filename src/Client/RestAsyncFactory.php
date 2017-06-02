@@ -2,22 +2,22 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\BackupAsync;
-use PhALDan\Discourse\Client\Rest\BadgeAsync;
-use PhALDan\Discourse\Client\Rest\CategoryAsync;
-use PhALDan\Discourse\Client\Rest\EmailAsync;
-use PhALDan\Discourse\Client\Rest\FlagAsync;
-use PhALDan\Discourse\Client\Rest\GroupAsync;
-use PhALDan\Discourse\Client\Rest\InviteAsync;
-use PhALDan\Discourse\Client\Rest\NotificationAsync;
-use PhALDan\Discourse\Client\Rest\PluginAsync;
-use PhALDan\Discourse\Client\Rest\PostAsync;
-use PhALDan\Discourse\Client\Rest\PrivateMessageAsync;
-use PhALDan\Discourse\Client\Rest\SiteSettingAsync;
-use PhALDan\Discourse\Client\Rest\TagAsync;
-use PhALDan\Discourse\Client\Rest\TagGroupAsync;
-use PhALDan\Discourse\Client\Rest\TopicAsync;
-use PhALDan\Discourse\Client\Rest\UserAsync;
+use PhALDan\Discourse\Client\RestAsync\BackupAsync;
+use PhALDan\Discourse\Client\RestAsync\BadgeAsync;
+use PhALDan\Discourse\Client\RestAsync\CategoryAsync;
+use PhALDan\Discourse\Client\RestAsync\EmailAsync;
+use PhALDan\Discourse\Client\RestAsync\FlagAsync;
+use PhALDan\Discourse\Client\RestAsync\GroupAsync;
+use PhALDan\Discourse\Client\RestAsync\InviteAsync;
+use PhALDan\Discourse\Client\RestAsync\NotificationAsync;
+use PhALDan\Discourse\Client\RestAsync\PluginAsync;
+use PhALDan\Discourse\Client\RestAsync\PostAsync;
+use PhALDan\Discourse\Client\RestAsync\PrivateMessageAsync;
+use PhALDan\Discourse\Client\RestAsync\SiteSettingAsync;
+use PhALDan\Discourse\Client\RestAsync\TagAsync;
+use PhALDan\Discourse\Client\RestAsync\TagGroupAsync;
+use PhALDan\Discourse\Client\RestAsync\TopicAsync;
+use PhALDan\Discourse\Client\RestAsync\UserAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>

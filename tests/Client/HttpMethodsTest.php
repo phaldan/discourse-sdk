@@ -2,7 +2,7 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\HttpAdapterSpy;
+use PhALDan\Discourse\Client\RestAsync\HttpAdapterSpy;
 use PHPUnit\Framework\TestCase;
 
 /**

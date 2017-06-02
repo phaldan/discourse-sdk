@@ -2,14 +2,14 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\BackupAsync;
-use PhALDan\Discourse\Client\Rest\Backups;
-use PhALDan\Discourse\Client\Rest\EmailAsync;
-use PhALDan\Discourse\Client\Rest\Emails;
-use PhALDan\Discourse\Client\Rest\PluginAsync;
-use PhALDan\Discourse\Client\Rest\Plugins;
-use PhALDan\Discourse\Client\Rest\SiteSettingAsync;
-use PhALDan\Discourse\Client\Rest\SiteSettings;
+use PhALDan\Discourse\Client\RestAsync\BackupAsync;
+use PhALDan\Discourse\Client\RestAsync\Backups;
+use PhALDan\Discourse\Client\RestAsync\EmailAsync;
+use PhALDan\Discourse\Client\RestAsync\Emails;
+use PhALDan\Discourse\Client\RestAsync\PluginAsync;
+use PhALDan\Discourse\Client\RestAsync\Plugins;
+use PhALDan\Discourse\Client\RestAsync\SiteSettingAsync;
+use PhALDan\Discourse\Client\RestAsync\SiteSettings;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>

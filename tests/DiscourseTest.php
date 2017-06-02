@@ -3,10 +3,10 @@
 namespace PhALDan\Discourse;
 
 use PhALDan\Discourse\Client\AuthenticationSpy;
-use PhALDan\Discourse\Client\Rest\Categories;
-use PhALDan\Discourse\Client\Rest\CategoryAsync;
-use PhALDan\Discourse\Client\Rest\HttpAdapterDummy;
-use PhALDan\Discourse\Client\Rest\HttpAdapterSpy;
+use PhALDan\Discourse\Client\RestAsync\Categories;
+use PhALDan\Discourse\Client\RestAsync\CategoryAsync;
+use PhALDan\Discourse\Client\RestAsync\HttpAdapterDummy;
+use PhALDan\Discourse\Client\RestAsync\HttpAdapterSpy;
 use PhALDan\Discourse\Client\RestAdminAsync;
 use PhALDan\Discourse\Client\RestAsyncFactory;
 use PhALDan\Discourse\Client\RestPostAsync;
@@ -51,7 +51,7 @@ class DiscourseTest extends TestCase
         };
         $target = new Discourse();
         $target->setRest($rest);
-        $this->assertSame($rest, $target->rest('https://localhost'));
+        $this->assertSame($rest, $target->restAsync('https://localhost'));
     }
 
     /**
@@ -61,7 +61,7 @@ class DiscourseTest extends TestCase
     {
         $auth = new AuthenticationSpy();
         $target = new Discourse();
-        $target->rest('https://localhost', $auth)->category()->list()->wait();
+        $target->restAsync('https://localhost', $auth)->category()->list()->wait();
         $this->assertNotNull($auth->http);
         $this->assertNotNull($auth->request);
     }
@@ -73,7 +73,7 @@ class DiscourseTest extends TestCase
     {
         $http = new HttpAdapterSpy();
         $target = new Discourse();
-        $target->rest('https://localhost', $http)->category()->list()->wait();
+        $target->restAsync('https://localhost', $http)->category()->list()->wait();
         $this->assertNotNull($http->request);
     }
 
@@ -85,7 +85,7 @@ class DiscourseTest extends TestCase
         $auth = new AuthenticationSpy();
         $http = new HttpAdapterSpy();
         $target = new Discourse();
-        $target->rest('https://localhost', $auth, $http)->category()->list()->wait();
+        $target->restAsync('https://localhost', $auth, $http)->category()->list()->wait();
         $this->assertSame($http, $auth->http);
         $this->assertNotNull($auth->request);
         $this->assertNull($http->request);

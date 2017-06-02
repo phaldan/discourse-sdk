@@ -3,7 +3,7 @@
 namespace PhALDan\Discourse\Client;
 
 use GuzzleHttp\Psr7\Request;
-use PhALDan\Discourse\Client\Rest\HttpAdapterSpy;
+use PhALDan\Discourse\Client\RestAsync\HttpAdapterSpy;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 

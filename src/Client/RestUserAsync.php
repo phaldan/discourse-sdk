@@ -2,16 +2,16 @@
 
 namespace PhALDan\Discourse\Client;
 
-use PhALDan\Discourse\Client\Rest\BadgeAsync;
-use PhALDan\Discourse\Client\Rest\Badges;
-use PhALDan\Discourse\Client\Rest\GroupAsync;
-use PhALDan\Discourse\Client\Rest\Groups;
-use PhALDan\Discourse\Client\Rest\InviteAsync;
-use PhALDan\Discourse\Client\Rest\Invites;
-use PhALDan\Discourse\Client\Rest\NotificationAsync;
-use PhALDan\Discourse\Client\Rest\Notifications;
-use PhALDan\Discourse\Client\Rest\UserAsync;
-use PhALDan\Discourse\Client\Rest\Users;
+use PhALDan\Discourse\Client\RestAsync\BadgeAsync;
+use PhALDan\Discourse\Client\RestAsync\Badges;
+use PhALDan\Discourse\Client\RestAsync\GroupAsync;
+use PhALDan\Discourse\Client\RestAsync\Groups;
+use PhALDan\Discourse\Client\RestAsync\InviteAsync;
+use PhALDan\Discourse\Client\RestAsync\Invites;
+use PhALDan\Discourse\Client\RestAsync\NotificationAsync;
+use PhALDan\Discourse\Client\RestAsync\Notifications;
+use PhALDan\Discourse\Client\RestAsync\UserAsync;
+use PhALDan\Discourse\Client\RestAsync\Users;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
