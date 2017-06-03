@@ -45,10 +45,10 @@ interface TagGroupAsync
      * Update an existing tag group.
      * More information on http://docs.discourse.org/#tag/Tags%2Fpaths%2F~1tag_groups~1%7Bid%7D.json%2Fput.
      *
-     * @param int $id
-     * @param $attributes
+     * @param int   $id
+     * @param array $attributes
      *
      * @return PromiseInterface
      */
-    public function update(int $id, $attributes): PromiseInterface;
+    public function update(int $id, array $attributes): PromiseInterface;
 }

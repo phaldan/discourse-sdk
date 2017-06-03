@@ -26,7 +26,7 @@ class TagGroups extends HttpClient implements TagGroupAsync
         return $this->client()->get($url);
     }
 
-    public function update(int $id, $attributes): PromiseInterface
+    public function update(int $id, array $attributes): PromiseInterface
     {
         $url = sprintf(RouteConstants::TAG_GROUP_SINGLE, $id);
 
