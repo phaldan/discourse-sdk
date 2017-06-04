@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class SiteSettings extends HttpClient implements SiteSettingAsync
+final class SiteSetting extends HttpClient implements SiteSettingAsync
 {
     public function update(string $setting, array $attributes): PromiseInterface
     {

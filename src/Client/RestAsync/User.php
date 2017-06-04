@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Users extends HttpClient implements UserAsync
+final class User extends HttpClient implements UserAsync
 {
     public function create(array $attributes): PromiseInterface
     {

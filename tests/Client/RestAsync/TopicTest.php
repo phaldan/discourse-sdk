@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\Topics
+ * @covers \PhALDan\Discourse\Client\RestAsync\Topic
  */
-class TopicsTest extends HttpTestCase
+class TopicTest extends HttpTestCase
 {
     /**
-     * @var Topics
+     * @var Topic
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Topics(self::URL, $this->http);
+        $this->target = new Topic(self::URL, $this->http);
     }
 
     /**
@@ -24,7 +24,7 @@ class TopicsTest extends HttpTestCase
      */
     public function successCreateScheduled(): void
     {
-        $attributes = [Topics::ATTR_TIME => 'some-time'];
+        $attributes = [Topic::ATTR_TIME => 'some-time'];
         $this->assertNull($this->target->createScheduled(1337, $attributes)->wait());
         $this->assertHttpPost(sprintf(RouteConstants::TOPIC_CREATE_SCHEDULED, 1337), $attributes);
     }
@@ -43,7 +43,7 @@ class TopicsTest extends HttpTestCase
      */
     public function successInvite(): void
     {
-        $attributes = [Topics::ATTR_USERNAME => 'username'];
+        $attributes = [Topic::ATTR_USERNAME => 'username'];
         $this->assertNull($this->target->invite(1337, $attributes)->wait());
         $this->assertHttpPost(sprintf(RouteConstants::TOPIC_INVITE, 1337), $attributes);
     }
@@ -62,9 +62,9 @@ class TopicsTest extends HttpTestCase
      */
     public function successLatestWithParameter(): void
     {
-        $parameters = [Topics::OPTION_ORDER => Topics::ORDER_DEFAULT];
+        $parameters = [Topic::OPTION_ORDER => Topic::ORDER_DEFAULT];
         $this->assertNull($this->target->latest($parameters)->wait());
-        $this->assertHttpGet(RouteConstants::TOPIC_LATEST.'?'.Topics::OPTION_ORDER.'='.Topics::ORDER_DEFAULT);
+        $this->assertHttpGet(RouteConstants::TOPIC_LATEST.'?'.Topic::OPTION_ORDER.'='.Topic::ORDER_DEFAULT);
     }
 
     /**
@@ -72,7 +72,7 @@ class TopicsTest extends HttpTestCase
      */
     public function successNotification(): void
     {
-        $attributes = [Topics::ATTR_NOTIFICATION_LEVEL => 1];
+        $attributes = [Topic::ATTR_NOTIFICATION_LEVEL => 1];
         $this->assertNull($this->target->notification(1337, $attributes)->wait());
         $this->assertHttpPost(sprintf(RouteConstants::TOPIC_NOTIFICATIONS, 1337), $attributes);
     }
@@ -100,8 +100,8 @@ class TopicsTest extends HttpTestCase
      */
     public function successTopFiltered(): void
     {
-        $this->assertNull($this->target->topFiltered(Topics::FLAG_ALL)->wait());
-        $this->assertHttpGet(sprintf(RouteConstants::TOPIC_TOP_FILTERED, Topics::FLAG_ALL));
+        $this->assertNull($this->target->topFiltered(Topic::FLAG_ALL)->wait());
+        $this->assertHttpGet(sprintf(RouteConstants::TOPIC_TOP_FILTERED, Topic::FLAG_ALL));
     }
 
     /**
@@ -109,7 +109,7 @@ class TopicsTest extends HttpTestCase
      */
     public function successUpdate(): void
     {
-        $attribute = [Topics::ATTR_TITLE => 'newer news'];
+        $attribute = [Topic::ATTR_TITLE => 'newer news'];
         $this->assertNull($this->target->update('news', 1337, $attribute)->wait());
         $this->assertHttpPut(sprintf(RouteConstants::TOPIC_UPDATE, 'news', 1337), $attribute);
     }
@@ -119,7 +119,7 @@ class TopicsTest extends HttpTestCase
      */
     public function updateScheduled(): void
     {
-        $attributes = [Topics::ATTR_TIMESTAMP => 42];
+        $attributes = [Topic::ATTR_TIMESTAMP => 42];
         $this->assertNull($this->target->updateScheduled(1337, $attributes)->wait());
         $this->assertHttpPut(sprintf(RouteConstants::TOPIC_UPDATE_SCHEDULED, 1337), $attributes);
     }
@@ -129,7 +129,7 @@ class TopicsTest extends HttpTestCase
      */
     public function updateStatus(): void
     {
-        $attributes = [Topics::ATTR_STATUS => Topics::STATUS_VISIBLE];
+        $attributes = [Topic::ATTR_STATUS => Topic::STATUS_VISIBLE];
         $this->assertNull($this->target->updateStatus(1337, $attributes)->wait());
         $this->assertHttpPut(sprintf(RouteConstants::TOPIC_UPDATE_STATUS, 1337), $attributes);
     }

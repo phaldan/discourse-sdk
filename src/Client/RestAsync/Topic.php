@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Topics extends HttpClient implements TopicAsync
+final class Topic extends HttpClient implements TopicAsync
 {
     public function createScheduled(int $id, array $attributes): PromiseInterface
     {

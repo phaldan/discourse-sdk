@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\TagGroups
+ * @covers \PhALDan\Discourse\Client\RestAsync\TagGroup
  */
-class TagGroupsTest extends HttpTestCase
+class TagGroupTest extends HttpTestCase
 {
     /**
-     * @var TagGroups
+     * @var TagGroup
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new TagGroups(self::URL, $this->http);
+        $this->target = new TagGroup(self::URL, $this->http);
     }
 
     /**
@@ -42,7 +42,7 @@ class TagGroupsTest extends HttpTestCase
      */
     public function successCreate(): void
     {
-        $attributes = [TagGroups::ATTR_NAME => 'group'];
+        $attributes = [TagGroup::ATTR_NAME => 'group'];
         $this->assertNull($this->target->create($attributes)->wait());
         $this->assertHttpPost(RouteConstants::TAG_GROUP_CREATE, $attributes);
     }
@@ -52,7 +52,7 @@ class TagGroupsTest extends HttpTestCase
      */
     public function successUodate(): void
     {
-        $attributes = [TagGroups::ATTR_NAME => 'group'];
+        $attributes = [TagGroup::ATTR_NAME => 'group'];
         $this->assertNull($this->target->update(1337, $attributes)->wait());
         $this->assertHttpPut(sprintf(RouteConstants::TAG_GROUP_UPDATE, 1337), $attributes);
     }

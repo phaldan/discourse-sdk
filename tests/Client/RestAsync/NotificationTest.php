@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\Notifications
+ * @covers \PhALDan\Discourse\Client\RestAsync\Notification
  */
-class NotificationsTest extends HttpTestCase
+class NotificationTest extends HttpTestCase
 {
     /**
-     * @var Notifications
+     * @var Notification
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Notifications(self::URL, $this->http);
+        $this->target = new Notification(self::URL, $this->http);
     }
 
     /**

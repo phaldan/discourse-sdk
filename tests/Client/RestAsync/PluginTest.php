@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\Plugins
+ * @covers \PhALDan\Discourse\Client\RestAsync\Plugin
  */
-class PluginsTest extends HttpTestCase
+class PluginTest extends HttpTestCase
 {
     /**
-     * @var Plugins
+     * @var Plugin
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Plugins(self::URL, $this->http);
+        $this->target = new Plugin(self::URL, $this->http);
     }
 
     /**

@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Badges extends HttpClient implements BadgeAsync
+final class Badge extends HttpClient implements BadgeAsync
 {
     public function list(): PromiseInterface
     {

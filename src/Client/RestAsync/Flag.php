@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Flags extends HttpClient implements FlagAsync
+final class Flag extends HttpClient implements FlagAsync
 {
     public function list(string $type, array $parameters = []): PromiseInterface
     {

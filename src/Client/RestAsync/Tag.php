@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Tags extends HttpClient implements TagAsync
+final class Tag extends HttpClient implements TagAsync
 {
     public function list(): PromiseInterface
     {

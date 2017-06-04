@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class TagGroups extends HttpClient implements TagGroupAsync
+final class TagGroup extends HttpClient implements TagGroupAsync
 {
     public function create(array $attributes): PromiseInterface
     {

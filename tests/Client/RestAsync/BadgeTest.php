@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\Badges
+ * @covers \PhALDan\Discourse\Client\RestAsync\Badge
  */
-class BadgesTest extends HttpTestCase
+class BadgeTest extends HttpTestCase
 {
     /**
-     * @var Badges
+     * @var Badge
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Badges(self::URL, $this->http);
+        $this->target = new Badge(self::URL, $this->http);
     }
 
     /**

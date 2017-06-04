@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\Invites
+ * @covers \PhALDan\Discourse\Client\RestAsync\Invite
  */
-class InvitesTest extends HttpTestCase
+class InviteTest extends HttpTestCase
 {
     /**
-     * @var Invites
+     * @var Invite
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Invites(self::URL, $this->http);
+        $this->target = new Invite(self::URL, $this->http);
     }
 
     /**
@@ -24,7 +24,7 @@ class InvitesTest extends HttpTestCase
      */
     public function successEmail(): void
     {
-        $attributes = [Invites::ATTR_EMAIL => 'admin@example.com'];
+        $attributes = [Invite::ATTR_EMAIL => 'admin@example.com'];
         $this->assertNull($this->target->email($attributes)->wait());
         $this->assertHttpPost(RouteConstants::INVITE_EMAIL, $attributes);
     }
@@ -34,7 +34,7 @@ class InvitesTest extends HttpTestCase
      */
     public function successCreateLink(): void
     {
-        $attributes = [Invites::ATTR_EMAIL => 'admin@example.com'];
+        $attributes = [Invite::ATTR_EMAIL => 'admin@example.com'];
         $this->assertNull($this->target->createLink($attributes)->wait());
         $this->assertHttpPost(RouteConstants::INVITE_CREATE_LINK, $attributes);
     }
@@ -44,7 +44,7 @@ class InvitesTest extends HttpTestCase
      */
     public function successCreateToken(): void
     {
-        $attributes = [Invites::ATTR_EMAIL => 'admin@example.com'];
+        $attributes = [Invite::ATTR_EMAIL => 'admin@example.com'];
         $this->assertNull($this->target->createToken($attributes)->wait());
         $this->assertHttpPost(RouteConstants::INVITE_CREATE_TOKEN, $attributes);
     }

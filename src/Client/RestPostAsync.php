@@ -2,18 +2,18 @@
 
 namespace PhALDan\Discourse\Client;
 
+use PhALDan\Discourse\Client\RestAsync\Flag;
 use PhALDan\Discourse\Client\RestAsync\FlagAsync;
-use PhALDan\Discourse\Client\RestAsync\Flags;
+use PhALDan\Discourse\Client\RestAsync\Post;
 use PhALDan\Discourse\Client\RestAsync\PostAsync;
-use PhALDan\Discourse\Client\RestAsync\Posts;
+use PhALDan\Discourse\Client\RestAsync\PrivateMessage;
 use PhALDan\Discourse\Client\RestAsync\PrivateMessageAsync;
-use PhALDan\Discourse\Client\RestAsync\PrivateMessages;
+use PhALDan\Discourse\Client\RestAsync\Tag;
 use PhALDan\Discourse\Client\RestAsync\TagAsync;
+use PhALDan\Discourse\Client\RestAsync\TagGroup;
 use PhALDan\Discourse\Client\RestAsync\TagGroupAsync;
-use PhALDan\Discourse\Client\RestAsync\TagGroups;
-use PhALDan\Discourse\Client\RestAsync\Tags;
+use PhALDan\Discourse\Client\RestAsync\Topic;
 use PhALDan\Discourse\Client\RestAsync\TopicAsync;
-use PhALDan\Discourse\Client\RestAsync\Topics;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
@@ -32,31 +32,31 @@ trait RestPostAsync
 
     public function flag(): FlagAsync
     {
-        return new Flags($this->url, $this->http);
+        return new Flag($this->url, $this->http);
     }
 
     public function post(): PostAsync
     {
-        return new Posts($this->url, $this->http);
+        return new Post($this->url, $this->http);
     }
 
     public function privateMessage(): PrivateMessageAsync
     {
-        return new PrivateMessages($this->url, $this->http);
+        return new PrivateMessage($this->url, $this->http);
     }
 
     public function tag(): TagAsync
     {
-        return new Tags($this->url, $this->http);
+        return new Tag($this->url, $this->http);
     }
 
     public function tagGroup(): TagGroupAsync
     {
-        return new TagGroups($this->url, $this->http);
+        return new TagGroup($this->url, $this->http);
     }
 
     public function topic(): TopicAsync
     {
-        return new Topics($this->url, $this->http);
+        return new Topic($this->url, $this->http);
     }
 }

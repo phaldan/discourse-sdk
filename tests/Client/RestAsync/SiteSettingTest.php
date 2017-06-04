@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\SiteSettings
+ * @covers \PhALDan\Discourse\Client\RestAsync\SiteSetting
  */
-class SiteSettingsTest extends HttpTestCase
+class SiteSettingTest extends HttpTestCase
 {
     /**
-     * @var SiteSettings
+     * @var SiteSetting
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new SiteSettings(self::URL, $this->http);
+        $this->target = new SiteSetting(self::URL, $this->http);
     }
 
     /**

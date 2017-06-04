@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Plugins extends HttpClient implements PluginAsync
+final class Plugin extends HttpClient implements PluginAsync
 {
     public function list(): PromiseInterface
     {

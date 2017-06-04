@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class PrivateMessages extends HttpClient implements PrivateMessageAsync
+final class PrivateMessage extends HttpClient implements PrivateMessageAsync
 {
     public function inbox(string $username): PromiseInterface
     {

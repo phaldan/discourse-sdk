@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Backups extends HttpClient implements BackupAsync
+final class Backup extends HttpClient implements BackupAsync
 {
     public function list(): PromiseInterface
     {

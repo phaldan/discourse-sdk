@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Emails extends HttpClient implements EmailAsync
+final class Email extends HttpClient implements EmailAsync
 {
     public function list(string $action, array $parameters = []): PromiseInterface
     {

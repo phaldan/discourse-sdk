@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Notifications extends HttpClient implements NotificationAsync
+final class Notification extends HttpClient implements NotificationAsync
 {
     public function list(): PromiseInterface
     {

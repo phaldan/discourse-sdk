@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Groups extends HttpClient implements GroupAsync
+final class Group extends HttpClient implements GroupAsync
 {
     public function create(array $attributes): PromiseInterface
     {

@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\Tags
+ * @covers \PhALDan\Discourse\Client\RestAsync\Tag
  */
-class TagsTest extends HttpTestCase
+class TagTest extends HttpTestCase
 {
     /**
-     * @var Tags
+     * @var Tag
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Tags(self::URL, $this->http);
+        $this->target = new Tag(self::URL, $this->http);
     }
 
     /**

@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\Users
+ * @covers \PhALDan\Discourse\Client\RestAsync\User
  */
-class UsersTest extends HttpTestCase
+class UserTest extends HttpTestCase
 {
     /**
-     * @var Users
+     * @var User
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Users(self::URL, $this->http);
+        $this->target = new User(self::URL, $this->http);
     }
 
     /**
@@ -24,7 +24,7 @@ class UsersTest extends HttpTestCase
      */
     public function successCreate(): void
     {
-        $attributes = [Users::ATTR_NAME => 'admin'];
+        $attributes = [User::ATTR_NAME => 'admin'];
         $this->assertNull($this->target->create($attributes)->wait());
         $this->assertHttpPost(RouteConstants::USER_CREATE, $attributes);
     }
@@ -34,9 +34,9 @@ class UsersTest extends HttpTestCase
      */
     public function successDirectoryItems(): void
     {
-        $parameters = [Users::OPTION_PERIOD => Users::PERIOD_WEEKLY];
+        $parameters = [User::OPTION_PERIOD => User::PERIOD_WEEKLY];
         $this->assertNull($this->target->directoryItems($parameters)->wait());
-        $this->assertHttpGet(RouteConstants::USER_DIRECTORY_ITEMS.'?'.Users::OPTION_PERIOD.'='.Users::PERIOD_WEEKLY);
+        $this->assertHttpGet(RouteConstants::USER_DIRECTORY_ITEMS.'?'.User::OPTION_PERIOD.'='.User::PERIOD_WEEKLY);
     }
 
     /**
@@ -44,9 +44,9 @@ class UsersTest extends HttpTestCase
      */
     public function successList(): void
     {
-        $parameters = [Users::OPTION_ORDER => Users::ORDER_EMAIL];
-        $this->assertNull($this->target->list(Users::FLAG_ACTIVE, $parameters)->wait());
-        $url = sprintf(RouteConstants::USER_LIST, Users::FLAG_ACTIVE).'?'.Users::OPTION_ORDER.'='.Users::ORDER_EMAIL;
+        $parameters = [User::OPTION_ORDER => User::ORDER_EMAIL];
+        $this->assertNull($this->target->list(User::FLAG_ACTIVE, $parameters)->wait());
+        $url = sprintf(RouteConstants::USER_LIST, User::FLAG_ACTIVE).'?'.User::OPTION_ORDER.'='.User::ORDER_EMAIL;
         $this->assertHttpGet($url);
     }
 
@@ -64,7 +64,7 @@ class UsersTest extends HttpTestCase
      */
     public function successUpdateAvatar(): void
     {
-        $attributes = [Users::ATTR_UPLOAD => 42];
+        $attributes = [User::ATTR_UPLOAD => 42];
         $this->assertNull($this->target->updateAvatar('admin', $attributes)->wait());
         $this->assertHttpPut(sprintf(RouteConstants::USER_UPDATE_AVATAR, 'admin'), $attributes);
     }
@@ -74,7 +74,7 @@ class UsersTest extends HttpTestCase
      */
     public function successUpdateEmail(): void
     {
-        $attributes = [Users::ATTR_EMAIL => 'admin@example.com'];
+        $attributes = [User::ATTR_EMAIL => 'admin@example.com'];
         $this->assertNull($this->target->updateEmail('admin', $attributes)->wait());
         $this->assertHttpPut(sprintf(RouteConstants::USER_UPDATE_EMAIL, 'admin'), $attributes);
     }

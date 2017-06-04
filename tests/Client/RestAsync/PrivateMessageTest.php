@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\PrivateMessages
+ * @covers \PhALDan\Discourse\Client\RestAsync\PrivateMessage
  */
-class PrivateMessagesTest extends HttpTestCase
+class PrivateMessageTest extends HttpTestCase
 {
     /**
-     * @var PrivateMessages
+     * @var PrivateMessage
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new PrivateMessages(self::URL, $this->http);
+        $this->target = new PrivateMessage(self::URL, $this->http);
     }
 
     /**

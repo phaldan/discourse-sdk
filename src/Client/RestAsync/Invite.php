@@ -7,7 +7,7 @@ use GuzzleHttp\Promise\PromiseInterface;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class Invites extends HttpClient implements InviteAsync
+final class Invite extends HttpClient implements InviteAsync
 {
     public function email(array $attributes): PromiseInterface
     {

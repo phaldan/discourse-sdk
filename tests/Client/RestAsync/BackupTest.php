@@ -4,19 +4,19 @@ namespace PhALDan\Discourse\Client\RestAsync;
 
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
- * @covers \PhALDan\Discourse\Client\RestAsync\Backups
+ * @covers \PhALDan\Discourse\Client\RestAsync\Backup
  */
-class BackupsTest extends HttpTestCase
+class BackupTest extends HttpTestCase
 {
     /**
-     * @var Backups
+     * @var Backup
      */
     private $target;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->target = new Backups(self::URL, $this->http);
+        $this->target = new Backup(self::URL, $this->http);
     }
 
     /**
@@ -33,7 +33,7 @@ class BackupsTest extends HttpTestCase
      */
     public function successCreate(): void
     {
-        $attributes = [Backups::ATTR_WITH_UPLOADS => true];
+        $attributes = [Backup::ATTR_WITH_UPLOADS => true];
         $this->assertNull($this->target->create($attributes)->wait());
         $this->assertHttpPost(RouteConstants::BACKUP_CREATE, $attributes);
     }
