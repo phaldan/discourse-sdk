@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  * @covers \PhALDan\Discourse\Client\RestAsync
- * @covers \PhALDan\Discourse\Client\RestAdminAsync
- * @covers \PhALDan\Discourse\Client\RestPostAsync
- * @covers \PhALDan\Discourse\Client\RestUserAsync
+ * @covers \PhALDan\Discourse\Client\RestAsyncAdmin
+ * @covers \PhALDan\Discourse\Client\RestAsyncPost
+ * @covers \PhALDan\Discourse\Client\RestAsyncUser
  */
 class RestAsyncTest extends TestCase
 {
