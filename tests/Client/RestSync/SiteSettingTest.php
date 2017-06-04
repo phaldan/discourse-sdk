@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\SiteSettingAsync;
+use PhALDan\Discourse\Client\RestAsync\SiteSettingAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,7 +17,7 @@ class SiteSettingTest extends TestCase
      */
     public function successUpdate(): void
     {
-        $client = new class() implements SiteSettingAsync {
+        $client = new class() extends SiteSettingAsyncDummy {
             public $updateSetting;
             public $updateAttributes;
 
@@ -27,10 +25,8 @@ class SiteSettingTest extends TestCase
             {
                 $this->updateSetting = $setting;
                 $this->updateAttributes = $attributes;
-                $promise = new Promise();
-                $promise->resolve(new ResponseDummy());
 
-                return $promise;
+                return parent::update($setting, $attributes);
             }
         };
         $target = new SiteSetting($client);

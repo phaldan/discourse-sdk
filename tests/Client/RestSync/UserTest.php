@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\UserAsync;
+use PhALDan\Discourse\Client\RestAsync\UserAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -96,7 +94,7 @@ class UserTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class UserAsyncSpy implements UserAsync
+class UserAsyncSpy extends UserAsyncDummy
 {
     public $createAttributes;
     public $directoryItemsParameters;
@@ -112,14 +110,14 @@ class UserAsyncSpy implements UserAsync
     {
         $this->createAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::create($attributes);
     }
 
     public function directoryItems(array $parameters): PromiseInterface
     {
         $this->directoryItemsParameters = $parameters;
 
-        return $this->createPromise();
+        return parent::directoryItems($parameters);
     }
 
     public function list(string $flag, array $parameters): PromiseInterface
@@ -127,14 +125,14 @@ class UserAsyncSpy implements UserAsync
         $this->listFlag = $flag;
         $this->listParameters = $parameters;
 
-        return $this->createPromise();
+        return parent::list($flag, $parameters);
     }
 
     public function single(string $username): PromiseInterface
     {
         $this->singleUsername = $username;
 
-        return $this->createPromise();
+        return parent::single($username);
     }
 
     public function updateAvatar(string $username, array $attributes): PromiseInterface
@@ -142,7 +140,7 @@ class UserAsyncSpy implements UserAsync
         $this->updateAvatarUsername = $username;
         $this->updateAvatarAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::updateAvatar($username, $attributes);
     }
 
     public function updateEmail(string $username, array $attributes): PromiseInterface
@@ -150,14 +148,6 @@ class UserAsyncSpy implements UserAsync
         $this->updateEmailUsername = $username;
         $this->updateEmailAttributes = $attributes;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise(): PromiseInterface
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::updateEmail($username, $attributes);
     }
 }

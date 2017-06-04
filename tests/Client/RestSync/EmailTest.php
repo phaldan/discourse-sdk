@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\EmailAsync;
+use PhALDan\Discourse\Client\RestAsync\EmailAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,9 +19,9 @@ class EmailTest extends TestCase
     {
         $client = new EmailAsyncSpy();
         $target = new Email($client);
-        $parameters = [EmailAsync::OPTION_OFFSET => 42];
+        $parameters = [EmailAsyncSpy::OPTION_OFFSET => 42];
         $this->assertNotNull($target->list(EmailAsyncSpy::ACTION_BOUNCED, $parameters));
-        $this->assertSame(EmailAsync::ACTION_BOUNCED, $client->listAction);
+        $this->assertSame(EmailAsyncSpy::ACTION_BOUNCED, $client->listAction);
         $this->assertSame($parameters, $client->listParameters);
     }
 }
@@ -31,7 +29,7 @@ class EmailTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class EmailAsyncSpy implements EmailAsync
+class EmailAsyncSpy extends EmailAsyncDummy
 {
     public $listAction;
     public $listParameters;
@@ -40,9 +38,7 @@ class EmailAsyncSpy implements EmailAsync
     {
         $this->listAction = $action;
         $this->listParameters = $parameters;
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
 
-        return $promise;
+        return parent::list($action, $parameters);
     }
 }

@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\BackupAsync;
+use PhALDan\Discourse\Client\RestAsync\BackupAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -52,7 +50,7 @@ class BackupTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class BackupAsyncSpy implements BackupAsync
+class BackupAsyncSpy extends BackupAsyncDummy
 {
     public $listCalled;
     public $createOptions;
@@ -61,21 +59,13 @@ class BackupAsyncSpy implements BackupAsync
     {
         $this->listCalled = true;
 
-        return $this->createPromise();
+        return parent::list();
     }
 
     public function create(array $options): PromiseInterface
     {
         $this->createOptions = $options;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise()
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::create($options);
     }
 }

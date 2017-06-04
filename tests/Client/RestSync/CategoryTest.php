@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\CategoryAsync;
+use PhALDan\Discourse\Client\RestAsync\CategoryAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -83,7 +81,7 @@ class CategoryTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class CategoryAsyncSpy implements CategoryAsync
+class CategoryAsyncSpy extends CategoryAsyncDummy
 {
     public $listParameters;
     public $singleId;
@@ -96,28 +94,28 @@ class CategoryAsyncSpy implements CategoryAsync
     {
         $this->listParameters = $parameters;
 
-        return $this->createPromise();
+        return parent::list($parameters);
     }
 
     public function single(int $id): PromiseInterface
     {
         $this->singleId = $id;
 
-        return $this->createPromise();
+        return parent::single($id);
     }
 
     public function singleBySlug(string $slug): PromiseInterface
     {
         $this->singleSlug = $slug;
 
-        return $this->createPromise();
+        return parent::singleBySlug($slug);
     }
 
     public function create(array $attributes): PromiseInterface
     {
         $this->createAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::create($attributes);
     }
 
     public function update(int $id, array $attributes): PromiseInterface
@@ -125,14 +123,6 @@ class CategoryAsyncSpy implements CategoryAsync
         $this->updateId = $id;
         $this->updateAttributes = $attributes;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise()
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::update($id, $attributes);
     }
 }

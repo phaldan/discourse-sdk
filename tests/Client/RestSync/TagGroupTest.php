@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\TagGroupAsync;
+use PhALDan\Discourse\Client\RestAsync\TagGroupAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -73,7 +71,7 @@ class TagGroupTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class TagGroupAsyncSpy implements TagGroupAsync
+class TagGroupAsyncSpy extends TagGroupAsyncDummy
 {
     public $createAttributes;
     public $listCalled;
@@ -85,21 +83,21 @@ class TagGroupAsyncSpy implements TagGroupAsync
     {
         $this->createAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::create($attributes);
     }
 
     public function list(): PromiseInterface
     {
         $this->listCalled = true;
 
-        return $this->createPromise();
+        return parent::list();
     }
 
     public function single(int $id): PromiseInterface
     {
         $this->singleId = $id;
 
-        return $this->createPromise();
+        return parent::single($id);
     }
 
     public function update(int $id, array $attributes): PromiseInterface
@@ -107,14 +105,6 @@ class TagGroupAsyncSpy implements TagGroupAsync
         $this->updateId = $id;
         $this->updateAttributes = $attributes;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise(): PromiseInterface
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::update($id, $attributes);
     }
 }

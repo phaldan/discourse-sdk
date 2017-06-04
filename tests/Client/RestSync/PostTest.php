@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\PostAsync;
+use PhALDan\Discourse\Client\RestAsync\PostAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -85,7 +83,7 @@ class PostTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class PostAsyncSpy implements PostAsync
+class PostAsyncSpy extends PostAsyncDummy
 {
     public $createAttributes;
     public $likeAttributes;
@@ -99,21 +97,21 @@ class PostAsyncSpy implements PostAsync
     {
         $this->createAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::create($attributes);
     }
 
     public function like(array $attributes): PromiseInterface
     {
         $this->likeAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::like($attributes);
     }
 
     public function single(int $id): PromiseInterface
     {
         $this->singleId = $id;
 
-        return $this->createPromise();
+        return parent::single($id);
     }
 
     public function unlike(int $id, array $attributes): PromiseInterface
@@ -121,7 +119,7 @@ class PostAsyncSpy implements PostAsync
         $this->unlikeId = $id;
         $this->unlikeAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::unlike($id, $attributes);
     }
 
     public function update(int $id, array $attributes): PromiseInterface
@@ -129,14 +127,6 @@ class PostAsyncSpy implements PostAsync
         $this->updateId = $id;
         $this->updateAttributes = $attributes;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise(): PromiseInterface
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::update($id, $attributes);
     }
 }

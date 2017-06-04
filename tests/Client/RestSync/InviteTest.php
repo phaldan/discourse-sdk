@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\InviteAsync;
+use PhALDan\Discourse\Client\RestAsync\InviteAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -64,7 +62,7 @@ class InviteTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class InviteAsyncSpy implements InviteAsync
+class InviteAsyncSpy extends InviteAsyncDummy
 {
     public $emailAttributes;
     public $createLinkAttributes;
@@ -74,28 +72,20 @@ class InviteAsyncSpy implements InviteAsync
     {
         $this->emailAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::email($attributes);
     }
 
     public function createLink(array $attributes): PromiseInterface
     {
         $this->createLinkAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::createLink($attributes);
     }
 
     public function createToken(array $attributes): PromiseInterface
     {
         $this->createTokenAttributes = $attributes;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise(): PromiseInterface
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::createToken($attributes);
     }
 }

@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\PluginAsync;
+use PhALDan\Discourse\Client\RestAsync\PluginAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -29,16 +27,14 @@ class PluginTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class PluginAsyncSpy implements PluginAsync
+class PluginAsyncSpy extends PluginAsyncDummy
 {
     public $listCalled;
 
     public function list(): PromiseInterface
     {
         $this->listCalled = true;
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
 
-        return $promise;
+        return parent::list();
     }
 }

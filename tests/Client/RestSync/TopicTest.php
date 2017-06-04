@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\TopicAsync;
+use PhALDan\Discourse\Client\RestAsync\TopicAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -147,7 +145,7 @@ class TopicTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class TopicAsyncSpy implements TopicAsync
+class TopicAsyncSpy extends TopicAsyncDummy
 {
     public $createScheduledId;
     public $createScheduledAttributes;
@@ -173,14 +171,14 @@ class TopicAsyncSpy implements TopicAsync
         $this->createScheduledId = $id;
         $this->createScheduledAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::createScheduled($id, $attributes);
     }
 
     public function delete(int $id): PromiseInterface
     {
         $this->deleteId = $id;
 
-        return $this->createPromise();
+        return parent::delete($id);
     }
 
     public function invite(int $id, array $attributes): PromiseInterface
@@ -188,14 +186,14 @@ class TopicAsyncSpy implements TopicAsync
         $this->inviteId = $id;
         $this->inviteAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::invite($id, $attributes);
     }
 
     public function latest(array $parameters = []): PromiseInterface
     {
         $this->latestParameters = $parameters;
 
-        return $this->createPromise();
+        return parent::latest($parameters);
     }
 
     public function notification(int $id, array $attributes): PromiseInterface
@@ -203,28 +201,28 @@ class TopicAsyncSpy implements TopicAsync
         $this->notificationId = $id;
         $this->notificationAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::notification($id, $attributes);
     }
 
     public function single(int $id): PromiseInterface
     {
         $this->singleId = $id;
 
-        return $this->createPromise();
+        return parent::single($id);
     }
 
     public function top(): PromiseInterface
     {
         $this->topCalled = true;
 
-        return $this->createPromise();
+        return parent::top();
     }
 
     public function topFiltered(string $flag): PromiseInterface
     {
         $this->topFilteredFlag = $flag;
 
-        return $this->createPromise();
+        return parent::topFiltered($flag);
     }
 
     public function update(string $slug, int $id, array $attributes): PromiseInterface
@@ -233,7 +231,7 @@ class TopicAsyncSpy implements TopicAsync
         $this->updateId = $id;
         $this->updateAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::update($slug, $id, $attributes);
     }
 
     public function updateScheduled(int $id, array $attributes): PromiseInterface
@@ -241,7 +239,7 @@ class TopicAsyncSpy implements TopicAsync
         $this->updateScheduledId = $id;
         $this->updateScheduledAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::updateScheduled($id, $attributes);
     }
 
     public function updateStatus(int $id, array $attributes): PromiseInterface
@@ -249,14 +247,6 @@ class TopicAsyncSpy implements TopicAsync
         $this->updateStatusId = $id;
         $this->updateStatusAttributes = $attributes;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise(): PromiseInterface
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::updateStatus($id, $attributes);
     }
 }

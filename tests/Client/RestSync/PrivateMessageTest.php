@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\PrivateMessageAsync;
+use PhALDan\Discourse\Client\RestAsync\PrivateMessageAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -81,7 +79,7 @@ class PrivateMessageTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class PrivateMessageAsyncSpy implements PrivateMessageAsync
+class PrivateMessageAsyncSpy extends PrivateMessageAsyncDummy
 {
     public $inboxUsername;
     public $sentUsername;
@@ -95,21 +93,21 @@ class PrivateMessageAsyncSpy implements PrivateMessageAsync
     {
         $this->inboxUsername = $username;
 
-        return $this->createPromise();
+        return parent::inbox($username);
     }
 
     public function sent(string $username): PromiseInterface
     {
         $this->sentUsername = $username;
 
-        return $this->createPromise();
+        return parent::sent($username);
     }
 
     public function archive(string $username): PromiseInterface
     {
         $this->archiveUsername = $username;
 
-        return $this->createPromise();
+        return parent::archive($username);
     }
 
     public function group(string $username, string $group): PromiseInterface
@@ -117,7 +115,7 @@ class PrivateMessageAsyncSpy implements PrivateMessageAsync
         $this->groupUsername = $username;
         $this->groupGroup = $group;
 
-        return $this->createPromise();
+        return parent::group($username, $group);
     }
 
     public function groupArchive(string $username, string $group): PromiseInterface
@@ -125,14 +123,6 @@ class PrivateMessageAsyncSpy implements PrivateMessageAsync
         $this->groupArchiveUsername = $username;
         $this->groupArchiveGroup = $group;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise(): PromiseInterface
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::groupArchive($username, $group);
     }
 }

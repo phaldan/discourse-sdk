@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\TagAsync;
+use PhALDan\Discourse\Client\RestAsync\TagAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -52,7 +50,7 @@ class TagTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class TagAsyncSpy implements TagAsync
+class TagAsyncSpy extends TagAsyncDummy
 {
     public $listCalled;
     public $singleName;
@@ -61,21 +59,13 @@ class TagAsyncSpy implements TagAsync
     {
         $this->listCalled = true;
 
-        return $this->createPromise();
+        return parent::list();
     }
 
     public function single(string $name): PromiseInterface
     {
         $this->singleName = $name;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise(): PromiseInterface
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::single($name);
     }
 }

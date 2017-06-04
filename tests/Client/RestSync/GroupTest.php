@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\GroupAsync;
+use PhALDan\Discourse\Client\RestAsync\GroupAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -94,7 +92,7 @@ class GroupTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class GroupAsyncSpy implements GroupAsync
+class GroupAsyncSpy extends GroupAsyncDummy
 {
     public $createAttributes;
     public $deleteId;
@@ -109,28 +107,28 @@ class GroupAsyncSpy implements GroupAsync
     {
         $this->createAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::create($attributes);
     }
 
     public function delete(int $id): PromiseInterface
     {
         $this->deleteId = $id;
 
-        return $this->createPromise();
+        return parent::delete($id);
     }
 
     public function list(array $parameters = []): PromiseInterface
     {
         $this->listParameters = $parameters;
 
-        return $this->createPromise();
+        return parent::list($parameters);
     }
 
     public function single(string $name): PromiseInterface
     {
         $this->singleName = $name;
 
-        return $this->createPromise();
+        return parent::single($name);
     }
 
     public function addMember(int $id, array $attributes): PromiseInterface
@@ -138,7 +136,7 @@ class GroupAsyncSpy implements GroupAsync
         $this->addMemberId = $id;
         $this->addMemberAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::addMember($id, $attributes);
     }
 
     public function deleteMember(int $id, array $attributes): PromiseInterface
@@ -146,14 +144,6 @@ class GroupAsyncSpy implements GroupAsync
         $this->deleteMemberId = $id;
         $this->deleteMemberAttributes = $attributes;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise(): PromiseInterface
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::deleteMember($id, $attributes);
     }
 }

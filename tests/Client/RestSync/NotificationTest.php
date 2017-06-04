@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\NotificationAsync;
+use PhALDan\Discourse\Client\RestAsync\NotificationAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -29,16 +27,14 @@ class NotificationTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class NotificationAsyncSpy implements NotificationAsync
+class NotificationAsyncSpy extends NotificationAsyncDummy
 {
     public $listCalled;
 
     public function list(): PromiseInterface
     {
         $this->listCalled = true;
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
 
-        return $promise;
+        return parent::list();
     }
 }

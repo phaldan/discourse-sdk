@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\FlagAsync;
+use PhALDan\Discourse\Client\RestAsync\FlagAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -32,7 +30,7 @@ class FlagTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class FlagAsyncSpy implements FlagAsync
+class FlagAsyncSpy extends FlagAsyncDummy
 {
     public $listType;
     public $listParameters;
@@ -41,9 +39,7 @@ class FlagAsyncSpy implements FlagAsync
     {
         $this->listType = $type;
         $this->listParameters = $parameters;
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
 
-        return $promise;
+        return parent::list($type, $parameters);
     }
 }

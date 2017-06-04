@@ -2,10 +2,8 @@
 
 namespace PhALDan\Discourse\Client\RestSync;
 
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Promise\PromiseInterface;
-use PhALDan\Discourse\Client\ResponseDummy;
-use PhALDan\Discourse\Client\RestAsync\BadgeAsync;
+use PhALDan\Discourse\Client\RestAsync\BadgeAsyncDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -61,7 +59,7 @@ class BadgeTest extends TestCase
 /**
  * @author Philipp Daniels <philipp.daniels@gmail.com>
  */
-class BadgeAsyncSpy implements BadgeAsync
+class BadgeAsyncSpy extends BadgeAsyncDummy
 {
     public $listCalled;
     public $createAttributes;
@@ -71,28 +69,20 @@ class BadgeAsyncSpy implements BadgeAsync
     {
         $this->listCalled = true;
 
-        return $this->createPromise();
+        return parent::list();
     }
 
     public function create(array $attributes): PromiseInterface
     {
         $this->createAttributes = $attributes;
 
-        return $this->createPromise();
+        return parent::create($attributes);
     }
 
     public function delete(int $id): PromiseInterface
     {
         $this->deleteId = $id;
 
-        return $this->createPromise();
-    }
-
-    private function createPromise()
-    {
-        $promise = new Promise();
-        $promise->resolve(new ResponseDummy());
-
-        return $promise;
+        return parent::delete($id);
     }
 }
