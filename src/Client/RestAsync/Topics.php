@@ -30,9 +30,9 @@ class Topics extends HttpClient implements TopicAsync
         return $this->client()->post($url, $attributes);
     }
 
-    public function latest(array $parameter = []): PromiseInterface
+    public function latest(array $parameters = []): PromiseInterface
     {
-        return $this->client()->get(RouteConstants::TOPIC_LATEST, $parameter);
+        return $this->client()->get(RouteConstants::TOPIC_LATEST, $parameters);
     }
 
     public function notification(int $id, array $attributes): PromiseInterface
@@ -61,11 +61,11 @@ class Topics extends HttpClient implements TopicAsync
         return $this->client()->get($url);
     }
 
-    public function update(string $slug, int $id, array $attribute): PromiseInterface
+    public function update(string $slug, int $id, array $attributes): PromiseInterface
     {
         $url = sprintf(RouteConstants::TOPIC_UPDATE, $slug, $id);
 
-        return $this->client()->put($url, $attribute);
+        return $this->client()->put($url, $attributes);
     }
 
     public function updateScheduled(int $id, array $attributes): PromiseInterface

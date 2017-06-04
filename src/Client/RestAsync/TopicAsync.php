@@ -82,11 +82,11 @@ interface TopicAsync
      * Retrieve a list of the latest topics.
      * More information on http://docs.discourse.org/#tag/Topics%2Fpaths%2F~1latest.json%2Fget.
      *
-     * @param array $parameter
+     * @param array $parameters
      *
      * @return PromiseInterface
      */
-    public function latest(array $parameter = []): PromiseInterface;
+    public function latest(array $parameters = []): PromiseInterface;
 
     /**
      * Set a new notification level for a topic. Required attribute: notification_level
@@ -133,11 +133,11 @@ interface TopicAsync
      *
      * @param string $slug
      * @param int    $id
-     * @param array  $attribute
+     * @param array  $attributes
      *
      * @return PromiseInterface
      */
-    public function update(string $slug, int $id, array $attribute): PromiseInterface;
+    public function update(string $slug, int $id, array $attributes): PromiseInterface;
 
     /**
      * Update an existing timed topic.
