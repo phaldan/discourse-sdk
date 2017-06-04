@@ -3,14 +3,8 @@
 namespace PhALDan\Discourse;
 
 use PhALDan\Discourse\Client\AuthenticationSpy;
-use PhALDan\Discourse\Client\RestAsync\Categories;
-use PhALDan\Discourse\Client\RestAsync\CategoryAsync;
-use PhALDan\Discourse\Client\RestAsync\HttpAdapterDummy;
 use PhALDan\Discourse\Client\RestAsync\HttpAdapterSpy;
-use PhALDan\Discourse\Client\RestAdminAsync;
-use PhALDan\Discourse\Client\RestAsyncFactory;
-use PhALDan\Discourse\Client\RestPostAsync;
-use PhALDan\Discourse\Client\RestUserAsync;
+use PhALDan\Discourse\Client\RestAsyncFactoryDummy;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -22,34 +16,10 @@ class DiscourseTest extends TestCase
     /**
      * @test
      */
-    public function successRest(): void
+    public function successRestAsync(): void
     {
-        $rest = new class() implements RestAsyncFactory {
-            /**
-             * @var string
-             */
-            private $url = '';
-
-            /**
-             * @var HttpAdapterDummy
-             */
-            private $http;
-
-            use RestAdminAsync;
-            use RestPostAsync;
-            use RestUserAsync;
-
-            public function __construct()
-            {
-                $this->http = new HttpAdapterDummy();
-            }
-
-            public function category(): CategoryAsync
-            {
-                return new Categories($this->url, $this->http);
-            }
-        };
         $target = new Discourse();
+        $rest = new RestAsyncFactoryDummy();
         $target->setRest($rest);
         $this->assertSame($rest, $target->restAsync('https://localhost'));
     }
@@ -57,7 +27,7 @@ class DiscourseTest extends TestCase
     /**
      * @test
      */
-    public function successRestWithAuth(): void
+    public function successRestAsyncWithAuth(): void
     {
         $auth = new AuthenticationSpy();
         $target = new Discourse();
@@ -69,7 +39,7 @@ class DiscourseTest extends TestCase
     /**
      * @test
      */
-    public function successRestWithHttp(): void
+    public function successRestAsyncWithHttp(): void
     {
         $http = new HttpAdapterSpy();
         $target = new Discourse();
@@ -80,7 +50,7 @@ class DiscourseTest extends TestCase
     /**
      * @test
      */
-    public function successRestWithAuthAndHttp(): void
+    public function successRestAsyncWithAuthAndHttp(): void
     {
         $auth = new AuthenticationSpy();
         $http = new HttpAdapterSpy();
@@ -89,5 +59,16 @@ class DiscourseTest extends TestCase
         $this->assertSame($http, $auth->http);
         $this->assertNotNull($auth->request);
         $this->assertNull($http->request);
+    }
+
+    /**
+     * @test
+     */
+    public function successRest(): void
+    {
+        $target = new Discourse();
+        $rest = new RestAsyncFactoryDummy();
+        $target->setRest($rest);
+        $this->assertNotNull($target->rest('https://localhost'));
     }
 }
