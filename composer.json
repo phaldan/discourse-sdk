@@ -43,8 +43,8 @@
             "vendor/bin/phpcpd -n src/ tests/ && ",
             "vendor/bin/psalm --find-dead-code && ",
             "vendor/bin/phpmd src text .phpmd.xml && ",
-            "vendor/bin/phpunit --coverage-text && ",
-            "vendor/bin/php-cs-fixer fix"
+            "vendor/bin/php-cs-fixer fix && ",
+            "vendor/bin/phpunit --coverage-text"
         ]
     }
 }
