@@ -1,0 +1,7 @@
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/.php_cs            export-ignore
+/.phpmd.xml         export-ignore
+/phpunit.xmll       export-ignore
+/psalm.xmll         export-ignore
+/tests              export-ignore
