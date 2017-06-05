@@ -37,15 +37,17 @@
         "post-install-cmd": "vendor/bin/cghooks update",
         "post-update-cmd": "vendor/bin/cghooks update",
         "pre-commit": [
-            "php --version && ",
-            "composer --version && ",
-            "composer validate && ",
-            "vendor/bin/parallel-lint tests src && ",
-            "vendor/bin/phpcpd -n src/ tests/ && ",
-            "vendor/bin/psalm --find-dead-code && ",
-            "vendor/bin/phpmd src text .phpmd.xml && ",
-            "vendor/bin/php-cs-fixer fix && ",
-            "vendor/bin/phpunit --coverage-text"
+            "#!/bin/bash\n",
+            "set -e\n",
+            "php --version\n",
+            "composer --version\n",
+            "composer validate\n",
+            "vendor/bin/parallel-lint tests src\n",
+            "vendor/bin/phpcpd -n src/ tests/\n",
+            "vendor/bin/psalm --find-dead-code\n",
+            "vendor/bin/phpmd src text .phpmd.xml\n",
+            "vendor/bin/php-cs-fixer fix\n",
+            "vendor/bin/phpunit --coverage-text\n"
         ]
     }
 }
